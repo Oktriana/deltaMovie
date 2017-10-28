@@ -115,6 +115,7 @@ public class LogIn extends javax.swing.JFrame {
             String pass = new String(pwd);
             if(uname.equals("hello")&& (pass.equals("world"))){
                         /*simple login form using netbeans IDE pan dix*/
+                        new formadmin().show();
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
