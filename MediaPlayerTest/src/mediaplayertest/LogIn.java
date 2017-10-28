@@ -5,6 +5,8 @@
  */
 package mediaplayertest;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author Oktriana Sidik
@@ -32,11 +34,13 @@ public class LogIn extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        email = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        btn_Login = new javax.swing.JButton();
+        btn_Regis = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        emailMessage = new javax.swing.JLabel();
+        pwdMessage = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -63,42 +67,52 @@ public class LogIn extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password :");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(100, 90, 90, 20);
+        jLabel3.setBounds(100, 110, 90, 20);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
-        jTextField1.setBounds(200, 40, 150, 30);
-        jPanel2.add(jPasswordField1);
-        jPasswordField1.setBounds(200, 90, 150, 30);
+        jPanel2.add(email);
+        email.setBounds(200, 40, 150, 30);
+        jPanel2.add(password);
+        password.setBounds(200, 100, 150, 30);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("LOG IN");
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btn_Login.setBackground(new java.awt.Color(255, 255, 153));
+        btn_Login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_Login.setText("LOG IN");
+        btn_Login.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton1MouseDragged(evt);
+                btn_LoginMouseDragged(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_LoginActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(200, 150, 90, 30);
+        jPanel2.add(btn_Login);
+        btn_Login.setBounds(200, 170, 90, 30);
 
-        jButton2.setText("Register");
-        jPanel2.add(jButton2);
-        jButton2.setBounds(340, 250, 110, 23);
+        btn_Regis.setText("Register");
+        jPanel2.add(btn_Regis);
+        btn_Regis.setBounds(340, 250, 110, 23);
 
         jLabel6.setForeground(new java.awt.Color(204, 255, 204));
         jLabel6.setText("Don't have account?");
         jPanel2.add(jLabel6);
         jLabel6.setBounds(340, 220, 120, 30);
+
+        emailMessage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        emailMessage.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel2.add(emailMessage);
+        emailMessage.setBounds(200, 70, 150, 30);
+
+        pwdMessage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        pwdMessage.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel2.add(pwdMessage);
+        pwdMessage.setBounds(200, 130, 150, 20);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 480, 290));
 
@@ -124,27 +138,41 @@ public class LogIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_emailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            String uname = jTextField1.getText();
-            char[] pwd = jPasswordField1.getPassword();
-            String pass = new String(pwd);
-            if(uname.equals("hello")&& (pass.equals("world"))){
-                        /*simple login form using netbeans IDE pan dix*/
-                        new formadmin().show();
+    private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
+        if(email.getText().trim().isEmpty() && password.getText().trim().isEmpty()){
+            emailMessage.setText("Email harus diisi!");
+            pwdMessage.setText("Password harus diisi!");
+        }else{
+            try{
+                String uname = email.getText();
+                char[] pwd = password.getPassword();
+                String pass = new String(pwd);
+                
+                if(uname.equals("hello")&& (pass.equals("world"))){
+                    showMessageDialog(null, "Anda BERHASIL LOGIN!");
+                    new FormAdmin().setVisible(true);
+                    this.setVisible(false);
+                } else if(pass.equals("world")){
+                    showMessageDialog(null, "Email salah!");
+                } else if(uname.equals("hello")){
+                    showMessageDialog(null, "Password salah!");
+                } else{
+                    showMessageDialog(null,"Email dan Password salah!!");
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
             }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_btn_LoginActionPerformed
 
-    private void jButton1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseDragged
+    private void btn_LoginMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LoginMouseDragged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseDragged
+    }//GEN-LAST:event_btn_LoginMouseDragged
 
     /**
      * @param args the command line arguments
@@ -183,8 +211,10 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_Login;
+    private javax.swing.JButton btn_Regis;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel emailMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -193,7 +223,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JLabel pwdMessage;
     // End of variables declaration//GEN-END:variables
 }
