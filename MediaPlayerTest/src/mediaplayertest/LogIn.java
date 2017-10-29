@@ -41,6 +41,7 @@ public class LogIn extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         emailMessage = new javax.swing.JLabel();
         pwdMessage = new javax.swing.JLabel();
+        tombolForgot = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -114,6 +115,16 @@ public class LogIn extends javax.swing.JFrame {
         jPanel2.add(pwdMessage);
         pwdMessage.setBounds(200, 130, 150, 20);
 
+        tombolForgot.setForeground(new java.awt.Color(255, 255, 255));
+        tombolForgot.setText("Forgot Password?");
+        tombolForgot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tombolForgotMouseClicked(evt);
+            }
+        });
+        jPanel2.add(tombolForgot);
+        tombolForgot.setBounds(20, 240, 130, 30);
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 480, 290));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu11.jpg"))); // NOI18N
@@ -154,7 +165,7 @@ public class LogIn extends javax.swing.JFrame {
                 
                 if(uname.equals("hello")&& (pass.equals("world"))){
                     showMessageDialog(null, "Anda BERHASIL LOGIN!");
-                    new formAdmin1().setVisible(true);
+                    new FormAdmin().setVisible(true);
                     this.setVisible(false);
                 } else if(pass.equals("world")){
                     showMessageDialog(null, "Email salah!");
@@ -173,6 +184,11 @@ public class LogIn extends javax.swing.JFrame {
     private void btn_LoginMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LoginMouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_LoginMouseDragged
+
+    private void tombolForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolForgotMouseClicked
+        new Forgot().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_tombolForgotMouseClicked
 
     /**
      * @param args the command line arguments
@@ -225,5 +241,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel pwdMessage;
+    private javax.swing.JLabel tombolForgot;
     // End of variables declaration//GEN-END:variables
 }
