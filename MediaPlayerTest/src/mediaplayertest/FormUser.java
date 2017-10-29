@@ -9,12 +9,12 @@ package mediaplayertest;
  *
  * @author A
  */
-public class formAdmin1 extends javax.swing.JFrame {
+public class FormUser extends javax.swing.JFrame {
 
     /**
-     * Creates new form formAdmin1
+     * Creates new form formUser1
      */
-    public formAdmin1() {
+    public FormUser() {
         initComponents();
     }
 
@@ -35,8 +35,9 @@ public class formAdmin1 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,46 +65,6 @@ public class formAdmin1 extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        pilihGmbr = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
-        jCheckBox19 = new javax.swing.JCheckBox();
-        jCheckBox20 = new javax.swing.JCheckBox();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton5 = new javax.swing.JButton();
-        jLabel25 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,19 +120,22 @@ public class formAdmin1 extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 640, 190));
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Movies");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel7.setText("HOME");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 60));
 
-        jLabel27.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(204, 204, 0));
-        jLabel27.setText("HOME");
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 50));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Movies");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+
+        jLabel6.setText("jLabel6");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -150, 640, 750));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 530));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 640, 540));
 
         jTabbedPane1.addTab("Home", jPanel1);
 
@@ -375,256 +339,25 @@ public class formAdmin1 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Help", jPanel5);
 
-        jPanel2.setLayout(null);
-
-        pilihGmbr.setText("Choose");
-        pilihGmbr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pilihGmbrActionPerformed(evt);
-            }
-        });
-        jPanel2.add(pilihGmbr);
-        pilihGmbr.setBounds(70, 10, 90, 20);
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Cover :");
-        jPanel2.add(jLabel17);
-        jLabel17.setBounds(10, 10, 60, 20);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Title :");
-        jPanel2.add(jLabel8);
-        jLabel8.setBounds(10, 40, 40, 15);
-
-        jTextField4.setText("...");
-        jPanel2.add(jTextField4);
-        jTextField4.setBounds(70, 40, 190, 20);
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Year :");
-        jPanel2.add(jLabel19);
-        jLabel19.setBounds(10, 70, 40, 15);
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Genre :");
-        jPanel2.add(jLabel20);
-        jLabel20.setBounds(10, 100, 50, 15);
-
-        jCheckBox1.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Action");
-        jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 255, 255), null, null));
-        jPanel2.add(jCheckBox1);
-        jCheckBox1.setBounds(70, 100, 90, 19);
-
-        jCheckBox2.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Horror");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox2);
-        jCheckBox2.setBounds(70, 160, 90, 23);
-
-        jCheckBox3.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setText("Advanture");
-        jPanel2.add(jCheckBox3);
-        jCheckBox3.setBounds(180, 100, 90, 23);
-
-        jCheckBox4.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox4.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setText("Animation");
-        jPanel2.add(jCheckBox4);
-        jCheckBox4.setBounds(300, 100, 90, 23);
-
-        jCheckBox5.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox5.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox5.setText("Comedy");
-        jPanel2.add(jCheckBox5);
-        jCheckBox5.setBounds(70, 130, 90, 23);
-
-        jCheckBox6.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox6.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox6.setText("Crime");
-        jPanel2.add(jCheckBox6);
-        jCheckBox6.setBounds(520, 100, 90, 23);
-
-        jCheckBox7.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox7.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox7.setText("Documantary");
-        jPanel2.add(jCheckBox7);
-        jCheckBox7.setBounds(180, 130, 89, 23);
-
-        jCheckBox8.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox8.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox8.setText("Family");
-        jPanel2.add(jCheckBox8);
-        jCheckBox8.setBounds(300, 130, 90, 23);
-
-        jCheckBox9.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox9.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox9.setText("Biography");
-        jPanel2.add(jCheckBox9);
-        jCheckBox9.setBounds(400, 100, 90, 23);
-
-        jCheckBox10.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox10.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox10.setText("Thriller");
-        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox10ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox10);
-        jCheckBox10.setBounds(300, 190, 90, 23);
-
-        jCheckBox11.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox11.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox11.setText("Fantasy");
-        jPanel2.add(jCheckBox11);
-        jCheckBox11.setBounds(400, 130, 90, 23);
-
-        jCheckBox12.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox12.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox12.setText("Music");
-        jPanel2.add(jCheckBox12);
-        jCheckBox12.setBounds(180, 160, 90, 23);
-
-        jCheckBox13.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox13.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox13.setText("War");
-        jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox13ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox13);
-        jCheckBox13.setBounds(400, 190, 90, 23);
-
-        jCheckBox14.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox14.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox14.setText("Sport");
-        jPanel2.add(jCheckBox14);
-        jCheckBox14.setBounds(180, 190, 90, 23);
-
-        jCheckBox15.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox15.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox15.setText("Sci-fi");
-        jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox15ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox15);
-        jCheckBox15.setBounds(70, 190, 90, 23);
-
-        jCheckBox16.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox16.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox16.setText("History");
-        jPanel2.add(jCheckBox16);
-        jCheckBox16.setBounds(520, 130, 90, 23);
-
-        jCheckBox17.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox17.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox17.setText("Musical");
-        jPanel2.add(jCheckBox17);
-        jCheckBox17.setBounds(300, 160, 90, 23);
-
-        jCheckBox18.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox18.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox18.setText("Mistery");
-        jPanel2.add(jCheckBox18);
-        jCheckBox18.setBounds(400, 160, 90, 23);
-
-        jCheckBox19.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox19.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox19.setText("Romance");
-        jPanel2.add(jCheckBox19);
-        jCheckBox19.setBounds(520, 160, 90, 23);
-
-        jCheckBox20.setBackground(new java.awt.Color(153, 51, 0));
-        jCheckBox20.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox20.setText("Westren");
-        jCheckBox20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox20ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox20);
-        jCheckBox20.setBounds(520, 190, 90, 23);
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Director :");
-        jPanel2.add(jLabel21);
-        jLabel21.setBounds(10, 230, 60, 15);
-
-        jTextField6.setText("...");
-        jPanel2.add(jTextField6);
-        jTextField6.setBounds(70, 230, 200, 20);
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Actor :");
-        jPanel2.add(jLabel22);
-        jLabel22.setBounds(10, 270, 50, 15);
-
-        jTextField7.setText("...");
-        jPanel2.add(jTextField7);
-        jTextField7.setBounds(70, 270, 200, 20);
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Country :");
-        jPanel2.add(jLabel23);
-        jLabel23.setBounds(10, 310, 60, 15);
-
-        jTextField8.setText("...");
-        jPanel2.add(jTextField8);
-        jTextField8.setBounds(70, 310, 200, 20);
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Synopsis :");
-        jPanel2.add(jLabel24);
-        jLabel24.setBounds(10, 350, 60, 15);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(70, 350, 330, 70);
-
-        jButton5.setText("Upload");
-        jPanel2.add(jButton5);
-        jButton5.setBounds(70, 440, 70, 30);
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText(".jpg");
-        jPanel2.add(jLabel25);
-        jLabel25.setBounds(160, 10, 40, 20);
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
-        jPanel2.add(jComboBox3);
-        jComboBox3.setBounds(70, 70, 90, 20);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, -170, 650, 810);
-
-        jTabbedPane1.addTab("Upload", jPanel2);
-
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 668, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 657, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -649,30 +382,6 @@ public class formAdmin1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox13ActionPerformed
-
-    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox10ActionPerformed
-
-    private void jCheckBox20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox20ActionPerformed
-
-    private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox15ActionPerformed
-
-    private void pilihGmbrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihGmbrActionPerformed
-        
-    }//GEN-LAST:event_pilihGmbrActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -690,20 +399,21 @@ public class formAdmin1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new formAdmin1().setVisible(true);
+                new FormUser().setVisible(true);
             }
         });
     }
@@ -712,30 +422,8 @@ public class formAdmin1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox20;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -745,30 +433,19 @@ public class formAdmin1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -776,15 +453,9 @@ public class formAdmin1 extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private java.awt.Label label3;
-    private javax.swing.JButton pilihGmbr;
     // End of variables declaration//GEN-END:variables
 }

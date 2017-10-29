@@ -36,7 +36,7 @@ public class LogIn extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        btn_Login = new javax.swing.JButton();
+        btn_SignIn = new javax.swing.JButton();
         btn_Regis = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         emailMessage = new javax.swing.JLabel();
@@ -80,25 +80,31 @@ public class LogIn extends javax.swing.JFrame {
         jPanel2.add(password);
         password.setBounds(200, 100, 150, 30);
 
-        btn_Login.setBackground(new java.awt.Color(255, 255, 153));
-        btn_Login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_Login.setText("LOG IN");
-        btn_Login.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btn_SignIn.setBackground(new java.awt.Color(255, 255, 153));
+        btn_SignIn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_SignIn.setText("SIGN IN");
+        btn_SignIn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                btn_LoginMouseDragged(evt);
+                btn_SignInMouseDragged(evt);
             }
         });
-        btn_Login.addActionListener(new java.awt.event.ActionListener() {
+        btn_SignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_LoginActionPerformed(evt);
+                btn_SignInActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_Login);
-        btn_Login.setBounds(200, 170, 90, 30);
+        jPanel2.add(btn_SignIn);
+        btn_SignIn.setBounds(200, 170, 120, 30);
 
-        btn_Regis.setText("Register");
+        btn_Regis.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_Regis.setText("SIGN UP");
+        btn_Regis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegisActionPerformed(evt);
+            }
+        });
         jPanel2.add(btn_Regis);
-        btn_Regis.setBounds(340, 250, 110, 23);
+        btn_Regis.setBounds(340, 250, 100, 23);
 
         jLabel6.setForeground(new java.awt.Color(204, 255, 204));
         jLabel6.setText("Don't have account?");
@@ -129,21 +135,21 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu11.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 400));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 400));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu9.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 363, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -153,7 +159,7 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
-    private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
+    private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
         if(email.getText().trim().isEmpty() && password.getText().trim().isEmpty()){
             emailMessage.setText("Email harus diisi!");
             pwdMessage.setText("Password harus diisi!");
@@ -179,16 +185,21 @@ public class LogIn extends javax.swing.JFrame {
             }
         }
         
-    }//GEN-LAST:event_btn_LoginActionPerformed
+    }//GEN-LAST:event_btn_SignInActionPerformed
 
-    private void btn_LoginMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LoginMouseDragged
+    private void btn_SignInMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SignInMouseDragged
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_LoginMouseDragged
+    }//GEN-LAST:event_btn_SignInMouseDragged
 
     private void tombolForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolForgotMouseClicked
         new Forgot().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_tombolForgotMouseClicked
+
+    private void btn_RegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisActionPerformed
+        new Register().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_RegisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,8 +238,8 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Login;
     private javax.swing.JButton btn_Regis;
+    private javax.swing.JButton btn_SignIn;
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailMessage;
     private javax.swing.JLabel jLabel1;

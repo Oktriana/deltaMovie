@@ -5,6 +5,8 @@
  */
 package mediaplayertest;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author Oktriana Sidik
@@ -211,21 +213,31 @@ public class Forgot extends javax.swing.JFrame {
 
     private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
         if(email.getText().trim().isEmpty() && password.getText().trim().isEmpty() && retypePwd.getText().trim().isEmpty() && answer.getText().trim().isEmpty()){
-            emailMessage.setText("Email harus diisi!");
-            pwdMessage.setText("Password harus diisi!");
-            retypeMessage.setText("Retype Password harus diisi!");
+            showMessageDialog(null, "Semua field harus diisi!");
+        } else if(answer.getText().trim().isEmpty()){
             answerMessage.setText("Jawaban pertanyaan keamanan harus diisi!");
+        } else if(!answer.getText().equals("KOTAAAA")){
+            answerMessage.setText("Jawaban anda salah!");
+        } else if(retypePwd.getText().trim().isEmpty()){
+            retypeMessage.setText("Retype Password harus diisi!");
+        } else if(password.getText().trim().isEmpty()){
+            pwdMessage.setText("Password harus diisi!");
+        } else if(email.getText().trim().isEmpty()){
+                emailMessage.setText("Email harus diisi!");
         } else{
             try{
 
                 String username = email.getText();
-                char[]pwd = password.getPassword();
+                String pass = password.getText();
 
             }
             catch(Exception e){
                 System.out.println(e.getMessage());
             }
         }
+        
+        new FormUser().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
     /**
