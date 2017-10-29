@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mediaplayer;
+package mediaplayertest;
 
 /**
  *
  * @author A
  */
-public class FormAdmin extends javax.swing.JFrame {
+public class formAdmin1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form formadmin
+     * Creates new form formAdmin1
      */
-    public FormAdmin() {
+    public formAdmin1() {
         initComponents();
     }
 
@@ -36,6 +36,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -45,7 +46,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -55,10 +56,13 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         label3 = new java.awt.Label();
         jLabel9 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,12 +82,12 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 70, 30));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Animation", "Family", "Fantasy", "Film-noir", "Music", "Musical", "Romance", "Western", "War", " " }));
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 123, 30));
+        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 123, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Genre");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 60, 30));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,22 +116,26 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 610, 190));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 640, 190));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mediaplayer/fenchan/siapatauperlu6.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -150, 610, 700));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -150, 640, 750));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel11.setText("jLabel11");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 530));
 
         jTabbedPane1.addTab("Home", jPanel1);
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.setLayout(null);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 255));
         jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getSize()+17f));
         jLabel3.setForeground(new java.awt.Color(204, 204, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("WATCH LATER");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 260, 31));
+        jPanel4.add(jLabel3);
+        jLabel3.setBounds(0, 10, 260, 31);
 
         jTextField2.setText("search");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -135,14 +143,17 @@ public class FormAdmin extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 30));
+        jPanel4.add(jTextField2);
+        jTextField2.setBounds(0, 60, 130, 30);
 
         jButton2.setBackground(new java.awt.Color(204, 204, 255));
         jButton2.setText("search");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 70, 30));
+        jPanel4.add(jButton2);
+        jButton2.setBounds(140, 60, 70, 30);
 
         label2.setText("sort by");
-        jPanel4.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 50, 30));
+        jPanel4.add(label2);
+        label2.setBounds(470, 60, 50, 30);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +161,8 @@ public class FormAdmin extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 90, 30));
+        jPanel4.add(jComboBox2);
+        jComboBox2.setBounds(530, 60, 110, 30);
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 255));
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
@@ -158,7 +170,8 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 2, true));
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 610, -1));
+        jPanel4.add(jLabel4);
+        jLabel4.setBounds(0, 100, 640, 25);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,11 +200,13 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 610, 190));
+        jPanel4.add(jScrollPane2);
+        jScrollPane2.setBounds(0, 130, 640, 190);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mediaplayer/fenchan/siapatauperlu6.jpg"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 610, 570));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel10.setText("jLabel10");
+        jPanel4.add(jLabel10);
+        jLabel10.setBounds(0, -70, 640, 640);
 
         jTabbedPane1.addTab("Watch Later", jPanel4);
 
@@ -218,7 +233,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 70, 30));
 
         label1.setText("sort by");
-        jPanel3.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 50, 30));
+        jPanel3.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 50, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +241,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 90, 30));
+        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 110, 30));
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
@@ -234,7 +249,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Movies");
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 2, true));
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 610, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 640, -1));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -263,38 +278,55 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 610, 190));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 640, 190));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mediaplayer/fenchan/siapatauperlu6.jpg"))); // NOI18N
-        jLabel8.setText("jLabel8");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -60, 610, 580));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel12.setText("jLabel12");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 500));
 
         jTabbedPane1.addTab("History", jPanel3);
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        label3.setAlignment(java.awt.Label.CENTER);
         label3.setBackground(new java.awt.Color(255, 255, 255));
-        label3.setText("Top Frequently Asked Questions");
-        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
+        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        label3.setPreferredSize(new java.awt.Dimension(100, 24));
+        label3.setText("Pertanyaan yang sering diajukan");
+        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, 30));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mediaplayer/fenchan/siapatauperlu6.jpg"))); // NOI18N
-        jLabel9.setText("jLabel9");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -110, 610, 690));
+        jLabel9.setBackground(new java.awt.Color(153, 51, 0));
+        jLabel9.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Saya mengalami masalah masuk ke situs dengan username / password");
+        jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 560, 60));
+
+        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Siapa yang bisa menambahkan data ke judul?");
+        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 560, 60));
+
+        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Bagaimana menghitung rating untuk sebuah film?");
+        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 560, 60));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel13.setText("jLabel13");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
 
         jTabbedPane1.addTab("Help", jPanel5);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
-        );
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -336,21 +368,20 @@ public class FormAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formAdmin1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormAdmin().setVisible(true);
+                new formAdmin1().setVisible(true);
             }
         });
     }
@@ -363,13 +394,17 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
