@@ -154,7 +154,7 @@ public class LogIn extends javax.swing.JFrame {
                 
                 if(uname.equals("hello")&& (pass.equals("world"))){
                     showMessageDialog(null, "Anda BERHASIL LOGIN!");
-                    new FormAdmin().setVisible(true);
+                    new formAdmin1().setVisible(true);
                     this.setVisible(false);
                 } else if(pass.equals("world")){
                     showMessageDialog(null, "Email salah!");
