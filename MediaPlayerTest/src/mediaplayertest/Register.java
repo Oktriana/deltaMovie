@@ -61,7 +61,7 @@ public class Register extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REGISTER");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 10, 170, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 0, 170, 60));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -117,7 +117,7 @@ public class Register extends javax.swing.JFrame {
                 btn_SubmitActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_Submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+        jPanel2.add(btn_Submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, -1));
 
         answerMessage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         answerMessage.setForeground(new java.awt.Color(204, 0, 0));

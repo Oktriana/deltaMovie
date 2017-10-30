@@ -37,6 +37,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,6 +48,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,6 +59,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         label3 = new java.awt.Label();
@@ -160,16 +163,18 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 640, 190));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Movies");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, 30));
 
         jLabel27.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("HOME");
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 50));
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 130, 60));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
+        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 530));
 
@@ -179,11 +184,11 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 255));
         jLabel3.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("WATCH LATER");
         jPanel4.add(jLabel3);
-        jLabel3.setBounds(0, 10, 260, 50);
+        jLabel3.setBounds(40, 10, 260, 50);
 
         jTextField2.setText("search");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -209,11 +214,10 @@ public class FormAdmin extends javax.swing.JFrame {
         jComboBox2.setBounds(530, 70, 110, 30);
 
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
         jPanel4.add(jLabel4);
-        jLabel4.setBounds(0, 110, 640, 21);
+        jLabel4.setBounds(0, 110, 640, 30);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,7 +255,11 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(jLabel16);
         jLabel16.setBounds(470, 70, 70, 30);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
+        jPanel4.add(jLabel29);
+        jLabel29.setBounds(0, 10, 42, 42);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel10.setText("jLabel10");
         jPanel4.add(jLabel10);
         jLabel10.setBounds(0, -80, 640, 640);
@@ -262,10 +270,10 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("HISTORY");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 220, 50));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 220, 50));
 
         jTextField1.setText("search");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -290,10 +298,9 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Movies");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 640, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 640, -1));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -329,7 +336,10 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel18.setText("Sort by");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 30));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
+        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel12.setText("jLabel12");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 640, 500));
 
@@ -343,33 +353,30 @@ public class FormAdmin extends javax.swing.JFrame {
         label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         label3.setPreferredSize(new java.awt.Dimension(100, 24));
         label3.setText("Pertanyaan yang sering diajukan");
-        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, 30));
+        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 270, 30));
 
         jLabel9.setBackground(new java.awt.Color(153, 51, 0));
         jLabel9.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Saya mengalami masalah masuk ke situs dengan username / password");
         jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 560, 60));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 560, 60));
 
         jLabel14.setBackground(new java.awt.Color(204, 51, 0));
         jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Siapa yang bisa menambahkan data ke judul?");
         jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 560, 60));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 560, 60));
 
         jLabel15.setBackground(new java.awt.Color(204, 51, 0));
         jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Bagaimana menghitung rating untuk sebuah film?");
         jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 560, 60));
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 560, 60));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel13.setText("jLabel13");
         jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
 
@@ -617,7 +624,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jComboBox3);
         jComboBox3.setBounds(70, 70, 90, 20);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu6.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(0, -170, 650, 810);
@@ -758,7 +765,10 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
