@@ -37,8 +37,8 @@ public class FormUser extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,8 +89,7 @@ public class FormUser extends javax.swing.JFrame {
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Animation", "Family", "Fantasy", "Film-noir", "Music", "Musical", "Romance", "Western", "War", " " }));
         jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 123, 30));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Genre");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 30));
 
@@ -132,11 +131,18 @@ public class FormUser extends javax.swing.JFrame {
         jLabel8.setText("Movies");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, 30));
 
-        jLabel6.setText("jLabel6");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -150, 640, 660));
-
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
+
+        jButton4.setBackground(new java.awt.Color(204, 204, 204));
+        jButton4.setText("LOGOUT");
+        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 102, 0), null));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -213,8 +219,7 @@ public class FormUser extends javax.swing.JFrame {
         jPanel4.add(jScrollPane2);
         jScrollPane2.setBounds(0, 160, 640, 190);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Sort by");
         jPanel4.add(jLabel16);
         jLabel16.setBounds(470, 70, 70, 30);
@@ -295,8 +300,7 @@ public class FormUser extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 640, 190));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Sort by");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 30));
 
@@ -389,6 +393,12 @@ public class FormUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new LogIn().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -429,6 +439,7 @@ public class FormUser extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -448,7 +459,6 @@ public class FormUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
