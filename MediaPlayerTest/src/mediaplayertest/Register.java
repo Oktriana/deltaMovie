@@ -5,6 +5,14 @@
  */
 package mediaplayertest;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -12,7 +20,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Oktriana Sidik
  */
 public class Register extends javax.swing.JFrame {
-
+    
+    Koneksi konek = new Koneksi();
     /**
      * Creates new form Register
      */
@@ -39,7 +48,7 @@ public class Register extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        question = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         answer = new javax.swing.JTextField();
         btn_Submit = new javax.swing.JButton();
@@ -96,13 +105,13 @@ public class Register extends javax.swing.JFrame {
         jLabel5.setText("Security Question :");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Where is your mother born?", "Where is city of your childhood?", "What is your pet name?", "What is your favorite song?", "What is your favorite quote?" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Where is your mother born?", "Where is city of your childhood?", "What is your pet name?", "What is your favorite song?", "What is your favorite quote?" }));
+        question.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                questionActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
+        jPanel2.add(question, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,9 +180,9 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_questionActionPerformed
 
     private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
         if(username.getText().trim().isEmpty() && email.getText().trim().isEmpty() && password.getText().trim().isEmpty()
@@ -189,8 +198,19 @@ public class Register extends javax.swing.JFrame {
             pwdMessage.setText("Password harus diisi!");
         } else if(email.getText().trim().isEmpty()){
             emailMessage.setText("Email harus diisi!");
-        } else{
+        } else if(username.getText().trim().isEmpty()){
             unameMessage.setText("Username harus diisi!");
+        } else{
+            String nama = username.getText();
+            String mail = email.getText();
+            String pass = password.getText();
+            String rPass = retypePwd.getText();
+            int quest = question.getSelectedIndex();
+            String answr = answer.getText();
+            
+            insert(nama, mail, pass, quest, answr);
+            
+            showMessageDialog(null, "Semua data telah di masukan!");
         }
 
         //new HalamanUtama().setVisible(true);
@@ -198,6 +218,42 @@ public class Register extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
+    public void insert(String nama, String mail, String pass, int quest, String answr){
+        String sql = "INSERT INTO Userr(namaUser, email, password, securityQuestion, securityAnswer)" +
+                "VALUES('" + nama + "','" + mail + "','" + pass + "','" + quest + "','" + answr + "')";
+        try (Connection con = konek.connect();
+            PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+              //selectAll();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void selectAll(){
+        String sql = "SELECT namaUser, email, password, securityQuestion, securityAnswer FROM Userr"; 
+        
+        try (Connection con = konek.connect();
+            Statement stmt  = con.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void encrypt(String enkrip){
+        String pwd = null;
+        
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(pwd.getBytes(),0,pwd.length());
+            new BigInteger(1, md.digest()).toString(16);
+        } catch(NoSuchAlgorithmException e){
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -239,7 +295,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton btn_Submit;
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailMessage;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -252,6 +307,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel pwdMessage;
+    private javax.swing.JComboBox<String> question;
     private javax.swing.JLabel retypeMessage;
     private javax.swing.JPasswordField retypePwd;
     private javax.swing.JLabel unameMessage;
