@@ -10,6 +10,11 @@ import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
 import java.io.IOException; //untuk penentuan jenis data seperti jpg
 import java.sql.Blob; //untuk mengambil type data blob pada database
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
@@ -692,16 +697,19 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_chooseActionPerformed
 
     private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
-        // TODO add your handling code here:
-        String jdl = title.getText();
-        int thn = year.getSelectedIndex();
-        
-        String drctr = director.getText();
-        String actr = actor.getText();
-        String cntry = country.getText();
-        String snpss = synopsis.getText();
-        String temp = "";
-        
+
+        if(title.getText().trim().isEmpty() && director.getText().trim().isEmpty() && actor.getText().trim().isEmpty() &&
+               country.getText().trim().isEmpty() && synopsis.getText().trim().isEmpty()){
+            showMessageDialog(null,"Input can't be empty");
+        }
+        else{
+            String jdl = title.getText();
+            int thn = year.getSelectedIndex();
+            String drctr = director.getText();
+            String actr = actor.getText();
+            String cntry = country.getText();
+            String snpss = synopsis.getText();
+            String temp = "";
         
         if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
         if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
@@ -724,10 +732,9 @@ public class FormAdmin extends javax.swing.JFrame {
         if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
         if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
         
-        showMessageDialog(null, temp);
-//        if (jCheckBox1.isSelected()) {
-//         showMessageDialog(null, "cobadulu");   
-//        }
+        insert(jdl, thn, temp, drctr, actr, cntry, snpss);
+        
+        showMessageDialog(null, "Insert berhasil");
 //        List<String> infos = new ArrayList<String>();
 //        for (JCheckBox checkBox : JCheckBox) {
 //            if (checkBox.isSelected()) {
@@ -735,9 +742,34 @@ public class FormAdmin extends javax.swing.JFrame {
 //            }
 //        }
         
-        
+        }
     }//GEN-LAST:event_btn_uploadActionPerformed
-
+    
+    public void insert(String title, int year, String genre, String director, String actor, String country, String synopsis){
+        
+        String sql = "INSERT INTO Movie(title, year, genre, director, actor, country, synopsis)" +
+                "VALUES('" + title + "','" + year + "','" +genre+ "','" + director + "','" + actor + "','" + country + "','" + synopsis +")";
+        try (Connection con = konek.connect();
+            PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void selectAll(){
+        String sql = "SELECT title, year, genre, director, actor, country, synopsis FROM Movie"; 
+  
+        try (Connection con = konek.connect();
+            Statement stmt  = con.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
