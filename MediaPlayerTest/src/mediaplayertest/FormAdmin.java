@@ -5,12 +5,26 @@
  */
 package mediaplayertest;
 
+import java.awt.List;
+import java.awt.image.BufferedImage; //colormode
+import java.io.File; //upload file
+import java.io.IOException; //untuk penentuan jenis data seperti jpg
+import java.sql.Blob; //untuk mengambil type data blob pada database
+import java.util.ArrayList;
+import java.util.logging.Level; //jenis user
+import java.util.logging.Logger; //pencatatan waktu
+import static javax.swing.JOptionPane.showMessageDialog; //error
 /**
  *
  * @author A
  */
 public class FormAdmin extends javax.swing.JFrame {
-
+    
+    Blob blob;
+    BufferedImage img;
+    
+    Koneksi konek = new Koneksi();
+    
     /**
      * Creates new form formAdmin1
      */
@@ -68,10 +82,10 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        pilihGmbr = new javax.swing.JButton();
+        btn_choose = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        title = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -95,17 +109,17 @@ public class FormAdmin extends javax.swing.JFrame {
         jCheckBox19 = new javax.swing.JCheckBox();
         jCheckBox20 = new javax.swing.JCheckBox();
         jLabel21 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        director = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        actor = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        country = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton5 = new javax.swing.JButton();
+        synopsis = new javax.swing.JTextArea();
+        btn_upload = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        year = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -384,14 +398,14 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        pilihGmbr.setText("Choose");
-        pilihGmbr.addActionListener(new java.awt.event.ActionListener() {
+        btn_choose.setText("Choose");
+        btn_choose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pilihGmbrActionPerformed(evt);
+                btn_chooseActionPerformed(evt);
             }
         });
-        jPanel2.add(pilihGmbr);
-        pilihGmbr.setBounds(70, 10, 90, 20);
+        jPanel2.add(btn_choose);
+        btn_choose.setBounds(70, 10, 90, 20);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -405,9 +419,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel8);
         jLabel8.setBounds(10, 40, 40, 15);
 
-        jTextField4.setText("...");
-        jPanel2.add(jTextField4);
-        jTextField4.setBounds(70, 40, 190, 20);
+        title.setText("...");
+        jPanel2.add(title);
+        title.setBounds(70, 40, 190, 20);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -425,6 +439,12 @@ public class FormAdmin extends javax.swing.JFrame {
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Action");
         jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 255, 255), null, null));
+        jCheckBox1.setName(""); // NOI18N
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jCheckBox1);
         jCheckBox1.setBounds(70, 100, 90, 19);
 
@@ -573,9 +593,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel21);
         jLabel21.setBounds(10, 230, 60, 15);
 
-        jTextField6.setText("...");
-        jPanel2.add(jTextField6);
-        jTextField6.setBounds(70, 230, 200, 20);
+        director.setText("...");
+        jPanel2.add(director);
+        director.setBounds(70, 230, 200, 20);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -583,9 +603,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel22);
         jLabel22.setBounds(10, 270, 50, 15);
 
-        jTextField7.setText("...");
-        jPanel2.add(jTextField7);
-        jTextField7.setBounds(70, 270, 200, 20);
+        actor.setText("...");
+        jPanel2.add(actor);
+        actor.setBounds(70, 270, 200, 20);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -593,9 +613,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel23);
         jLabel23.setBounds(10, 310, 60, 15);
 
-        jTextField8.setText("...");
-        jPanel2.add(jTextField8);
-        jTextField8.setBounds(70, 310, 200, 20);
+        country.setText("...");
+        jPanel2.add(country);
+        country.setBounds(70, 310, 200, 20);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -603,16 +623,21 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel24);
         jLabel24.setBounds(10, 350, 60, 15);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        synopsis.setColumns(20);
+        synopsis.setRows(5);
+        jScrollPane1.setViewportView(synopsis);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(70, 350, 330, 70);
 
-        jButton5.setText("Upload");
-        jPanel2.add(jButton5);
-        jButton5.setBounds(70, 440, 70, 30);
+        btn_upload.setText("Upload");
+        btn_upload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_uploadActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_upload);
+        btn_upload.setBounds(70, 440, 70, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -620,9 +645,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel25);
         jLabel25.setBounds(160, 10, 40, 20);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
-        jPanel2.add(jComboBox3);
-        jComboBox3.setBounds(70, 70, 90, 20);
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
+        jPanel2.add(year);
+        year.setBounds(70, 70, 90, 20);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
@@ -676,9 +701,60 @@ public class FormAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox15ActionPerformed
 
-    private void pilihGmbrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihGmbrActionPerformed
+    private void btn_chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chooseActionPerformed
         
-    }//GEN-LAST:event_pilihGmbrActionPerformed
+    }//GEN-LAST:event_btn_chooseActionPerformed
+
+    private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
+        // TODO add your handling code here:
+        String jdl = title.getText();
+        int thn = year.getSelectedIndex();
+        
+        String drctr = director.getText();
+        String actr = actor.getText();
+        String cntry = country.getText();
+        String snpss = synopsis.getText();
+        String temp = "";
+        
+        
+        if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ",";}
+        else if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ",";}
+        else if (jCheckBox3.isSelected()) {temp += jCheckBox3.getText();temp+= ",";}
+        else if (jCheckBox4.isSelected()) {temp += jCheckBox4.getText();temp+= ",";}
+        else if (jCheckBox5.isSelected()) {temp += jCheckBox5.getText();temp+= ",";}
+        else if (jCheckBox6.isSelected()) {temp += jCheckBox6.getText();}
+        else if (jCheckBox7.isSelected()) {temp += jCheckBox7.getText();}
+        else if (jCheckBox8.isSelected()) {temp += jCheckBox8.getText();}
+        else if (jCheckBox9.isSelected()) {temp += jCheckBox9.getText();}
+        else if (jCheckBox10.isSelected()) {temp += jCheckBox10.getText();}
+        else if (jCheckBox11.isSelected()) {temp += jCheckBox11.getText();}
+        else if (jCheckBox12.isSelected()) {temp += jCheckBox12.getText();}
+        else if (jCheckBox13.isSelected()) {temp += jCheckBox13.getText();}
+        else if (jCheckBox14.isSelected()) {temp += jCheckBox14.getText();}
+        else if (jCheckBox15.isSelected()) {temp += jCheckBox15.getText();}
+        else if (jCheckBox16.isSelected()) {temp += jCheckBox16.getText();}
+        else if (jCheckBox17.isSelected()) {temp += jCheckBox17.getText();}
+        else if (jCheckBox18.isSelected()) {temp += jCheckBox18.getText();}
+        else if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();}
+        else {temp += jCheckBox20.getText();}
+        
+        showMessageDialog(null, temp);
+//        if (jCheckBox1.isSelected()) {
+//         showMessageDialog(null, "cobadulu");   
+//        }
+//        List<String> infos = new ArrayList<String>();
+//        for (JCheckBox checkBox : JCheckBox) {
+//            if (checkBox.isSelected()) {
+//                infos.add(checkBox.getText());
+//            }
+//        }
+        
+        
+    }//GEN-LAST:event_btn_uploadActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -717,10 +793,14 @@ public class FormAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField actor;
+    private javax.swing.JButton btn_choose;
+    private javax.swing.JButton btn_upload;
+    private javax.swing.JTextField country;
+    private javax.swing.JTextField director;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
@@ -743,7 +823,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -787,15 +866,12 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private java.awt.Label label3;
-    private javax.swing.JButton pilihGmbr;
+    private javax.swing.JTextArea synopsis;
+    private javax.swing.JTextField title;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }
