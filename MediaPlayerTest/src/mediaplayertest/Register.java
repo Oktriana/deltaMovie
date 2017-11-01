@@ -216,7 +216,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
     public void insert(String nama, String mail, String pass, int quest, String answr){
-        String sql = "INSERT INTO User(userName, email, password, s_question, s_answer)" +
+        String sql = "INSERT INTO User(name, email, password, s_question, s_answer)" +
                 "VALUES('" + nama + "','" + mail + "','" + pass + "','" + quest + "','" + answr + "')";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -228,7 +228,7 @@ public class Register extends javax.swing.JFrame {
     }
     
     public void selectAll(){
-        String sql = "SELECT userName, email, password, s_question, s_answer FROM User"; 
+        String sql = "SELECT name, email, password, s_question, s_answer FROM User";
         
         try (Connection con = konek.connect();
             Statement stmt = con.createStatement();
