@@ -13,12 +13,15 @@ import java.sql.Blob; //untuk mengambil type data blob pada database
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author A
@@ -30,11 +33,31 @@ public class FormAdmin extends javax.swing.JFrame {
     
     Koneksi konek = new Koneksi();
     
+    int id_terpilih;
+    
+    FormAdmin upload;
+    int row_terpilih;
+    String[] getdata_edit = new String[8];
+    
     /**
      * Creates new form formAdmin1
      */
-    public FormAdmin() {
+    public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
         initComponents();
+        this.id_terpilih= Integer.parseInt(id_terpilih);
+        this.upload = upload;
+        this.row_terpilih = row_terpilih;
+        
+        title1.setText(title);
+        year1.setSelectedIndex(year);
+        director1.setText(director);
+        actor1.setText(actor);
+        country1.setText(country);
+        synopsis1.setText(synopsis);
+    }
+
+    FormAdmin() {
+    initComponents();    
     }
 
     /**
@@ -53,11 +76,12 @@ public class FormAdmin extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        table_home = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -127,6 +151,47 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         year = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        btn_choose1 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        title1 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jCheckBox21 = new javax.swing.JCheckBox();
+        jCheckBox22 = new javax.swing.JCheckBox();
+        jCheckBox23 = new javax.swing.JCheckBox();
+        jCheckBox24 = new javax.swing.JCheckBox();
+        jCheckBox25 = new javax.swing.JCheckBox();
+        jCheckBox26 = new javax.swing.JCheckBox();
+        jCheckBox27 = new javax.swing.JCheckBox();
+        jCheckBox28 = new javax.swing.JCheckBox();
+        jCheckBox29 = new javax.swing.JCheckBox();
+        jCheckBox30 = new javax.swing.JCheckBox();
+        jCheckBox31 = new javax.swing.JCheckBox();
+        jCheckBox32 = new javax.swing.JCheckBox();
+        jCheckBox33 = new javax.swing.JCheckBox();
+        jCheckBox34 = new javax.swing.JCheckBox();
+        jCheckBox35 = new javax.swing.JCheckBox();
+        jCheckBox36 = new javax.swing.JCheckBox();
+        jCheckBox37 = new javax.swing.JCheckBox();
+        jCheckBox38 = new javax.swing.JCheckBox();
+        jCheckBox39 = new javax.swing.JCheckBox();
+        jCheckBox40 = new javax.swing.JCheckBox();
+        jLabel35 = new javax.swing.JLabel();
+        director1 = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        actor1 = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        country1 = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        synopsis1 = new javax.swing.JTextArea();
+        btn_update = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        year1 = new javax.swing.JComboBox<>();
+        jLabel40 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,7 +217,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel5.setText("Genre");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 60, 30));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        table_home.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -177,7 +242,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(table_home);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 630, 190));
 
@@ -201,6 +266,14 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
+
+        btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -417,23 +490,23 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_choose);
-        btn_choose.setBounds(70, 10, 90, 20);
+        btn_choose.setBounds(70, 0, 90, 20);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Cover :");
         jPanel2.add(jLabel17);
-        jLabel17.setBounds(10, 10, 60, 20);
+        jLabel17.setBounds(10, 0, 60, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Title :");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(10, 40, 40, 15);
+        jLabel8.setBounds(10, 30, 40, 15);
 
         title.setText("...");
         jPanel2.add(title);
-        title.setBounds(70, 40, 190, 20);
+        title.setBounds(70, 30, 190, 30);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -492,7 +565,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jCheckBox7.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox7.setText("Documantary");
         jPanel2.add(jCheckBox7);
-        jCheckBox7.setBounds(180, 130, 89, 23);
+        jCheckBox7.setBounds(180, 130, 110, 23);
 
         jCheckBox8.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox8.setText("Family");
@@ -587,7 +660,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
         director.setText("...");
         jPanel2.add(director);
-        director.setBounds(70, 230, 200, 20);
+        director.setBounds(70, 230, 200, 30);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -597,7 +670,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
         actor.setText("...");
         jPanel2.add(actor);
-        actor.setBounds(70, 270, 200, 20);
+        actor.setBounds(70, 270, 200, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -607,7 +680,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
         country.setText("...");
         jPanel2.add(country);
-        country.setBounds(70, 310, 200, 20);
+        country.setBounds(70, 310, 200, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -635,7 +708,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText(".jpg");
         jPanel2.add(jLabel25);
-        jLabel25.setBounds(160, 10, 40, 20);
+        jLabel25.setBounds(160, 0, 40, 20);
 
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
         jPanel2.add(year);
@@ -643,9 +716,252 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, -170, 650, 810);
+        jLabel7.setBounds(0, -170, 650, 730);
 
         jTabbedPane1.addTab("Upload", jPanel2);
+
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setLayout(null);
+
+        btn_choose1.setText("Choose");
+        btn_choose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_choose1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_choose1);
+        btn_choose1.setBounds(70, 0, 90, 20);
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Cover :");
+        jPanel7.add(jLabel31);
+        jLabel31.setBounds(10, 0, 60, 20);
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("Title :");
+        jPanel7.add(jLabel32);
+        jLabel32.setBounds(10, 30, 40, 15);
+
+        title1.setText("...");
+        jPanel7.add(title1);
+        title1.setBounds(70, 30, 190, 30);
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Year :");
+        jPanel7.add(jLabel33);
+        jLabel33.setBounds(10, 70, 40, 15);
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Genre :");
+        jPanel7.add(jLabel34);
+        jLabel34.setBounds(10, 100, 50, 15);
+
+        jCheckBox21.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox21.setText("Action");
+        jCheckBox21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 255, 255), null, null));
+        jCheckBox21.setName(""); // NOI18N
+        jCheckBox21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox21ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox21);
+        jCheckBox21.setBounds(70, 100, 90, 19);
+
+        jCheckBox22.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox22.setText("Horror");
+        jCheckBox22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox22ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox22);
+        jCheckBox22.setBounds(70, 160, 90, 23);
+
+        jCheckBox23.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox23.setText("Advanture");
+        jPanel7.add(jCheckBox23);
+        jCheckBox23.setBounds(180, 100, 90, 23);
+
+        jCheckBox24.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox24.setText("Animation");
+        jPanel7.add(jCheckBox24);
+        jCheckBox24.setBounds(300, 100, 90, 23);
+
+        jCheckBox25.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox25.setText("Comedy");
+        jPanel7.add(jCheckBox25);
+        jCheckBox25.setBounds(70, 130, 90, 23);
+
+        jCheckBox26.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox26.setText("Crime");
+        jPanel7.add(jCheckBox26);
+        jCheckBox26.setBounds(520, 100, 90, 23);
+
+        jCheckBox27.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox27.setText("Documantary");
+        jPanel7.add(jCheckBox27);
+        jCheckBox27.setBounds(180, 130, 110, 23);
+
+        jCheckBox28.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox28.setText("Family");
+        jPanel7.add(jCheckBox28);
+        jCheckBox28.setBounds(300, 130, 90, 23);
+
+        jCheckBox29.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox29.setText("Biography");
+        jPanel7.add(jCheckBox29);
+        jCheckBox29.setBounds(400, 100, 90, 23);
+
+        jCheckBox30.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox30.setText("Thriller");
+        jCheckBox30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox30ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox30);
+        jCheckBox30.setBounds(300, 190, 90, 23);
+
+        jCheckBox31.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox31.setText("Fantasy");
+        jPanel7.add(jCheckBox31);
+        jCheckBox31.setBounds(400, 130, 90, 23);
+
+        jCheckBox32.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox32.setText("Music");
+        jPanel7.add(jCheckBox32);
+        jCheckBox32.setBounds(180, 160, 90, 23);
+
+        jCheckBox33.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox33.setText("War");
+        jCheckBox33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox33ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox33);
+        jCheckBox33.setBounds(400, 190, 90, 23);
+
+        jCheckBox34.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox34.setText("Sport");
+        jPanel7.add(jCheckBox34);
+        jCheckBox34.setBounds(180, 190, 90, 23);
+
+        jCheckBox35.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox35.setText("Sci-fi");
+        jCheckBox35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox35ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox35);
+        jCheckBox35.setBounds(70, 190, 90, 23);
+
+        jCheckBox36.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox36.setText("History");
+        jPanel7.add(jCheckBox36);
+        jCheckBox36.setBounds(520, 130, 90, 23);
+
+        jCheckBox37.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox37.setText("Musical");
+        jPanel7.add(jCheckBox37);
+        jCheckBox37.setBounds(300, 160, 90, 23);
+
+        jCheckBox38.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox38.setText("Mistery");
+        jPanel7.add(jCheckBox38);
+        jCheckBox38.setBounds(400, 160, 90, 23);
+
+        jCheckBox39.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox39.setText("Romance");
+        jPanel7.add(jCheckBox39);
+        jCheckBox39.setBounds(520, 160, 90, 23);
+
+        jCheckBox40.setBackground(new java.awt.Color(153, 51, 0));
+        jCheckBox40.setText("Westren");
+        jCheckBox40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox40ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jCheckBox40);
+        jCheckBox40.setBounds(520, 190, 90, 23);
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Director :");
+        jPanel7.add(jLabel35);
+        jLabel35.setBounds(10, 230, 60, 15);
+
+        director1.setText("...");
+        jPanel7.add(director1);
+        director1.setBounds(70, 230, 200, 30);
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Actor :");
+        jPanel7.add(jLabel36);
+        jLabel36.setBounds(10, 270, 50, 15);
+
+        actor1.setText("...");
+        jPanel7.add(actor1);
+        actor1.setBounds(70, 270, 200, 30);
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("Country :");
+        jPanel7.add(jLabel37);
+        jLabel37.setBounds(10, 310, 60, 15);
+
+        country1.setText("...");
+        jPanel7.add(country1);
+        country1.setBounds(70, 310, 200, 30);
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("Synopsis :");
+        jPanel7.add(jLabel38);
+        jLabel38.setBounds(10, 350, 60, 15);
+
+        synopsis1.setColumns(20);
+        synopsis1.setRows(5);
+        jScrollPane5.setViewportView(synopsis1);
+
+        jPanel7.add(jScrollPane5);
+        jScrollPane5.setBounds(70, 350, 330, 70);
+
+        btn_update.setText("Update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_update);
+        btn_update.setBounds(70, 440, 70, 30);
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText(".jpg");
+        jPanel7.add(jLabel39);
+        jLabel39.setBounds(160, 0, 40, 20);
+
+        year1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
+        jPanel7.add(year1);
+        year1.setBounds(70, 70, 90, 20);
+
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
+        jPanel7.add(jLabel40);
+        jLabel40.setBounds(0, -170, 650, 730);
+
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 630));
+
+        jTabbedPane1.addTab("Update", jPanel6);
 
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -697,19 +1013,16 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_chooseActionPerformed
 
     private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
-
-        if(title.getText().trim().isEmpty() && director.getText().trim().isEmpty() && actor.getText().trim().isEmpty() &&
-               country.getText().trim().isEmpty() && synopsis.getText().trim().isEmpty()){
-            showMessageDialog(null,"Input can't be empty");
-        }
-        else{
-            String jdl = title.getText();
-            int thn = year.getSelectedIndex();
-            String drctr = director.getText();
-            String actr = actor.getText();
-            String cntry = country.getText();
-            String snpss = synopsis.getText();
-            String temp = "";
+        // TODO add your handling code here:
+        String jdl = title.getText();
+        int thn = year.getSelectedIndex();
+        
+        String drctr = director.getText();
+        String actr = actor.getText();
+        String cntry = country.getText();
+        String snpss = synopsis.getText();
+        String temp = "";
+        
         
         if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
         if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
@@ -732,9 +1045,10 @@ public class FormAdmin extends javax.swing.JFrame {
         if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
         if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
         
-        insert(jdl, thn, temp, drctr, actr, cntry, snpss);
-        
-        showMessageDialog(null, "Insert berhasil");
+        showMessageDialog(null, temp);
+//        if (jCheckBox1.isSelected()) {
+//         showMessageDialog(null, "cobadulu");   
+//        }
 //        List<String> infos = new ArrayList<String>();
 //        for (JCheckBox checkBox : JCheckBox) {
 //            if (checkBox.isSelected()) {
@@ -742,34 +1056,9 @@ public class FormAdmin extends javax.swing.JFrame {
 //            }
 //        }
         
-        }
-    }//GEN-LAST:event_btn_uploadActionPerformed
-    
-    public void insert(String title, int year, String genre, String director, String actor, String country, String synopsis){
         
-        String sql = "INSERT INTO Movie(title, year, genre, director, actor, country, synopsis)" +
-                "VALUES('" + title + "','" + year + "','" +genre+ "','" + director + "','" + actor + "','" + country + "','" + synopsis +")";
-        try (Connection con = konek.connect();
-            PreparedStatement pstmt = con.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void selectAll(){
-        String sql = "SELECT title, year, genre, director, actor, country, synopsis FROM Movie"; 
-  
-        try (Connection con = konek.connect();
-            Statement stmt  = con.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql)){
-            rs.close();
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
+    }//GEN-LAST:event_btn_uploadActionPerformed
+
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
@@ -780,6 +1069,89 @@ public class FormAdmin extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        int row_terpilih = table_home.getSelectedRow();
+        if(row_terpilih != -1){
+            String id_terpilih = table_home.getModel().getValueAt(row_terpilih, 0).toString();
+            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION);
+            if(selectedOption == JOptionPane.YES_OPTION){
+                delete(Integer.parseInt(id_terpilih));
+                showMessageDialog(null, "Data deleted success!");
+                selectAll();
+            }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btn_choose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choose1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_choose1ActionPerformed
+
+    private void jCheckBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox21ActionPerformed
+
+    private void jCheckBox22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox22ActionPerformed
+
+    private void jCheckBox30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox30ActionPerformed
+
+    private void jCheckBox33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox33ActionPerformed
+
+    private void jCheckBox35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox35ActionPerformed
+
+    private void jCheckBox40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox40ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox40ActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        // TODO add your handling code here:
+        String title = title1.getText();
+        int year = year1.getSelectedIndex();
+        String director = director1.getText();
+        String actor = actor1.getText();
+        String country = country1.getText();
+        String synopsis = synopsis1.getText();
+        
+        update (id_terpilih, title, year, director, actor, country, synopsis);
+        showMessageDialog(null, "Update berhasil!");
+        
+        this.dispose();
+    }//GEN-LAST:event_btn_updateActionPerformed
+        
+    public void update(int id_terpilih, String title, int year, String director, String actor, String country, String synopsis){
+        String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
+        try (Connection conn = konek.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, title);
+            pstmt.setInt(2, year);
+            pstmt.setString(3, director);
+            pstmt.setString(4, actor);
+            pstmt.setString(5, country);
+            pstmt.setString(6, synopsis);
+            pstmt.executeUpdate();
+    } catch(SQLException e){
+            System.out.println(e.getMessage());
+    }
+    }
+    public void delete(int id_terpilih){
+        Connection conn = konek.connect();
+        String sql = "DELETE FROM Movie WHERE id_movie = ?";
+        
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id_terpilih);
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+    }
+    }
     /**
      * @param args the command line arguments
      */
@@ -815,13 +1187,48 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void selectAll(){
+            String sql = "SELECT id_movie, title, year, director, actor, country, synopsis FROM Movie";
+            try(Connection con = konek.connect();
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql)){
+                
+                while(table_home.getRowCount() > 0)
+                {
+                    ((DefaultTableModel) table_home.getModel()).removeRow(0);
+                }
+                while (rs.next()){
+                    ResultSetMetaData md = rs.getMetaData();
+                    int columns = md.getColumnCount();
+                    
+                        Object[] row = new Object[columns];
+                        for (int i = 1; i <= columns; i++)
+                        {
+                            row[i-1] = rs.getObject(i);
+                            System.out.println(rs.getObject(i));
+                        }
+                        ((DefaultTableModel) table_home.getModel()).insertRow(rs.getRow()-1,row);
+                }
+                rs.close();
+                stmt.close();
+            } catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actor;
+    private javax.swing.JTextField actor1;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btn_choose;
+    private javax.swing.JButton btn_choose1;
+    private javax.swing.JButton btn_update;
     private javax.swing.JButton btn_upload;
     private javax.swing.JTextField country;
+    private javax.swing.JTextField country1;
     private javax.swing.JTextField director;
+    private javax.swing.JTextField director1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -839,8 +1246,28 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox19;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox20;
+    private javax.swing.JCheckBox jCheckBox21;
+    private javax.swing.JCheckBox jCheckBox22;
+    private javax.swing.JCheckBox jCheckBox23;
+    private javax.swing.JCheckBox jCheckBox24;
+    private javax.swing.JCheckBox jCheckBox25;
+    private javax.swing.JCheckBox jCheckBox26;
+    private javax.swing.JCheckBox jCheckBox27;
+    private javax.swing.JCheckBox jCheckBox28;
+    private javax.swing.JCheckBox jCheckBox29;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox30;
+    private javax.swing.JCheckBox jCheckBox31;
+    private javax.swing.JCheckBox jCheckBox32;
+    private javax.swing.JCheckBox jCheckBox33;
+    private javax.swing.JCheckBox jCheckBox34;
+    private javax.swing.JCheckBox jCheckBox35;
+    private javax.swing.JCheckBox jCheckBox36;
+    private javax.swing.JCheckBox jCheckBox37;
+    private javax.swing.JCheckBox jCheckBox38;
+    private javax.swing.JCheckBox jCheckBox39;
     private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox40;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
@@ -873,7 +1300,17 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -883,20 +1320,26 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private java.awt.Label label3;
     private javax.swing.JTextArea synopsis;
+    private javax.swing.JTextArea synopsis1;
+    private javax.swing.JTable table_home;
     private javax.swing.JTextField title;
+    private javax.swing.JTextField title1;
     private javax.swing.JComboBox<String> year;
+    private javax.swing.JComboBox<String> year1;
     // End of variables declaration//GEN-END:variables
 }
