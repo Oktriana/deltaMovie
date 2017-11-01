@@ -5,6 +5,10 @@
  */
 package mediaplayertest;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -13,6 +17,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class LogIn extends javax.swing.JFrame {
 
+    Koneksi konek = new Koneksi();
     /**
      * Creates new form log
      */
@@ -166,7 +171,9 @@ public class LogIn extends javax.swing.JFrame {
                 char[] pwd = password.getPassword();
                 String pass = new String(pwd);
                 
-                if(uname.equals("hello")&& (pass.equals("world"))){
+                cek();
+                
+                /*if(uname.equals("hello")&& (pass.equals("world"))){
                     showMessageDialog(null, "Anda BERHASIL LOGIN!");
                     new FormAdmin().setVisible(true);
                     this.setVisible(false);
@@ -176,7 +183,7 @@ public class LogIn extends javax.swing.JFrame {
                     showMessageDialog(null, "Password salah!");
                 } else{
                     showMessageDialog(null,"Email dan Password salah!!");
-                }
+                }*/
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
@@ -198,6 +205,33 @@ public class LogIn extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_RegisActionPerformed
 
+    public void cek(){
+        String sql = "SELECT * FROM User WHERE userName='" +email.getText()+ "' AND password='"+password.getText()+"'";
+        
+        try(Connection conn = konek.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+            
+            if(rs.next()){
+                if(rs.getString("job").equals("User")){
+                new FormAdmin().setVisible(true);
+                this.setVisible(false);
+                } else if(rs.getString("job").equals("Admin")){
+                new FormUser().setVisible(true);
+                this.setVisible(false);
+                }
+            }else {
+                showMessageDialog(null, "Username atau Password salah!");
+                email.setText("");
+                password.setText("");
+                email.requestFocus();
+            }
+        } catch (SQLException e){
+            showMessageDialog(null, e);
+        }
+    }
+       
+    
     /**
      * @param args the command line arguments
      */

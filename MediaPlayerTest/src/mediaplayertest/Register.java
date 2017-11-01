@@ -192,8 +192,6 @@ public class Register extends javax.swing.JFrame {
             answerMessage.setText("Jawaban harus diisi!");
         } else if(retypePwd.getText().trim().isEmpty()){
             retypeMessage.setText("Retype Password!");
-        } else if(!retypePwd.equals(password.getText())){
-            retypeMessage.setText("Tidak sama dengan password");
         } else if(password.getText().trim().isEmpty()){
             pwdMessage.setText("Password harus diisi!");
         } else if(email.getText().trim().isEmpty()){
@@ -204,22 +202,21 @@ public class Register extends javax.swing.JFrame {
             String nama = username.getText();
             String mail = email.getText();
             String pass = password.getText();
-            String rPass = retypePwd.getText();
             int quest = question.getSelectedIndex();
             String answr = answer.getText();
-            
+                       
             insert(nama, mail, pass, quest, answr);
             
             showMessageDialog(null, "Semua data telah di masukan!");
         }
 
-        //new HalamanUtama().setVisible(true);
-        //this.setVisible(false);
+        new FormUser().setVisible(true);
+        this.setVisible(false);
 
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
     public void insert(String nama, String mail, String pass, int quest, String answr){
-        String sql = "INSERT INTO Userr(namaUser, email, password, securityQuestion, securityAnswer)" +
+        String sql = "INSERT INTO User(userName, email, password, s_question, s_answer)" +
                 "VALUES('" + nama + "','" + mail + "','" + pass + "','" + quest + "','" + answr + "')";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -231,11 +228,11 @@ public class Register extends javax.swing.JFrame {
     }
     
     public void selectAll(){
-        String sql = "SELECT namaUser, email, password, securityQuestion, securityAnswer FROM Userr"; 
+        String sql = "SELECT userName, email, password, s_question, s_answer FROM User"; 
         
         try (Connection con = konek.connect();
-            Statement stmt  = con.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql)){
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -250,8 +247,9 @@ public class Register extends javax.swing.JFrame {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(pwd.getBytes(),0,pwd.length());
             new BigInteger(1, md.digest()).toString(16);
-        } catch(NoSuchAlgorithmException e){
             
+        } catch(NoSuchAlgorithmException e){
+            e.getMessage();
         }
     }
     /**
