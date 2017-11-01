@@ -565,7 +565,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jCheckBox7.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox7.setText("Documantary");
         jPanel2.add(jCheckBox7);
-        jCheckBox7.setBounds(180, 130, 110, 23);
+        jCheckBox7.setBounds(180, 130, 90, 23);
 
         jCheckBox8.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox8.setText("Family");
@@ -806,7 +806,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jCheckBox27.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox27.setText("Documantary");
         jPanel7.add(jCheckBox27);
-        jCheckBox27.setBounds(180, 130, 110, 23);
+        jCheckBox27.setBounds(180, 130, 90, 23);
 
         jCheckBox28.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox28.setText("Family");
@@ -1016,7 +1016,6 @@ public class FormAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String jdl = title.getText();
         int thn = year.getSelectedIndex();
-        
         String drctr = director.getText();
         String actr = actor.getText();
         String cntry = country.getText();
