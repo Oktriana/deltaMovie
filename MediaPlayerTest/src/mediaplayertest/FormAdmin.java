@@ -16,7 +16,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
 import javax.swing.JOptionPane;
@@ -1070,8 +1073,36 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
-        int row_terpilih = table_home.getSelectedRow();
-        if(row_terpilih != -1){
+        Connection conn = konek.connect();
+    
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
+            pstmt.setInt(1, id_terpilih);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.getInt("id_movie")==0){
+                showMessageDialog(null, "Data tidak ada!!!");
+            }
+            else{
+                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data pemasukan ?","Hapus Data Pemasukan", JOptionPane.INFORMATION_MESSAGE);
+                if (result == JOptionPane.OK_OPTION){
+                     String sql = "DELETE FROM Movie WHERE id_movie=?";
+                     PreparedStatement hapus = conn.prepareStatement(sql);
+                    // set the corresponding param
+                    hapus.setInt(1, id_terpilih);
+                    hapus.executeUpdate();
+                    selectAll();
+                    hapus.close();
+                    }   
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            
+    }
+        
+        /**if(row_terpilih != -1){
             String id_terpilih = table_home.getModel().getValueAt(row_terpilih, 0).toString();
             int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION);
             if(selectedOption == JOptionPane.YES_OPTION){
@@ -1079,7 +1110,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 showMessageDialog(null, "Data deleted success!");
                 selectAll();
             }
-        }
+        }**/
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btn_choose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choose1ActionPerformed
@@ -1136,17 +1167,27 @@ public class FormAdmin extends javax.swing.JFrame {
             pstmt.setString(5, country);
             pstmt.setString(6, synopsis);
             pstmt.executeUpdate();
+            
+            pstmt.close();
+            conn.close();
     } catch(SQLException e){
             System.out.println(e.getMessage());
     }
     }
-    public void delete(int id_terpilih){
+    /**public void delete(int id_terpilih){
         Connection conn = konek.connect();
         String sql = "DELETE FROM Movie WHERE id_movie = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, id_terpilih);
-            pstmt.executeUpdate();
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.getInt("id_movie")==0){
+                showMessageDialog(null, "Data tidak ada!!!");
+            }
+            
+            rs.close();
+            pstmt.close();
+            conn.close();
         } catch (SQLException e){
             System.out.println(e.getMessage());
     }
@@ -1188,9 +1229,53 @@ public class FormAdmin extends javax.swing.JFrame {
     }
     
     public void selectAll(){
-            String sql = "SELECT id_movie, title, year, director, actor, country, synopsis FROM Movie";
-            try(Connection con = konek.connect();
-                    Statement stmt = con.createStatement();
+        try {
+            Connection conn = konek.connect();
+            PreparedStatement pstmt = conn.prepareStatement("Select id_movie, title, year, actor, directory, country, synopsis from Movie");
+            pstmt.setString(1, title.getText());
+            pstmt.setInt(2, year.getSelectedIndex());
+            pstmt.setString(3, director.getText());
+            pstmt.setString(4, actor.getText());
+            pstmt.setString(5, country.getText());
+            pstmt.setString(6, synopsis.getText());
+            
+            ResultSet rs = pstmt.executeQuery();
+              
+             //To remove previously added rows
+            while(table_home.getRowCount() > 0) 
+            {
+                ((DefaultTableModel) table_home.getModel()).removeRow(0);
+            }
+
+            while (rs.next()) {
+                //Count the number of column
+                
+                ResultSetMetaData md = rs.getMetaData();
+                int columns = md.getColumnCount();
+                
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++)
+                {  
+                    row[i - 1] = rs.getObject(i);
+                }
+                ((DefaultTableModel) table_home.getModel()).insertRow(rs.getRow()-1,row);
+                
+            }
+            
+            // Tutup koneksi
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+            /**String sql = "SELECT id_movie, title, year, director, actor, country, synopsis FROM Movie";
+            try(Connection conn = konek.connect();
+                    Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(sql)){
                 
                 while(table_home.getRowCount() > 0)
@@ -1214,7 +1299,7 @@ public class FormAdmin extends javax.swing.JFrame {
             } catch (SQLException e){
                 System.out.println(e.getMessage());
             }
-    }
+    }**/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actor;
