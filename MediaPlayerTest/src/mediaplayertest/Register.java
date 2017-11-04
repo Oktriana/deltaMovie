@@ -204,14 +204,15 @@ public class Register extends javax.swing.JFrame {
             String pass = password.getText();
             int quest = question.getSelectedIndex();
             String answr = answer.getText();
-                       
+                      
+            encrypt(pass);
             insert(nama, mail, pass, quest, answr);
             
             showMessageDialog(null, "Semua data telah di masukan!");
         }
 
         new FormUser().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
 
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
@@ -241,11 +242,10 @@ public class Register extends javax.swing.JFrame {
     }
     
     public void encrypt(String enkrip){
-        String pwd = null;
         
         try{
             MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(pwd.getBytes(),0,pwd.length());
+            md.update(enkrip.getBytes(),0,enkrip.length());
             new BigInteger(1, md.digest()).toString(16);
             
         } catch(NoSuchAlgorithmException e){

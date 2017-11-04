@@ -18,6 +18,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class LogIn extends javax.swing.JFrame {
 
     Koneksi konek = new Koneksi();
+    int id_terpilih;
     /**
      * Creates new form log
      */
@@ -197,16 +198,16 @@ public class LogIn extends javax.swing.JFrame {
 
     private void tombolForgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolForgotMouseClicked
         new Forgot().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_tombolForgotMouseClicked
 
     private void btn_RegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisActionPerformed
         new Register().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_RegisActionPerformed
 
     public void cek(){
-        String sql = "SELECT * FROM User WHERE userName='" +email.getText()+ "' AND password='"+password.getText()+"'";
+        String sql = "SELECT * FROM User WHERE name='" +email.getText()+ "' AND password='"+password.getText()+"'";
         
         try(Connection conn = konek.connect();
             Statement stmt = conn.createStatement();
@@ -215,10 +216,10 @@ public class LogIn extends javax.swing.JFrame {
             if(rs.next()){
                 if(rs.getString("job").equals("User")){
                 new FormAdmin().setVisible(true);
-                this.setVisible(false);
+                this.dispose();
                 } else if(rs.getString("job").equals("Admin")){
                 new FormUser().setVisible(true);
-                this.setVisible(false);
+                this.dispose();
                 }
             }else {
                 showMessageDialog(null, "Username atau Password salah!");
