@@ -75,7 +75,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        Search = new javax.swing.JButton();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -208,10 +208,15 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 30));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 255));
-        jButton3.setText("search");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
+        Search.setBackground(new java.awt.Color(204, 204, 255));
+        Search.setText("search");
+        Search.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Animation", "Family", "Fantasy", "Film-noir", "Music", "Musical", "Romance", "Western", "War", " " }));
         jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 123, 30));
@@ -1155,6 +1160,19 @@ public class FormAdmin extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        // TODO add your handling code here:
+        try(Connection conn = konek.connect()){
+            if(Search.getText().trim().isEmpty()){
+                showMessageDialog(null,"Harus diisi");
+            }else if(Search.getText() == title.getText()){
+                String sql = "Select * from Movie where title like '%" + Search.getText();
+            }
+        }catch(SQLException e){
+                
+            }
+    }//GEN-LAST:event_SearchActionPerformed
         
     public void update(int id_terpilih, String title, int year, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1302,6 +1320,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }**/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Search;
     private javax.swing.JTextField actor;
     private javax.swing.JTextField actor1;
     private javax.swing.JButton btnHapus;
@@ -1315,7 +1334,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField director1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
