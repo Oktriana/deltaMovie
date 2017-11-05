@@ -204,14 +204,22 @@ public class Register extends javax.swing.JFrame {
             String pass = password.getText();
             int quest = question.getSelectedIndex();
             String answr = answer.getText();
-                      
-            encrypt(pass);
-            insert(nama, mail, pass, quest, answr);
+            String passMD5 = null;
+            
+            try{
+                    MessageDigest md5 = MessageDigest.getInstance("MD5");
+                    byte[] tmp = pass.getBytes();
+                    md5.update(tmp);
+                    passMD5 = byteArrToString(md5.digest());
+                } catch(NoSuchAlgorithmException ex){
+                    showMessageDialog(null, ex.getMessage());
+                }
+            insert(nama, mail, passMD5, quest, answr);
             
             showMessageDialog(null, "Semua data telah di masukan!");
         }
 
-        new FormUser().setVisible(true);
+        new LogIn().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btn_SubmitActionPerformed
@@ -241,17 +249,20 @@ public class Register extends javax.swing.JFrame {
         }
     }
     
-    public void encrypt(String enkrip){
-        
-        try{
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(enkrip.getBytes(),0,enkrip.length());
-            new BigInteger(1, md.digest()).toString(16);
-            
-        } catch(NoSuchAlgorithmException e){
-            e.getMessage();
+    private static String byteArrToString(byte[] b){
+        String res = null;
+        StringBuffer sb = new StringBuffer(b.length * 2);
+        for (int i = 0; i < b.length; i++){
+           int j = b[i] & 0xff;
+           if (j < 16) {
+              sb.append('0');
+           }
+           sb.append(Integer.toHexString(j));
         }
+        res = sb.toString();
+        return res.toUpperCase();
     }
+    
     /**
      * @param args the command line arguments
      */

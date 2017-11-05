@@ -5,6 +5,8 @@
  */
 package mediaplayertest;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author A
@@ -38,7 +40,7 @@ public class FormUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btn_LogOut = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -134,15 +136,15 @@ public class FormUser extends javax.swing.JFrame {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setText("LOGOUT");
-        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 102, 0), null));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_LogOut.setBackground(new java.awt.Color(204, 204, 204));
+        btn_LogOut.setText("LOGOUT");
+        btn_LogOut.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 102, 0), null));
+        btn_LogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_LogOutActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
+        jPanel1.add(btn_LogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -393,11 +395,13 @@ public class FormUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new LogIn().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin mengakhiri sesi ini?","Konfirmasi", JOptionPane.INFORMATION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION){
+                new LogIn().setVisible(true); //untuk menampilkan form baru
+                this.dispose(); //set form saat ini menjadi invisible
+                }
+    }//GEN-LAST:event_btn_LogOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,10 +440,10 @@ public class FormUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;

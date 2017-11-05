@@ -5,6 +5,8 @@
  */
 package mediaplayertest;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -266,7 +268,16 @@ public class Forgot extends javax.swing.JFrame {
                             rs.getString("s_question").equals(quest)&&rs.getString("s_answer").equals(ans)){
                             String pass = password.getText();
                             String rPass = retypePwd.getText();
-                            update(pass);
+                            String passMD5 = "";
+                            try{
+                                MessageDigest md5 = MessageDigest.getInstance("MD5");
+                                byte[] tmp = pass.getBytes();
+                                md5.update(tmp);
+                                passMD5 = byteArrToString(md5.digest());
+                            } catch(NoSuchAlgorithmException ex){
+                                showMessageDialog(null, ex.getMessage());
+                            }
+                            update(passMD5);
                         }
                     }else {
                         showMessageDialog(null, "Data tidak ditemukan! Mungkin anda belum terdaftar");
@@ -279,7 +290,7 @@ public class Forgot extends javax.swing.JFrame {
             }
         }
 
-        new FormUser().setVisible(true);
+        new LogIn().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
@@ -293,6 +304,20 @@ public class Forgot extends javax.swing.JFrame {
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+    
+    private static String byteArrToString(byte[] b){
+        String res = null;
+        StringBuffer sb = new StringBuffer(b.length * 2);
+        for (int i = 0; i < b.length; i++){
+           int j = b[i] & 0xff;
+           if (j < 16) {
+              sb.append('0');
+           }
+           sb.append(Integer.toHexString(j));
+        }
+        res = sb.toString();
+        return res.toUpperCase();
     }
     /**
      * @param args the command line arguments

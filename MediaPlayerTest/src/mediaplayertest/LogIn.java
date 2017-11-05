@@ -5,6 +5,8 @@
  */
 package mediaplayertest;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -174,17 +176,6 @@ public class LogIn extends javax.swing.JFrame {
                 
                 cek();
                 
-                /*if(uname.equals("hello")&& (pass.equals("world"))){
-                    showMessageDialog(null, "Anda BERHASIL LOGIN!");
-                    new FormAdmin().setVisible(true);
-                    this.setVisible(false);
-                } else if(pass.equals("world")){
-                    showMessageDialog(null, "Email salah!");
-                } else if(uname.equals("hello")){
-                    showMessageDialog(null, "Password salah!");
-                } else{
-                    showMessageDialog(null,"Email dan Password salah!!");
-                }*/
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
@@ -207,7 +198,18 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_RegisActionPerformed
 
     public void cek(){
-        String sql = "SELECT * FROM User WHERE name='" +email.getText()+ "' AND password='"+password.getText()+"'";
+        String pass = password.getText();
+        String passMD5 = null;
+        try{
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] tmp = pass.getBytes();
+            md5.update(tmp);
+            passMD5 = byteArrToString(md5.digest());
+        } catch(NoSuchAlgorithmException e){
+            showMessageDialog(null, e.getMessage());
+        }
+        
+        String sql = "SELECT * FROM User WHERE name='" +email.getText()+ "' AND password='"+passMD5+"'";
         
         try(Connection conn = konek.connect();
             Statement stmt = conn.createStatement();
@@ -215,10 +217,10 @@ public class LogIn extends javax.swing.JFrame {
             
             if(rs.next()){
                 if(rs.getString("job").equals("User")){
-                new FormAdmin().setVisible(true);
+                new FormUser().setVisible(true);
                 this.dispose();
                 } else if(rs.getString("job").equals("Admin")){
-                new FormUser().setVisible(true);
+                new FormAdmin().setVisible(true);
                 this.dispose();
                 }
             }else {
@@ -232,6 +234,19 @@ public class LogIn extends javax.swing.JFrame {
         }
     }
        
+    private static String byteArrToString(byte[] b){
+        String res = null;
+        StringBuffer sb = new StringBuffer(b.length * 2);
+        for (int i = 0; i < b.length; i++){
+           int j = b[i] & 0xff;
+           if (j < 16) {
+              sb.append('0');
+           }
+           sb.append(Integer.toHexString(j));
+        }
+        res = sb.toString();
+        return res.toUpperCase();
+    }
     
     /**
      * @param args the command line arguments

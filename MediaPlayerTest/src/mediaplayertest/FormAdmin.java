@@ -83,7 +83,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -266,14 +266,14 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
 
-        jButton4.setText("LOGOUT");
-        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 102, 0), null));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_LogOut.setText("LOGOUT");
+        btn_LogOut.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 102, 0), null));
+        btn_LogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_LogOutActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
+        jPanel1.add(btn_LogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 90, 40));
 
         btnHapus.setText("Hapus");
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -1070,11 +1070,14 @@ public class FormAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
         // TODO add your handling code here:
-        new LogIn().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin akan LogOut ?","Konfirmasi", JOptionPane.INFORMATION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION){
+                new LogIn().setVisible(true);
+                this.dispose(); 
+            }
+    }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
@@ -1088,7 +1091,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 showMessageDialog(null, "Data tidak ada!!!");
             }
             else{
-                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data pemasukan ?","Hapus Data Pemasukan", JOptionPane.INFORMATION_MESSAGE);
+                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?","Hapus Data Movie", JOptionPane.INFORMATION_MESSAGE);
                 if (result == JOptionPane.OK_OPTION){
                      String sql = "DELETE FROM Movie WHERE id_movie=?";
                      PreparedStatement hapus = conn.prepareStatement(sql);
@@ -1324,6 +1327,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField actor;
     private javax.swing.JTextField actor1;
     private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton btn_choose;
     private javax.swing.JButton btn_choose1;
     private javax.swing.JButton btn_update;
@@ -1334,7 +1338,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField director1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
