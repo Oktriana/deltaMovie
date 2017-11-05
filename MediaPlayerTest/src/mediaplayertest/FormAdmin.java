@@ -5,7 +5,9 @@
  */
 package mediaplayertest;
 
+import java.awt.Graphics2D;
 import java.awt.List;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
 import java.io.IOException; //untuk penentuan jenis data seperti jpg
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
 import javax.swing.table.DefaultTableModel;
@@ -42,9 +47,41 @@ public class FormAdmin extends javax.swing.JFrame {
     int row_terpilih;
     String[] getdata_edit = new String[8];
     
+    public static BufferedImage image = null;
+    
+    
     /**
      * Creates new form formAdmin1
      */
+    public static BufferedImage gambar_c = null;
+    public static BufferedImage loadImage(String add){
+        BufferedImage image1 = null;
+        try {
+            image1 = ImageIO.read(new File(add));
+            
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+        return image;
+    }
+    
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+
+        int w1 = img.getWidth();
+        int h1 = img.getHeight();
+        BufferedImage dimg = dimg = new BufferedImage(newW, newH, img.getType());
+        Graphics2D g = dimg.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(img, 0, 0, newW, newH, 0, 0, w1, h1, null);
+
+        g.dispose();
+        System.out.println("Ukuran awal gambar panjang : " + w1);
+        System.out.println("Ukuran awal gambar tinggi : " + h1);
+
+        return dimg;
+
+    }
+    
     public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
         initComponents();
         this.id_terpilih= Integer.parseInt(id_terpilih);
@@ -72,6 +109,7 @@ public class FormAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
@@ -153,6 +191,7 @@ public class FormAdmin extends javax.swing.JFrame {
         btn_upload = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         year = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -491,42 +530,42 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        btn_choose.setText("Choose");
+        btn_choose.setText("Choose Cover");
         btn_choose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_chooseActionPerformed(evt);
             }
         });
         jPanel2.add(btn_choose);
-        btn_choose.setBounds(70, 0, 90, 20);
+        btn_choose.setBounds(80, 130, 110, 20);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Cover :");
         jPanel2.add(jLabel17);
-        jLabel17.setBounds(10, 0, 60, 20);
+        jLabel17.setBounds(10, 10, 60, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Title :");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(10, 30, 40, 15);
+        jLabel8.setBounds(10, 160, 40, 15);
 
         title.setText("...");
         jPanel2.add(title);
-        title.setBounds(70, 30, 190, 30);
+        title.setBounds(80, 160, 190, 30);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Year :");
         jPanel2.add(jLabel19);
-        jLabel19.setBounds(10, 70, 40, 15);
+        jLabel19.setBounds(10, 200, 40, 15);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Genre :");
         jPanel2.add(jLabel20);
-        jLabel20.setBounds(10, 100, 50, 15);
+        jLabel20.setBounds(10, 230, 50, 15);
 
         jCheckBox1.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox1.setText("Action");
@@ -538,7 +577,7 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox1);
-        jCheckBox1.setBounds(70, 100, 90, 19);
+        jCheckBox1.setBounds(80, 230, 90, 19);
 
         jCheckBox2.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox2.setText("Horror");
@@ -548,42 +587,42 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox2);
-        jCheckBox2.setBounds(70, 160, 90, 23);
+        jCheckBox2.setBounds(80, 290, 90, 23);
 
         jCheckBox3.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox3.setText("Advanture");
         jPanel2.add(jCheckBox3);
-        jCheckBox3.setBounds(180, 100, 90, 23);
+        jCheckBox3.setBounds(180, 230, 90, 23);
 
         jCheckBox4.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox4.setText("Animation");
         jPanel2.add(jCheckBox4);
-        jCheckBox4.setBounds(300, 100, 90, 23);
+        jCheckBox4.setBounds(280, 230, 90, 23);
 
         jCheckBox5.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox5.setText("Comedy");
         jPanel2.add(jCheckBox5);
-        jCheckBox5.setBounds(70, 130, 90, 23);
+        jCheckBox5.setBounds(80, 260, 90, 23);
 
         jCheckBox6.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox6.setText("Crime");
         jPanel2.add(jCheckBox6);
-        jCheckBox6.setBounds(520, 100, 90, 23);
+        jCheckBox6.setBounds(480, 230, 90, 23);
 
         jCheckBox7.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox7.setText("Documantary");
         jPanel2.add(jCheckBox7);
-        jCheckBox7.setBounds(180, 130, 90, 23);
+        jCheckBox7.setBounds(180, 260, 90, 23);
 
         jCheckBox8.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox8.setText("Family");
         jPanel2.add(jCheckBox8);
-        jCheckBox8.setBounds(300, 130, 90, 23);
+        jCheckBox8.setBounds(280, 260, 90, 23);
 
         jCheckBox9.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox9.setText("Biography");
         jPanel2.add(jCheckBox9);
-        jCheckBox9.setBounds(400, 100, 90, 23);
+        jCheckBox9.setBounds(380, 230, 90, 23);
 
         jCheckBox10.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox10.setText("Thriller");
@@ -593,17 +632,17 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox10);
-        jCheckBox10.setBounds(300, 190, 90, 23);
+        jCheckBox10.setBounds(280, 320, 90, 23);
 
         jCheckBox11.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox11.setText("Fantasy");
         jPanel2.add(jCheckBox11);
-        jCheckBox11.setBounds(400, 130, 90, 23);
+        jCheckBox11.setBounds(380, 260, 90, 23);
 
         jCheckBox12.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox12.setText("Music");
         jPanel2.add(jCheckBox12);
-        jCheckBox12.setBounds(180, 160, 90, 23);
+        jCheckBox12.setBounds(180, 290, 90, 23);
 
         jCheckBox13.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox13.setText("War");
@@ -613,12 +652,12 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox13);
-        jCheckBox13.setBounds(400, 190, 90, 23);
+        jCheckBox13.setBounds(380, 320, 90, 23);
 
         jCheckBox14.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox14.setText("Sport");
         jPanel2.add(jCheckBox14);
-        jCheckBox14.setBounds(180, 190, 90, 23);
+        jCheckBox14.setBounds(180, 320, 90, 23);
 
         jCheckBox15.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox15.setText("Sci-fi");
@@ -628,27 +667,27 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox15);
-        jCheckBox15.setBounds(70, 190, 90, 23);
+        jCheckBox15.setBounds(80, 320, 90, 23);
 
         jCheckBox16.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox16.setText("History");
         jPanel2.add(jCheckBox16);
-        jCheckBox16.setBounds(520, 130, 90, 23);
+        jCheckBox16.setBounds(480, 260, 90, 23);
 
         jCheckBox17.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox17.setText("Musical");
         jPanel2.add(jCheckBox17);
-        jCheckBox17.setBounds(300, 160, 90, 23);
+        jCheckBox17.setBounds(280, 290, 90, 23);
 
         jCheckBox18.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox18.setText("Mistery");
         jPanel2.add(jCheckBox18);
-        jCheckBox18.setBounds(400, 160, 90, 23);
+        jCheckBox18.setBounds(380, 290, 90, 23);
 
         jCheckBox19.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox19.setText("Romance");
         jPanel2.add(jCheckBox19);
-        jCheckBox19.setBounds(520, 160, 90, 23);
+        jCheckBox19.setBounds(480, 290, 90, 23);
 
         jCheckBox20.setBackground(new java.awt.Color(153, 51, 0));
         jCheckBox20.setText("Westren");
@@ -658,50 +697,50 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jCheckBox20);
-        jCheckBox20.setBounds(520, 190, 90, 23);
+        jCheckBox20.setBounds(480, 320, 90, 23);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Director :");
         jPanel2.add(jLabel21);
-        jLabel21.setBounds(10, 230, 60, 15);
+        jLabel21.setBounds(10, 360, 60, 15);
 
         director.setText("...");
         jPanel2.add(director);
-        director.setBounds(70, 230, 200, 30);
+        director.setBounds(80, 360, 200, 30);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Actor :");
         jPanel2.add(jLabel22);
-        jLabel22.setBounds(10, 270, 50, 15);
+        jLabel22.setBounds(10, 400, 50, 15);
 
         actor.setText("...");
         jPanel2.add(actor);
-        actor.setBounds(70, 270, 200, 30);
+        actor.setBounds(80, 400, 200, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Country :");
         jPanel2.add(jLabel23);
-        jLabel23.setBounds(10, 310, 60, 15);
+        jLabel23.setBounds(10, 440, 60, 15);
 
         country.setText("...");
         jPanel2.add(country);
-        country.setBounds(70, 310, 200, 30);
+        country.setBounds(80, 440, 200, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Synopsis :");
         jPanel2.add(jLabel24);
-        jLabel24.setBounds(10, 350, 60, 15);
+        jLabel24.setBounds(10, 480, 60, 15);
 
         synopsis.setColumns(20);
         synopsis.setRows(5);
         jScrollPane1.setViewportView(synopsis);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(70, 350, 330, 70);
+        jScrollPane1.setBounds(80, 480, 330, 70);
 
         btn_upload.setText("Upload");
         btn_upload.addActionListener(new java.awt.event.ActionListener() {
@@ -710,21 +749,25 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_upload);
-        btn_upload.setBounds(70, 440, 70, 30);
+        btn_upload.setBounds(80, 560, 70, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setForeground(new java.awt.Color(255, 0, 0));
         jLabel25.setText(".jpg");
         jPanel2.add(jLabel25);
-        jLabel25.setBounds(160, 0, 40, 20);
+        jLabel25.setBounds(190, 130, 40, 20);
 
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
         jPanel2.add(year);
-        year.setBounds(70, 70, 90, 20);
+        year.setBounds(80, 200, 90, 20);
+
+        jLabel6.setText("jLabel6");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(90, 20, 80, 100);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, -170, 650, 730);
+        jLabel7.setBounds(0, -50, 650, 730);
 
         jTabbedPane1.addTab("Upload", jPanel2);
 
@@ -1017,7 +1060,16 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox15ActionPerformed
 
     private void btn_chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chooseActionPerformed
-        
+        int gambar = jFileChooser1.showOpenDialog(null);
+        if (gambar == JFileChooser.APPROVE_OPTION) {
+            File f = jFileChooser1.getSelectedFile();
+
+            BufferedImage loadImg = loadImage(f.toString());
+
+            gambar_c = resize(loadImg, 300, 300);
+            ImageIcon imageicon = new ImageIcon(gambar_c);
+            jLabel6.setIcon(imageicon);
+        }
     }//GEN-LAST:event_btn_chooseActionPerformed
 
     private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
@@ -1381,6 +1433,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1417,6 +1470,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
