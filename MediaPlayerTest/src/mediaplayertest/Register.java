@@ -59,6 +59,9 @@ public class Register extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         unameMessage = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        radioBtn_Admin = new javax.swing.JRadioButton();
+        radioBtn_User = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,12 +156,34 @@ public class Register extends javax.swing.JFrame {
         unameMessage.setForeground(new java.awt.Color(255, 0, 0));
         jPanel2.add(unameMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 180, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 470, 370));
+        jLabel8.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel8.setText("Register as :");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+
+        radioBtn_Admin.setForeground(new java.awt.Color(240, 240, 240));
+        radioBtn_Admin.setText("Admin");
+        radioBtn_Admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtn_AdminActionPerformed(evt);
+            }
+        });
+        jPanel2.add(radioBtn_Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+
+        radioBtn_User.setForeground(new java.awt.Color(240, 240, 240));
+        radioBtn_User.setText("User");
+        radioBtn_User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtn_UserActionPerformed(evt);
+            }
+        });
+        jPanel2.add(radioBtn_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 540, 370));
 
         jLabel7.setBackground(new java.awt.Color(204, 255, 204));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu8.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 510));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +195,7 @@ public class Register extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 49, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,6 +230,13 @@ public class Register extends javax.swing.JFrame {
             int quest = question.getSelectedIndex();
             String answr = answer.getText();
             String passMD5 = null;
+            String job= "";
+            
+            if(radioBtn_Admin.isSelected()){
+                job = "Admin";
+            } else{
+                job = "User";
+            }
             
             try{
                     MessageDigest md5 = MessageDigest.getInstance("MD5");
@@ -214,7 +246,7 @@ public class Register extends javax.swing.JFrame {
                 } catch(NoSuchAlgorithmException ex){
                     showMessageDialog(null, ex.getMessage());
                 }
-            insert(nama, mail, passMD5, quest, answr);
+            insert(nama, mail, passMD5, quest, answr, job);
             
             showMessageDialog(null, "Semua data telah di masukan!");
         }
@@ -224,9 +256,21 @@ public class Register extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
-    public void insert(String nama, String mail, String pass, int quest, String answr){
-        String sql = "INSERT INTO User(name, email, password, s_question, s_answer)" +
-                "VALUES('" + nama + "','" + mail + "','" + pass + "','" + quest + "','" + answr + "')";
+    private void radioBtn_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtn_UserActionPerformed
+        if(radioBtn_User.isSelected()){
+            radioBtn_Admin.setSelected(false);
+        }
+    }//GEN-LAST:event_radioBtn_UserActionPerformed
+
+    private void radioBtn_AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtn_AdminActionPerformed
+        if(radioBtn_Admin.isSelected()){
+            radioBtn_User.setSelected(false);
+        }
+    }//GEN-LAST:event_radioBtn_AdminActionPerformed
+
+    public void insert(String nama, String mail, String pass, int quest, String answr, String job){
+        String sql = "INSERT INTO User(name, email, password, s_question, s_answer, job)" +
+                "VALUES('" + nama + "','" + mail + "','" + pass + "','" + quest + "','" + answr + "','" + job + "')";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.executeUpdate();
@@ -312,11 +356,14 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel pwdMessage;
     private javax.swing.JComboBox<String> question;
+    private javax.swing.JRadioButton radioBtn_Admin;
+    private javax.swing.JRadioButton radioBtn_User;
     private javax.swing.JLabel retypeMessage;
     private javax.swing.JPasswordField retypePwd;
     private javax.swing.JLabel unameMessage;

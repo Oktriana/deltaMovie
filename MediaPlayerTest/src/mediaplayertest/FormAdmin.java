@@ -5,6 +5,7 @@
  */
 package mediaplayertest;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.List;
 import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
@@ -69,7 +70,8 @@ public class FormAdmin extends javax.swing.JFrame {
     }
 
     FormAdmin() {
-    initComponents();    
+    initComponents();
+    tampilkan_data();
     }
 
     /**
@@ -210,6 +212,11 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         search.setText("search");
+        search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchMouseClicked(evt);
+            }
+        });
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchActionPerformed(evt);
@@ -294,7 +301,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 530));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 790, 570));
 
         jTabbedPane1.addTab("Home", jPanel1);
 
@@ -1002,7 +1009,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_searchActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
@@ -1089,14 +1096,13 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-        Connection conn = konek.connect();
+        /*Connection conn = konek.connect();
     
         try{
             PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
             pstmt.setInt(1, id_terpilih);
             ResultSet rs = pstmt.executeQuery();
-            if(rs.getInt("id_movie")==0){
+            if(rs.getInt("id_movie")==-1){
                 showMessageDialog(null, "Data tidak ada!!!");
             }
             else{
@@ -1116,10 +1122,9 @@ public class FormAdmin extends javax.swing.JFrame {
             conn.close();
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            
-    }
+        }*/
         
-        /**if(row_terpilih != -1){
+        if(row_terpilih != -1){
             String id_terpilih = table_home.getModel().getValueAt(row_terpilih, 0).toString();
             int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION);
             if(selectedOption == JOptionPane.YES_OPTION){
@@ -1127,7 +1132,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 showMessageDialog(null, "Data deleted success!");
                 selectAll();
             }
-        }**/
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btn_choose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choose1ActionPerformed
@@ -1210,6 +1215,10 @@ public class FormAdmin extends javax.swing.JFrame {
             
         }     **/
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
+        search.setText("");
+    }//GEN-LAST:event_searchMouseClicked
     
     public void update(int id_terpilih, String title, int year, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1230,24 +1239,65 @@ public class FormAdmin extends javax.swing.JFrame {
             
     }
     }
-    /**public void delete(int id_terpilih){
+    
+    public void tampilkan_data(){
+        DefaultTableModel user = (DefaultTableModel)table_home.getModel();
+        
+        while(user.getRowCount() > 0)
+        {
+            user.removeRow(0);
+        }
+        
+        String sql = "SELECT title, year, actor FROM Movie";
+        
+        try (Connection conn = konek.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+              
+             //To remove previously added rows
+            while(table_home.getRowCount() > 0) 
+            {
+                ((DefaultTableModel) table_home.getModel()).removeRow(0);
+            }
+
+            //Hitung jumlah kolom
+            ResultSetMetaData md = rs.getMetaData();
+            int columns = md.getColumnCount();
+                
+            while (rs.next()) {
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++)
+                {  
+                    row[i - 1] = rs.getObject(i);
+                    System.out.println(rs.getObject(i));
+                }
+                ((DefaultTableModel) table_home.getModel()).insertRow(rs.getRow()-1,row);
+            }
+            // Tutup koneksi
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void delete(int id_terpilih){
         Connection conn = konek.connect();
         String sql = "DELETE FROM Movie WHERE id_movie = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, id_terpilih);
-            ResultSet rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
+            
             if(rs.getInt("id_movie")==0){
                 showMessageDialog(null, "Data tidak ada!!!");
             }
             
-            rs.close();
-            pstmt.close();
-            conn.close();
         } catch (SQLException e){
             System.out.println(e.getMessage());
     }
     }
+    
     /**
      * @param args the command line arguments
      */
