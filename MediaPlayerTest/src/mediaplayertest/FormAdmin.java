@@ -312,7 +312,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 790, 570));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 560));
 
         jTabbedPane1.addTab("Home", jPanel1);
 
@@ -353,7 +353,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
         jPanel4.add(jLabel4);
-        jLabel4.setBounds(0, 110, 640, 30);
+        jLabel4.setBounds(0, 120, 630, 30);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -435,7 +435,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Movies");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 640, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 630, -1));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -538,8 +538,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel8.setText("Title :");
         jPanel2.add(jLabel8);
         jLabel8.setBounds(10, 30, 40, 15);
-
-        title.setText("...");
         jPanel2.add(title);
         title.setBounds(70, 30, 190, 30);
 
@@ -693,7 +691,11 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel21);
         jLabel21.setBounds(10, 230, 60, 15);
 
-        director.setText("...");
+        director.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                directorActionPerformed(evt);
+            }
+        });
         jPanel2.add(director);
         director.setBounds(70, 230, 200, 30);
 
@@ -703,7 +705,11 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(jLabel22);
         jLabel22.setBounds(10, 270, 50, 15);
 
-        actor.setText("...");
+        actor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actorActionPerformed(evt);
+            }
+        });
         jPanel2.add(actor);
         actor.setBounds(70, 270, 200, 30);
 
@@ -712,8 +718,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel23.setText("Country :");
         jPanel2.add(jLabel23);
         jLabel23.setBounds(10, 310, 60, 15);
-
-        country.setText("...");
         jPanel2.add(country);
         country.setBounds(70, 310, 200, 30);
 
@@ -749,9 +753,13 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(year);
         year.setBounds(70, 70, 90, 20);
 
-        cover_upload.setText("jLabel6");
+        cover_upload.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cover_upload.setForeground(new java.awt.Color(255, 255, 255));
+        cover_upload.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cover_upload.setText("Cover movie");
+        cover_upload.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(cover_upload);
-        cover_upload.setBounds(310, 10, 100, 80);
+        cover_upload.setBounds(430, 230, 180, 190);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel2.add(jLabel7);
@@ -783,8 +791,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel32.setText("Title :");
         jPanel7.add(jLabel32);
         jLabel32.setBounds(10, 30, 40, 15);
-
-        title1.setText("...");
         jPanel7.add(title1);
         title1.setBounds(70, 30, 190, 30);
 
@@ -937,8 +943,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel35.setText("Director :");
         jPanel7.add(jLabel35);
         jLabel35.setBounds(10, 230, 60, 15);
-
-        director1.setText("...");
         jPanel7.add(director1);
         director1.setBounds(70, 230, 200, 30);
 
@@ -947,8 +951,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel36.setText("Actor :");
         jPanel7.add(jLabel36);
         jLabel36.setBounds(10, 270, 50, 15);
-
-        actor1.setText("...");
         jPanel7.add(actor1);
         actor1.setBounds(70, 270, 200, 30);
 
@@ -957,8 +959,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel37.setText("Country :");
         jPanel7.add(jLabel37);
         jLabel37.setBounds(10, 310, 60, 15);
-
-        country1.setText("...");
         jPanel7.add(country1);
         country1.setBounds(70, 310, 200, 30);
 
@@ -994,9 +994,13 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel7.add(year1);
         year1.setBounds(70, 70, 90, 20);
 
-        cover_update.setText("jLabel6");
+        cover_update.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cover_update.setForeground(new java.awt.Color(255, 255, 255));
+        cover_update.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cover_update.setText("Cover movie");
+        cover_update.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.add(cover_update);
-        cover_update.setBounds(314, 14, 90, 60);
+        cover_update.setBounds(430, 230, 180, 190);
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel7.add(jLabel40);
@@ -1146,7 +1150,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        /*Connection conn = konek.connect();
+        /**Connection conn = konek.connect();
     
         try{
             PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
@@ -1172,23 +1176,14 @@ public class FormAdmin extends javax.swing.JFrame {
             conn.close();
         } catch (SQLException e){
             System.out.println(e.getMessage());
-        }*/
+        }**/
         
-        /*if(row_terpilih != -1){
-            String id_terpilih = table_home.getModel().getValueAt(row_terpilih, 0).toString();
-            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION);
-            if(selectedOption == JOptionPane.YES_OPTION){
-                delete(Integer.parseInt(id_terpilih));
-                showMessageDialog(null, "Data deleted success!");
-                selectAll();
-            }
-        }*/
         DefaultTableModel model = (DefaultTableModel) table_home.getModel();
        int row = table_home.getSelectedRow();
             if(row>=0){
                 int ok=JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if(ok==0){
-                    String sql = "DELETE FROM data WHERE nim =" + title.getText()+ "";
+                    String sql = "DELETE FROM Movie WHERE nim =" + title.getText()+ "";
                     
                     model.removeRow(row);
                 }
@@ -1197,6 +1192,21 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void btn_choose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choose1ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        int result = fc.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            loc = fc.getSelectedFile().getAbsolutePath();
+            
+            BufferedImage img = null;
+            try{
+                img = ImageIO.read(new File(loc));
+            } catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+            Image newImg = img.getScaledInstance(cover_update.getWidth(), cover_update.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imgIcon = new ImageIcon(newImg);
+            cover_update.setIcon(imgIcon);
+        }
     }//GEN-LAST:event_btn_choose1ActionPerformed
 
     private void jCheckBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox21ActionPerformed
@@ -1280,6 +1290,14 @@ public class FormAdmin extends javax.swing.JFrame {
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         search.setText("");
     }//GEN-LAST:event_searchMouseClicked
+
+    private void directorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_directorActionPerformed
+
+    private void actorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actorActionPerformed
     
     public void update(int id_terpilih, String title, int year, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";

@@ -5,7 +5,17 @@
  */
 package mediaplayertest;
 
+import java.awt.image.BufferedImage;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.NativeString.search;
 
 /**
  *
@@ -16,9 +26,21 @@ public class FormUser extends javax.swing.JFrame {
     /**
      * Creates new form formUser1
      */
+    Koneksi konek = new Koneksi();
+    
+    Blob blob;
+    BufferedImage img;
+    
+    Connection conn;
+    Statement pstmt;
+    ResultSet rs;
+    PreparedStatement ps;
+    
     public FormUser() {
         initComponents();
+       tampilkan_data();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,12 +53,12 @@ public class FormUser extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        search1 = new javax.swing.JTextField();
+        Search1 = new javax.swing.JButton();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        table_home1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -75,27 +97,37 @@ public class FormUser extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField3.setText("search");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        search1.setText("search");
+        search1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                search1MouseClicked(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 30));
+        search1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(search1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 30));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 255));
-        jButton3.setText("search");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
+        Search1.setBackground(new java.awt.Color(204, 204, 255));
+        Search1.setText("search");
+        Search1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Search1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Search1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Search1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Animation", "Family", "Fantasy", "Film-noir", "Music", "Musical", "Romance", "Western", "War", " " }));
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 123, 30));
+        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Genre");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 60, 30));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        table_home1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -120,9 +152,9 @@ public class FormUser extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(table_home1);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 640, 190));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 620, 190));
 
         jLabel7.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,7 +180,7 @@ public class FormUser extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 660, 540));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 510));
 
         jTabbedPane1.addTab("Home", jPanel1);
 
@@ -183,13 +215,13 @@ public class FormUser extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jComboBox2);
-        jComboBox2.setBounds(530, 70, 110, 30);
+        jComboBox2.setBounds(510, 70, 110, 30);
 
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
         jPanel4.add(jLabel4);
-        jLabel4.setBounds(0, 120, 640, 30);
+        jLabel4.setBounds(0, 120, 610, 30);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,12 +251,12 @@ public class FormUser extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         jPanel4.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 160, 640, 190);
+        jScrollPane2.setBounds(0, 160, 620, 190);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Sort by");
         jPanel4.add(jLabel16);
-        jLabel16.setBounds(470, 70, 70, 30);
+        jLabel16.setBounds(460, 70, 70, 30);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel4.add(jLabel20);
@@ -233,7 +265,7 @@ public class FormUser extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel10.setText("jLabel10");
         jPanel4.add(jLabel10);
-        jLabel10.setBounds(0, -80, 640, 640);
+        jLabel10.setBounds(-10, -70, 630, 550);
 
         jTabbedPane1.addTab("Watch Later", jPanel4);
 
@@ -265,13 +297,13 @@ public class FormUser extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 110, 30));
+        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 100, 30));
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Movies");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 640, 30));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 620, 30));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,7 +332,7 @@ public class FormUser extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 640, 190));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 620, 190));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Sort by");
@@ -311,7 +343,7 @@ public class FormUser extends javax.swing.JFrame {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel12.setText("jLabel12");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 650, 500));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 620, 500));
 
         jTabbedPane1.addTab("History", jPanel3);
 
@@ -356,20 +388,11 @@ public class FormUser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
         );
 
         pack();
@@ -391,9 +414,9 @@ public class FormUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_search1ActionPerformed
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
         int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin mengakhiri sesi ini?","Konfirmasi", JOptionPane.INFORMATION_MESSAGE);
@@ -403,9 +426,86 @@ public class FormUser extends javax.swing.JFrame {
                 }
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
+    
+    
+    private void Search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search1ActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel MyTable = new FormUser.DefaultTabelModel();
+        MyTable.addColumn("TITLE");
+        MyTable.addColumn("YEAR");
+        MyTable.addColumn("GENRE");
+        try(Connection conn = konek.connect()){
+        String sql = "Select * from Movie Where title LIKE '"+search1.getText()+"%' ";
+                //+ "and year LIKE '"+year.getSelectedIndex()+"%'";
+        pstmt=conn.createStatement();
+        rs=pstmt.executeQuery(sql);
+        while(rs.next()){
+            MyTable.addRow(new Object[]{
+            rs.getString(1),
+            rs.getString(2),
+            rs.getString(3),
+            });
+            System.out.println("sukseessss");
+        }
+        table_home1.setModel(MyTable);
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_Search1ActionPerformed
+
+    private void search1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search1MouseClicked
+        // TODO add your handling code here:
+        search1.setText("");
+    }//GEN-LAST:event_search1MouseClicked
+
+    public void tampilkan_data(){
+        DefaultTableModel user = (DefaultTableModel)table_home1.getModel();
+        
+        while(user.getRowCount() > 0)
+        {
+            user.removeRow(0);
+        }
+        
+        String sql = "SELECT title, year, actor FROM Movie";
+        
+        try (Connection conn = konek.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+              
+             //To remove previously added rows
+            while(table_home1.getRowCount() > 0) 
+            {
+                ((DefaultTableModel) table_home1.getModel()).removeRow(0);
+            }
+
+            //Hitung jumlah kolom
+            ResultSetMetaData md = rs.getMetaData();
+            int columns = md.getColumnCount();
+                
+            while (rs.next()) {
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++)
+                {  
+                    row[i - 1] = rs.getObject(i);
+                    System.out.println(rs.getObject(i));
+                }
+                ((DefaultTableModel) table_home1.getModel()).insertRow(rs.getRow()-1,row);
+            }
+            // Tutup koneksi
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    
+    }
+    
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -440,10 +540,10 @@ public class FormUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Search1;
     private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -476,10 +576,18 @@ public class FormUser extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private java.awt.Label label3;
+    private javax.swing.JTextField search1;
+    private javax.swing.JTable table_home1;
     // End of variables declaration//GEN-END:variables
+
+private static class DefaultTabelModel extends DefaultTableModel {
+
+        public DefaultTabelModel() {
+        }
+    }
+
 }
+
