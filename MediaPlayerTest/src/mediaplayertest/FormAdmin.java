@@ -6,10 +6,15 @@
 package mediaplayertest;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
 import java.awt.List;
 import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException; //untuk penentuan jenis data seperti jpg
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob; //untuk mengambil type data blob pada database
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +29,9 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +40,7 @@ import javax.swing.table.DefaultTableModel;
  * @author A
  */
 public class FormAdmin extends javax.swing.JFrame {
+    String loc;
     
     Blob blob;
     BufferedImage img;
@@ -164,6 +173,7 @@ public class FormAdmin extends javax.swing.JFrame {
         btn_upload = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         year = new javax.swing.JComboBox<>();
+        cover_upload = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -205,6 +215,7 @@ public class FormAdmin extends javax.swing.JFrame {
         btn_update = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
         year1 = new javax.swing.JComboBox<>();
+        cover_update = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -738,6 +749,10 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel2.add(year);
         year.setBounds(70, 70, 90, 20);
 
+        cover_upload.setText("jLabel6");
+        jPanel2.add(cover_upload);
+        cover_upload.setBounds(310, 10, 100, 80);
+
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel2.add(jLabel7);
         jLabel7.setBounds(0, -170, 650, 730);
@@ -979,6 +994,10 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel7.add(year1);
         year1.setBounds(70, 70, 90, 20);
 
+        cover_update.setText("jLabel6");
+        jPanel7.add(cover_update);
+        cover_update.setBounds(314, 14, 90, 60);
+
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel7.add(jLabel40);
         jLabel40.setBounds(0, -170, 650, 730);
@@ -1033,11 +1052,50 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox15ActionPerformed
 
     private void btn_chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chooseActionPerformed
-        
+        JFileChooser fc = new JFileChooser();
+        int result = fc.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            loc = fc.getSelectedFile().getAbsolutePath();
+            
+            BufferedImage img = null;
+            try{
+                img = ImageIO.read(new File(loc));
+            } catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+            Image newImg = img.getScaledInstance(cover_upload.getWidth(), cover_upload.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imgIcon = new ImageIcon(newImg);
+            cover_upload.setIcon(imgIcon);
+        }
     }//GEN-LAST:event_btn_chooseActionPerformed
 
     private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
         // TODO add your handling code here:
+        File fileImg = new File(loc);
+        String newImageLoc = "src/chooser/"+fileImg.getName();
+        File newFileImg = new File(newImageLoc);
+        
+        InputStream inStream = null;
+        OutputStream outStream = null;
+        boolean result = false;
+        
+        try{
+            byte[] buffer = new byte[1024];
+            int length;
+            
+            inStream = new FileInputStream(fileImg);
+            outStream = new FileOutputStream(newFileImg);
+            
+            while((length = inStream.read(buffer)) > 0){
+                outStream.write(buffer, 0, length);
+            }
+            
+            inStream.close();
+            outStream.close();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        
         String jdl = title.getText();
         int thn = year.getSelectedIndex();
         String drctr = director.getText();
@@ -1069,16 +1127,8 @@ public class FormAdmin extends javax.swing.JFrame {
         if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
         
         showMessageDialog(null, temp);
-//        if (jCheckBox1.isSelected()) {
-//         showMessageDialog(null, "cobadulu");   
-//        }
-//        List<String> infos = new ArrayList<String>();
-//        for (JCheckBox checkBox : JCheckBox) {
-//            if (checkBox.isSelected()) {
-//                infos.add(checkBox.getText());
-//            }
-//        }
         
+        insert(jdl, thn, temp, drctr, actr, cntry , snpss, newImageLoc );
         
     }//GEN-LAST:event_btn_uploadActionPerformed
 
@@ -1187,8 +1237,8 @@ public class FormAdmin extends javax.swing.JFrame {
         MyTable.addColumn("YEAR");
         MyTable.addColumn("GENRE");
         try(Connection conn = konek.connect()){
-        String sql = "Select * from Movie Where Title LIKE '"+title.getText()+"%' "
-                + "and Year LIKE '"+year.getSelectedIndex()+"%'";
+        String sql = "Select * from Movie Where title LIKE '"+search.getText()+"%' ";
+                //+ "and year LIKE '"+year.getSelectedIndex()+"%'";
         pstmt=conn.createStatement();
         rs=pstmt.executeQuery(sql);
         while(rs.next()){
@@ -1197,6 +1247,7 @@ public class FormAdmin extends javax.swing.JFrame {
             rs.getString(2),
             rs.getString(3),
             });
+            System.out.println("sukseessss");
         }
         table_home.setModel(MyTable);
         }catch(SQLException ex){
@@ -1379,6 +1430,20 @@ public class FormAdmin extends javax.swing.JFrame {
         
         
     }
+    
+    public void insert(String title, int year, String genre, String director, String actor, String country, String sinopsis, String cover){
+        String sql = "INSERT INTO Movie(title, year, genre1, director, actor, country, synopsis, cover)" +
+                "VALUES('" + title + "','" + year + "','" + genre + "','" + director + "','" + actor + "','" + country + "','" +sinopsis+ "','" + cover + "')";
+        try (Connection con = konek.connect();
+            PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+              //selectAll();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
             /**String sql = "SELECT id_movie, title, year, director, actor, country, synopsis FROM Movie";
             try(Connection conn = konek.connect();
                     Statement stmt = conn.createStatement();
@@ -1419,6 +1484,8 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btn_upload;
     private javax.swing.JTextField country;
     private javax.swing.JTextField country1;
+    private javax.swing.JLabel cover_update;
+    private javax.swing.JLabel cover_upload;
     private javax.swing.JTextField director;
     private javax.swing.JTextField director1;
     private javax.swing.JButton jButton1;
