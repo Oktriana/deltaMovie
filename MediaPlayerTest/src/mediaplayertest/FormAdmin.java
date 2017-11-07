@@ -1174,7 +1174,7 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }*/
         
-        if(row_terpilih != -1){
+        /*if(row_terpilih != -1){
             String id_terpilih = table_home.getModel().getValueAt(row_terpilih, 0).toString();
             int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION);
             if(selectedOption == JOptionPane.YES_OPTION){
@@ -1182,6 +1182,16 @@ public class FormAdmin extends javax.swing.JFrame {
                 showMessageDialog(null, "Data deleted success!");
                 selectAll();
             }
+        }*/
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+       int row = table_home.getSelectedRow();
+            if(row>=0){
+                int ok=JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if(ok==0){
+                    String sql = "DELETE FROM data WHERE nim =" + title.getText()+ "";
+                    
+                    model.removeRow(row);
+                }
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
