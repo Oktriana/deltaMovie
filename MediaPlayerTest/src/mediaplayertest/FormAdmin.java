@@ -94,8 +94,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         search_Home = new javax.swing.JTextField();
         btn_SearchHome = new javax.swing.JButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         table_home = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
@@ -209,13 +207,6 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel1.add(btn_SearchHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Animation", "Family", "Fantasy", "Film-noir", "Music", "Musical", "Romance", "Western", "War", " " }));
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 123, 30));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Genre");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 60, 30));
-
         table_home.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -272,7 +263,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, -1, 30));
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -1231,7 +1222,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1267,7 +1257,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
