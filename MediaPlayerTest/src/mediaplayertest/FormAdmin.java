@@ -104,9 +104,9 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        search_WatchLater = new javax.swing.JTextField();
+        btn_SearchWatchLater = new javax.swing.JButton();
+        S_Table = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -115,8 +115,8 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        search_History = new javax.swing.JTextField();
+        btn_SearchHistory = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -281,28 +281,33 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(jLabel3);
         jLabel3.setBounds(40, 10, 260, 50);
 
-        jTextField2.setText("search");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        search_WatchLater.setText("search");
+        search_WatchLater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                search_WatchLaterActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField2);
-        jTextField2.setBounds(0, 70, 130, 30);
+        jPanel4.add(search_WatchLater);
+        search_WatchLater.setBounds(0, 70, 130, 30);
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 255));
-        jButton2.setText("search");
-        jPanel4.add(jButton2);
-        jButton2.setBounds(140, 70, 70, 30);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        btn_SearchWatchLater.setBackground(new java.awt.Color(204, 204, 255));
+        btn_SearchWatchLater.setText("search");
+        btn_SearchWatchLater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                btn_SearchWatchLaterActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBox2);
-        jComboBox2.setBounds(520, 70, 110, 30);
+        jPanel4.add(btn_SearchWatchLater);
+        btn_SearchWatchLater.setBounds(140, 70, 70, 30);
+
+        S_Table.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
+        S_Table.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                S_TableActionPerformed(evt);
+            }
+        });
+        jPanel4.add(S_Table);
+        S_Table.setBounds(520, 70, 110, 30);
 
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -365,18 +370,23 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel1.setText("HISTORY");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 220, 50));
 
-        jTextField1.setText("search");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_History.setText("search");
+        search_History.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_HistoryActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 30));
+        jPanel3.add(search_History, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 30));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setText("search");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
+        btn_SearchHistory.setBackground(new java.awt.Color(204, 204, 255));
+        btn_SearchHistory.setText("search");
+        btn_SearchHistory.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        btn_SearchHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchHistoryActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_SearchHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -769,17 +779,18 @@ public class FormAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_HistoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_HistoryActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void S_TableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_TableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+        String tabel = S_Table.getSelectedItem().toString();
+    }//GEN-LAST:event_S_TableActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void search_WatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_WatchLaterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_search_WatchLaterActionPerformed
 
     private void search_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_HomeActionPerformed
        
@@ -977,8 +988,11 @@ public class FormAdmin extends javax.swing.JFrame {
         MyTable.addColumn("YEAR");
         MyTable.addColumn("GENRE");
         try(Connection conn = konek.connect()){
-        String sql = "Select * from Movie Where title LIKE '"+search_Home.getText()+"%' ";
-                //+ "and year LIKE '"+year.getSelectedIndex()+"%'";
+        String sql = "Select * from Movie Where title LIKE '%"+search_Home.getText()+ "%'" 
+                + "or year like '%" + search_Home.getText() + "%' "
+                + "or genre1 like '%" + search_Home.getText() + "%' "
+                + "or genre2 like '%" + search_Home.getText() + "%' "
+                + "or genre3 like '%" + search_Home.getText() + "%' ";
         pstmt=conn.createStatement();
         rs=pstmt.executeQuery(sql);
         while(rs.next()){
@@ -1030,6 +1044,56 @@ public class FormAdmin extends javax.swing.JFrame {
     private void directorUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_directorUpdateMouseClicked
         directorUpdate.setText("");
     }//GEN-LAST:event_directorUpdateMouseClicked
+
+    private void btn_SearchWatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchWatchLaterActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel MyTable = new DefaultTabelModel();
+        MyTable.addColumn("TITLE");
+        MyTable.addColumn("YEAR");
+        try(Connection conn = konek.connect()){
+        String sql = "Select * from Movie Where title LIKE '%"+search_WatchLater.getText()+ "%'" 
+                + "or year like '%" + search_WatchLater.getText() + "%' ";
+        pstmt=conn.createStatement();
+        rs=pstmt.executeQuery(sql);
+        while(rs.next()){
+            MyTable.addRow(new Object[]{
+            rs.getString(2),
+            rs.getString(3),
+            rs.getString(4),
+            });
+        }
+        table_home.setModel(MyTable);
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btn_SearchWatchLaterActionPerformed
+
+    private void btn_SearchHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchHistoryActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel MyTable = new DefaultTabelModel();
+        MyTable.addColumn("TITLE");
+        MyTable.addColumn("YEAR");
+        try(Connection conn = konek.connect()){
+        String sql = "Select * from Movie Where title LIKE '%"+search_History.getText()+ "%'" 
+                + "or year like '%" + search_History.getText() + "%' ";
+        pstmt=conn.createStatement();
+        rs=pstmt.executeQuery(sql);
+        while(rs.next()){
+            MyTable.addRow(new Object[]{
+            rs.getString(2),
+            rs.getString(3),
+            rs.getString(4),
+            });
+        }
+        table_home.setModel(MyTable);
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btn_SearchHistoryActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1197,12 +1261,15 @@ public class FormAdmin extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> S_Table;
     private javax.swing.JTextField actorUpdate;
     private javax.swing.JTextField actorUpload;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btn_ChooseUpdate;
     private javax.swing.JButton btn_LogOut;
+    private javax.swing.JButton btn_SearchHistory;
     private javax.swing.JButton btn_SearchHome;
+    private javax.swing.JButton btn_SearchWatchLater;
     private javax.swing.JButton btn_choose;
     private javax.swing.JButton btn_update;
     private javax.swing.JButton btn_upload;
@@ -1218,10 +1285,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel cover_upload;
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1275,10 +1339,10 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private java.awt.Label label3;
+    private javax.swing.JTextField search_History;
     private javax.swing.JTextField search_Home;
+    private javax.swing.JTextField search_WatchLater;
     private javax.swing.JTextArea synopsisUpdate;
     private javax.swing.JTextArea synopsisUpload;
     private javax.swing.JTable table_home;
