@@ -5,9 +5,12 @@
  */
 package mediaplayertest;
 
+import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
 import java.io.FileInputStream;
@@ -34,6 +37,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -61,6 +65,13 @@ public class FormAdmin extends javax.swing.JFrame {
     /**
      * Creates new form formAdmin1
      */
+    public void paging(){
+        DefaultPaginationModel pagination= new DefaultPaginationModel();
+        pagination.setTotalItem(2);
+        pagination.setPageSize(2);
+        jPagination1.setModel(pagination);
+    }
+    
     public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
         initComponents();
         this.id_terpilih= Integer.parseInt(id_terpilih);
@@ -101,6 +112,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        jPagination1 = new com.stripbandunk.jwidget.JPagination();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -232,6 +244,11 @@ public class FormAdmin extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        table_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_homeMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(table_home);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 630, 190));
@@ -264,6 +281,7 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
+        jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -1094,6 +1112,20 @@ public class FormAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_btn_SearchHistoryActionPerformed
+
+    private void table_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_homeMouseClicked
+        // TODO add your handling code here:                                       
+        table_home.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    JTable target = (JTable)e.getSource();
+                    int row = target.getSelectedRow();
+                    new Detail(row).setVisible(true);
+                    
+                }
+            }
+        });
+    }//GEN-LAST:event_table_homeMouseClicked
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1324,6 +1356,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.stripbandunk.jwidget.JPagination jPagination1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
