@@ -5,7 +5,6 @@
  */
 package mediaplayertest;
 
-import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
@@ -65,12 +64,12 @@ public class FormAdmin extends javax.swing.JFrame {
     /**
      * Creates new form formAdmin1
      */
-    public void paging(){
+    /*public void paging(){
         DefaultPaginationModel pagination= new DefaultPaginationModel();
         pagination.setTotalItem(2);
         pagination.setPageSize(2);
         jPagination1.setModel(pagination);
-    }
+    }*/
    
     FormAdmin() {
     initComponents();
@@ -97,7 +96,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        jPagination1 = new com.stripbandunk.jwidget.JPagination();
+        jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -236,11 +235,11 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(table_home);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 630, 190));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 630, 190));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel26.setText("Movies");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, 30));
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, 30));
 
         jLabel27.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -265,8 +264,15 @@ public class FormAdmin extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
-        jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, 30));
+
+        jButton1.setText("Detail");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -1063,6 +1069,15 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_table_homeMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+        int row = table_home.getSelectedRow();
+            if(row != -1){
+                new Detail().setVisible(true);
+            } 
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1251,6 +1266,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel cover_upload;
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1290,7 +1306,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.stripbandunk.jwidget.JPagination jPagination1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
