@@ -28,12 +28,10 @@ public class Detail extends javax.swing.JFrame {
      * Creates new form Detail
      */
     public Detail() {
-        initComponents();    
+        initComponents();
+        tampilan();
     }
     
-    public Detail(Movie detail){
-        tampilan(detail);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -258,12 +256,11 @@ public class Detail extends javax.swing.JFrame {
         });
     }
     
-    public void tampilan(Movie detail){
+    public void tampilan(){
         try{                                            
-            String id1 = detail.getTitle();                
-            String sql = "SELECT * FROM Movie WHERE id_movie=title";
+            String id1 = new Movie().getTitle();
+            String sql = "SELECT * FROM Movie WHERE title ='" +id1+ "'";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, id1);
             ResultSet rs=pst.executeQuery();
             
             String add1 =rs.getString("title");

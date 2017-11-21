@@ -5,8 +5,8 @@
  */
 package mediaplayertest;
 
-//import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import db.Koneksi;
+import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
@@ -74,21 +74,6 @@ public class FormAdmin extends javax.swing.JFrame {
         pagination.setPageSize(2);
         jPagination1.setModel(pagination);
     }*/
-    
-    public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
-        initComponents();
-        this.id_terpilih= Integer.parseInt(id_terpilih);
-        this.upload = upload;
-        this.row_terpilih = row_terpilih;
-        
-        titleUpdate.setText(title);
-        yearUpdate.setSelectedIndex(year);
-        directorUpdate.setText(director);
-        actorUpdate.setText(actor);
-        countryUpdate.setText(country);
-        synopsisUpdate.setText(synopsis);
-        
-    }
 
     FormAdmin() {
     initComponents();
@@ -115,13 +100,13 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_Detail = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         search_WatchLater = new javax.swing.JTextField();
         btn_SearchWatchLater = new javax.swing.JButton();
-        S_Table = new javax.swing.JComboBox<>();
+        sort_TabelWL = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -132,7 +117,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         search_History = new javax.swing.JTextField();
         btn_SearchHistory = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        sort_History = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -285,13 +270,13 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
 
-        jButton1.setText("Detail");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Detail.setText("Detail");
+        btn_Detail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_DetailActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
+        jPanel1.add(btn_Detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -328,14 +313,14 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(btn_SearchWatchLater);
         btn_SearchWatchLater.setBounds(140, 70, 70, 30);
 
-        S_Table.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
-        S_Table.addActionListener(new java.awt.event.ActionListener() {
+        sort_TabelWL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
+        sort_TabelWL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                S_TableActionPerformed(evt);
+                sort_TabelWLActionPerformed(evt);
             }
         });
-        jPanel4.add(S_Table);
-        S_Table.setBounds(520, 70, 110, 30);
+        jPanel4.add(sort_TabelWL);
+        sort_TabelWL.setBounds(520, 70, 110, 30);
 
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -416,13 +401,13 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel3.add(btn_SearchHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        sort_History.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
+        sort_History.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                sort_HistoryActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, 30));
+        jPanel3.add(sort_History, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, 30));
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
@@ -808,7 +793,7 @@ public class FormAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void sort_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sort_HistoryActionPerformed
         // TODO add your handling code here:
         java.sql.Date dateOfLastUpdate=null;
         
@@ -819,16 +804,16 @@ public class FormAdmin extends javax.swing.JFrame {
                     sorter.setSortKeys(list);
                     sorter.sort();
         */
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_sort_HistoryActionPerformed
 
     private void search_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_HistoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_search_HistoryActionPerformed
 
-    private void S_TableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_TableActionPerformed
+    private void sort_TabelWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sort_TabelWLActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_S_TableActionPerformed
+    }//GEN-LAST:event_sort_TabelWLActionPerformed
 
     private void search_WatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_WatchLaterActionPerformed
         // TODO add your handling code here:
@@ -883,55 +868,15 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         
-        String jdl = titleUpload.getText();
-        int thn = yearUpload.getSelectedIndex();
-        String genre1 = cbGenre1Upload.getSelectedItem().toString();
-        String genre2 = cbGenre2Upload.getSelectedItem().toString();
-        String genre3 = cbGenre3Upload.getSelectedItem().toString();
-        String drctr = directorUpload.getText();
-        String actr = actorUpload.getText();
-        String cntry = countryUpload.getText();
-        String snpss = synopsisUpload.getText();
+         insert(titleUpload.getText(), yearUpload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(),
+                cbGenre2Upload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(), directorUpload.getText(),
+                actorUpload.getText(), countryUpload.getText() , synopsisUpload.getText(), newImageLoc );
         
-        /*
-        if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
-        if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
-        if (jCheckBox3.isSelected()) {temp += jCheckBox3.getText();temp+= ", ";}
-        if (jCheckBox4.isSelected()) {temp += jCheckBox4.getText();temp+= ", ";}
-        if (jCheckBox5.isSelected()) {temp += jCheckBox5.getText();temp+= ", ";}
-        if (jCheckBox6.isSelected()) {temp += jCheckBox6.getText();temp+= ", ";}
-        if (jCheckBox7.isSelected()) {temp += jCheckBox7.getText();temp+= ", ";}
-        if (jCheckBox8.isSelected()) {temp += jCheckBox8.getText();temp+= ", ";}
-        if (jCheckBox9.isSelected()) {temp += jCheckBox9.getText();temp+= ", ";}
-        if (jCheckBox10.isSelected()) {temp += jCheckBox10.getText();temp+= ", ";}
-        if (jCheckBox11.isSelected()) {temp += jCheckBox11.getText();temp+= ", ";}
-        if (jCheckBox12.isSelected()) {temp += jCheckBox12.getText();temp+= ", ";}
-        if (jCheckBox13.isSelected()) {temp += jCheckBox13.getText();temp+= ", ";}
-        if (jCheckBox14.isSelected()) {temp += jCheckBox14.getText();temp+= ", ";}
-        if (jCheckBox15.isSelected()) {temp += jCheckBox15.getText();temp+= ", ";}
-        if (jCheckBox16.isSelected()) {temp += jCheckBox16.getText();temp+= ", ";}
-        if (jCheckBox17.isSelected()) {temp += jCheckBox17.getText();temp+= ", ";}
-        if (jCheckBox18.isSelected()) {temp += jCheckBox18.getText();temp+= ", ";}
-        if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
-        if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
-        
-        showMessageDialog(null, temp);*/
-        
-        insert(jdl, thn, genre1, genre2, genre3, drctr, actr, cntry , snpss, newImageLoc );
         showMessageDialog(null, "Upload succes!");
         
-        cover_upload.setText("");
-        titleUpload.setText("");
-        yearUpload.setSelectedIndex(0);
-        cbGenre1Upload.setSelectedIndex(0);
-        cbGenre2Upload.setSelectedIndex(0);
-        cbGenre3Upload.setSelectedIndex(0);
-        directorUpload.setText("");
-        actorUpload.setText("");
-        countryUpload.setText("");
-        synopsisUpload.setText("");
-        
-        
+        this.setVisible(false);
+        new FormAdmin().setVisible(true);
+       
     }//GEN-LAST:event_btn_uploadActionPerformed
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
@@ -944,34 +889,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        /**Connection conn = konek.connect();
-    
-        try{
-            PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
-            pstmt.setInt(1, id_terpilih);
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.getInt("id_movie")==-1){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
-            else{
-                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?","Hapus Data Movie", JOptionPane.INFORMATION_MESSAGE);
-                if (result == JOptionPane.OK_OPTION){
-                     String sql = "DELETE FROM Movie WHERE id_movie=?";
-                     PreparedStatement hapus = conn.prepareStatement(sql);
-                    // set the corresponding param
-                    hapus.setInt(1, id_terpilih);
-                    hapus.executeUpdate();
-                    selectAll();
-                    hapus.close();
-                    }   
-            }
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }**/
-        
+        /*
        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
        int row = table_home.getSelectedRow();
             if(row>=0){
@@ -981,7 +899,26 @@ public class FormAdmin extends javax.swing.JFrame {
                     
                     model.removeRow(row);
                 }
-        }
+        }*/
+        
+        int row_terpilih = table_home.getSelectedRow();
+        if(row_terpilih!=-1){
+            DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+            String row = table_home.getModel().getValueAt(row_terpilih, 0).toString();
+            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION); 
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                delete(row);
+                showMessageDialog(null, "Data deleted success !");
+                selectAll();
+                
+                this.dispose();
+                new FormAdmin().setVisible(true);
+            }
+            
+        } else {
+            showMessageDialog(null, "Please choose row that you want to delete!");
+        } 
+        
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btn_ChooseUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChooseUpdateActionPerformed
@@ -1149,15 +1086,33 @@ public class FormAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGenre1UploadActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
-        int row = table_home.getSelectedRow();
-            if(row != -1){
-                new Detail().setVisible(true);
-            } 
+    private void btn_DetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DetailActionPerformed
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+        int row_terpilih = table_home.getSelectedRow();
+        if(row_terpilih!=-1){
+           
+            String row = table_home.getModel().getValueAt(row_terpilih, 0).toString();
+            String sql = "SELECT id_movie FROM Movie WHERE title = '" +row_terpilih+ "'";
+            
+            new Movie().setTitle(row);
+            
+            
+            try (Connection conn = konek.connect();
+                 Statement stmt  = conn.createStatement();
+                 ResultSet rs    = stmt.executeQuery(sql)){
+                
+                
+                new Movie().setId(rs.getInt("id_movie"));
+                
+                new Detail().setVisible(true);
+                this.dispose();
+                
+            } catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btn_DetailActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1219,17 +1174,14 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void delete(int id_terpilih){
+    public void delete(String id_terpilih){
         Connection conn = konek.connect();
-        String sql = "DELETE FROM Movie WHERE id_movie = ?";
+        String sql = "DELETE FROM Movie WHERE title = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, id_terpilih);
+            pstmt.setString(1, id_terpilih);
             pstmt.executeUpdate();
             
-            if(rs.getInt("id_movie")==0){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -1312,8 +1264,7 @@ public class FormAdmin extends javax.swing.JFrame {
         } 
     }
     
-    public void insert(String title, int year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
-   
+    public void insert(String title, String year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
         String sql = "INSERT INTO Movie(title, year, genre1, genre2, genre3, director, actor, country, synopsis, cover)" +
                 "VALUES('" + title + "','" + year + "','" + genre1 +"','" +genre2+ "','" + genre3 + "','" + director + "','" + actor + "','" + country + "','" +sinopsis+ "','" + cover + "')";
         try (Connection con = konek.connect();
@@ -1325,12 +1276,19 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
+//        public void paging(){
+//        DefaultPaginationModel pagination= new DefaultPaginationModel();
+//        pagination.setTotalItem(2);
+//        pagination.setPageSize(2);
+//        jPagination1.setModel(pagination);
+//    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> S_Table;
     private javax.swing.JTextField actorUpdate;
     private javax.swing.JTextField actorUpload;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btn_ChooseUpdate;
+    private javax.swing.JButton btn_Detail;
     private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton btn_SearchHistory;
     private javax.swing.JButton btn_SearchHome;
@@ -1350,8 +1308,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel cover_upload;
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1409,6 +1365,8 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField search_History;
     private javax.swing.JTextField search_Home;
     private javax.swing.JTextField search_WatchLater;
+    private javax.swing.JComboBox<String> sort_History;
+    private javax.swing.JComboBox<String> sort_TabelWL;
     private javax.swing.JTextArea synopsisUpdate;
     private javax.swing.JTextArea synopsisUpload;
     private javax.swing.JTable table_home;
