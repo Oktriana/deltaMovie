@@ -5,7 +5,6 @@
  */
 package mediaplayertest;
 
-import db.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,6 +50,11 @@ public class Detail extends javax.swing.JFrame {
         country = new javax.swing.JLabel();
         cover = new javax.swing.JLabel();
         synopsis = new javax.swing.JLabel();
+        rating1 = new javax.swing.JButton();
+        rating2 = new javax.swing.JButton();
+        rating3 = new javax.swing.JButton();
+        rating4 = new javax.swing.JButton();
+        rating5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +79,41 @@ public class Detail extends javax.swing.JFrame {
 
         synopsis.setText("jLabel1");
 
+        rating1.setText("1");
+        rating1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rating1ActionPerformed(evt);
+            }
+        });
+
+        rating2.setText("2");
+        rating2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rating2ActionPerformed(evt);
+            }
+        });
+
+        rating3.setText("3");
+        rating3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rating3ActionPerformed(evt);
+            }
+        });
+
+        rating4.setText("4");
+        rating4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rating4ActionPerformed(evt);
+            }
+        });
+
+        rating5.setText("5");
+        rating5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rating5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,6 +136,17 @@ public class Detail extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rating1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rating2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rating3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rating4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rating5)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(synopsis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +176,14 @@ public class Detail extends javax.swing.JFrame {
                         .addComponent(country, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(synopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rating1)
+                    .addComponent(rating2)
+                    .addComponent(rating3)
+                    .addComponent(rating4)
+                    .addComponent(rating5))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -134,6 +191,34 @@ public class Detail extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rating1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating1ActionPerformed
+        int nilai = 1;
+        insertRating(nilai);
+    }//GEN-LAST:event_rating1ActionPerformed
+
+    private void rating2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating2ActionPerformed
+        int nilai = 2;
+        insertRating(nilai);
+    }//GEN-LAST:event_rating2ActionPerformed
+
+    private void rating3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating3ActionPerformed
+        int nilai = 3;
+        insertRating(nilai);
+    }//GEN-LAST:event_rating3ActionPerformed
+
+    private void rating4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating4ActionPerformed
+        int nilai = 4;
+        insertRating(nilai);
+    }//GEN-LAST:event_rating4ActionPerformed
+
+    private void rating5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating5ActionPerformed
+        int nilai = 5;
+        insertRating(nilai);
+    }//GEN-LAST:event_rating5ActionPerformed
+
+    void insertRating(int nilai){
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -197,6 +282,11 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JLabel director;
     private javax.swing.JLabel genre;
     private java.awt.Label label1;
+    private javax.swing.JButton rating1;
+    private javax.swing.JButton rating2;
+    private javax.swing.JButton rating3;
+    private javax.swing.JButton rating4;
+    private javax.swing.JButton rating5;
     private javax.swing.JLabel synopsis;
     private javax.swing.JLabel title;
     private javax.swing.JLabel year;

@@ -5,7 +5,7 @@
  */
 package mediaplayertest;
 
-import db.Koneksi;
+import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
@@ -33,11 +33,13 @@ import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level; //jenis user
 import java.util.logging.Logger; //pencatatan waktu
 import javax.imageio.ImageIO;
+import javax.swing.DefaultRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -65,13 +67,28 @@ public class FormAdmin extends javax.swing.JFrame {
     /**
      * Creates new form formAdmin1
      */
-    /*public void paging(){
+    public void paging(){
         DefaultPaginationModel pagination= new DefaultPaginationModel();
         pagination.setTotalItem(2);
         pagination.setPageSize(2);
         jPagination1.setModel(pagination);
-    }*/
-   
+    }
+    
+    public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
+        initComponents();
+        this.id_terpilih= Integer.parseInt(id_terpilih);
+        this.upload = upload;
+        this.row_terpilih = row_terpilih;
+        
+        titleUpdate.setText(title);
+        yearUpdate.setSelectedIndex(year);
+        directorUpdate.setText(director);
+        actorUpdate.setText(actor);
+        countryUpdate.setText(country);
+        synopsisUpdate.setText(synopsis);
+        
+    }
+
     FormAdmin() {
     initComponents();
     tampilkan_data();
@@ -97,6 +114,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        jPagination1 = new com.stripbandunk.jwidget.JPagination();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -236,11 +254,11 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(table_home);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 630, 190));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 630, 190));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel26.setText("Movies");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, 30));
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, 30));
 
         jLabel27.setFont(new java.awt.Font("Felix Titling", 1, 28)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -265,7 +283,8 @@ public class FormAdmin extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, 30));
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
+        jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jButton1.setText("Detail");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +292,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -310,7 +329,7 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(btn_SearchWatchLater);
         btn_SearchWatchLater.setBounds(140, 70, 70, 30);
 
-        S_Table.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
+        S_Table.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
         S_Table.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 S_TableActionPerformed(evt);
@@ -398,7 +417,7 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel3.add(btn_SearchHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -500,39 +519,39 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_choose);
-        btn_choose.setBounds(90, 10, 100, 30);
+        btn_choose.setBounds(70, 0, 90, 20);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Cover :");
         jPanel2.add(jLabel17);
-        jLabel17.setBounds(20, 20, 60, 20);
+        jLabel17.setBounds(10, 0, 60, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Title :");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(20, 70, 40, 15);
+        jLabel8.setBounds(10, 30, 40, 15);
         jPanel2.add(titleUpload);
-        titleUpload.setBounds(90, 60, 190, 30);
+        titleUpload.setBounds(80, 30, 190, 30);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Year :");
         jPanel2.add(jLabel19);
-        jLabel19.setBounds(20, 110, 40, 15);
+        jLabel19.setBounds(10, 70, 40, 15);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Genre :");
         jPanel2.add(jLabel20);
-        jLabel20.setBounds(20, 170, 50, 15);
+        jLabel20.setBounds(10, 120, 50, 15);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Director :");
         jPanel2.add(jLabel21);
-        jLabel21.setBounds(20, 220, 60, 15);
+        jLabel21.setBounds(10, 170, 60, 15);
 
         directorUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -540,13 +559,13 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(directorUpload);
-        directorUpload.setBounds(90, 210, 200, 30);
+        directorUpload.setBounds(80, 160, 200, 30);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Actor :");
         jPanel2.add(jLabel22);
-        jLabel22.setBounds(20, 270, 50, 15);
+        jLabel22.setBounds(10, 220, 50, 15);
 
         actorUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,48 +573,47 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(actorUpload);
-        actorUpload.setBounds(90, 260, 200, 30);
+        actorUpload.setBounds(80, 210, 200, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Country :");
         jPanel2.add(jLabel23);
-        jLabel23.setBounds(20, 330, 60, 15);
+        jLabel23.setBounds(10, 270, 60, 15);
         jPanel2.add(countryUpload);
-        countryUpload.setBounds(90, 320, 200, 30);
+        countryUpload.setBounds(80, 260, 200, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Synopsis :");
         jPanel2.add(jLabel24);
-        jLabel24.setBounds(20, 390, 60, 15);
+        jLabel24.setBounds(10, 310, 60, 15);
 
         synopsisUpload.setColumns(20);
         synopsisUpload.setRows(5);
         jScrollPane1.setViewportView(synopsisUpload);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 380, 310, 120);
+        jScrollPane1.setBounds(80, 310, 310, 120);
 
-        btn_upload.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_upload.setText("UPLOAD");
+        btn_upload.setText("Upload");
         btn_upload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_uploadActionPerformed(evt);
             }
         });
         jPanel2.add(btn_upload);
-        btn_upload.setBounds(90, 520, 100, 40);
+        btn_upload.setBounds(80, 450, 70, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText(".jpg");
         jPanel2.add(jLabel25);
-        jLabel25.setBounds(200, 20, 40, 20);
+        jLabel25.setBounds(160, 0, 40, 20);
 
         yearUpload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
         jPanel2.add(yearUpload);
-        yearUpload.setBounds(90, 110, 100, 30);
+        yearUpload.setBounds(80, 70, 100, 30);
 
         cover_upload.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cover_upload.setForeground(new java.awt.Color(255, 255, 255));
@@ -603,23 +621,28 @@ public class FormAdmin extends javax.swing.JFrame {
         cover_upload.setText("Cover movie");
         cover_upload.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(cover_upload);
-        cover_upload.setBounds(430, 310, 170, 190);
+        cover_upload.setBounds(430, 230, 180, 190);
 
-        cbGenre1Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre1Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
+        cbGenre1Upload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGenre1UploadActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbGenre1Upload);
-        cbGenre1Upload.setBounds(90, 160, 130, 30);
+        cbGenre1Upload.setBounds(80, 110, 130, 30);
 
-        cbGenre2Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre2Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
         jPanel2.add(cbGenre2Upload);
-        cbGenre2Upload.setBounds(260, 160, 150, 30);
+        cbGenre2Upload.setBounds(240, 110, 150, 30);
 
-        cbGenre3Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre3Upload.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
         jPanel2.add(cbGenre3Upload);
-        cbGenre3Upload.setBounds(440, 160, 140, 30);
+        cbGenre3Upload.setBounds(430, 110, 140, 30);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, -50, 650, 730);
+        jLabel7.setBounds(0, -180, 650, 730);
 
         jTabbedPane1.addTab("Upload", jPanel2);
 
@@ -634,96 +657,96 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel7.add(btn_ChooseUpdate);
-        btn_ChooseUpdate.setBounds(80, 20, 90, 30);
+        btn_ChooseUpdate.setBounds(70, 0, 90, 20);
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Cover :");
         jPanel7.add(jLabel31);
-        jLabel31.setBounds(20, 20, 60, 20);
+        jLabel31.setBounds(10, 0, 60, 20);
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Title :");
         jPanel7.add(jLabel32);
-        jLabel32.setBounds(20, 80, 40, 15);
+        jLabel32.setBounds(10, 30, 40, 15);
 
-        titleUpdate.setText("...");
         titleUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 titleUpdateMouseClicked(evt);
             }
         });
+        titleUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleUpdateActionPerformed(evt);
+            }
+        });
         jPanel7.add(titleUpdate);
-        titleUpdate.setBounds(80, 70, 190, 30);
+        titleUpdate.setBounds(70, 30, 190, 30);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("Year :");
         jPanel7.add(jLabel33);
-        jLabel33.setBounds(20, 140, 40, 15);
+        jLabel33.setBounds(10, 70, 40, 15);
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("Genre :");
         jPanel7.add(jLabel34);
-        jLabel34.setBounds(10, 190, 50, 15);
+        jLabel34.setBounds(10, 120, 50, 15);
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setText("Director :");
         jPanel7.add(jLabel35);
-        jLabel35.setBounds(10, 250, 60, 20);
+        jLabel35.setBounds(10, 170, 60, 15);
 
-        directorUpdate.setText("...");
         directorUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 directorUpdateMouseClicked(evt);
             }
         });
         jPanel7.add(directorUpdate);
-        directorUpdate.setBounds(80, 240, 200, 30);
+        directorUpdate.setBounds(70, 160, 200, 30);
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText("Actor :");
         jPanel7.add(jLabel36);
-        jLabel36.setBounds(20, 300, 50, 15);
+        jLabel36.setBounds(10, 230, 50, 15);
 
-        actorUpdate.setText("...");
         actorUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 actorUpdateMouseClicked(evt);
             }
         });
         jPanel7.add(actorUpdate);
-        actorUpdate.setBounds(80, 290, 200, 30);
+        actorUpdate.setBounds(70, 220, 200, 30);
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("Country :");
         jPanel7.add(jLabel37);
-        jLabel37.setBounds(10, 340, 60, 15);
+        jLabel37.setBounds(10, 280, 60, 15);
 
-        countryUpdate.setText("...");
         countryUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 countryUpdateMouseClicked(evt);
             }
         });
         jPanel7.add(countryUpdate);
-        countryUpdate.setBounds(80, 340, 200, 30);
+        countryUpdate.setBounds(70, 270, 200, 30);
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("Synopsis :");
         jPanel7.add(jLabel38);
-        jLabel38.setBounds(10, 390, 60, 15);
+        jLabel38.setBounds(10, 320, 60, 15);
 
         synopsisUpdate.setColumns(20);
-        synopsisUpdate.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        synopsisUpdate.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         synopsisUpdate.setRows(5);
-        synopsisUpdate.setText("...");
         synopsisUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 synopsisUpdateMouseClicked(evt);
@@ -732,27 +755,26 @@ public class FormAdmin extends javax.swing.JFrame {
         jScrollPane5.setViewportView(synopsisUpdate);
 
         jPanel7.add(jScrollPane5);
-        jScrollPane5.setBounds(80, 390, 330, 110);
+        jScrollPane5.setBounds(70, 320, 330, 110);
 
-        btn_update.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_update.setText("UPDATE");
+        btn_update.setText("Update");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
             }
         });
         jPanel7.add(btn_update);
-        btn_update.setBounds(80, 530, 100, 40);
+        btn_update.setBounds(70, 440, 70, 30);
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText(".jpg");
         jPanel7.add(jLabel39);
-        jLabel39.setBounds(180, 30, 40, 20);
+        jLabel39.setBounds(160, 0, 40, 20);
 
         yearUpdate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
         jPanel7.add(yearUpdate);
-        yearUpdate.setBounds(80, 130, 90, 30);
+        yearUpdate.setBounds(70, 70, 90, 20);
 
         cover_update.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cover_update.setForeground(new java.awt.Color(255, 255, 255));
@@ -760,23 +782,23 @@ public class FormAdmin extends javax.swing.JFrame {
         cover_update.setText("Cover movie");
         cover_update.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.add(cover_update);
-        cover_update.setBounds(430, 320, 160, 190);
+        cover_update.setBounds(430, 230, 180, 190);
 
-        cbGenre1Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre1Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
         jPanel7.add(cbGenre1Update);
-        cbGenre1Update.setBounds(80, 180, 120, 30);
+        cbGenre1Update.setBounds(70, 110, 120, 30);
 
-        cbGenre2Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre2Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
         jPanel7.add(cbGenre2Update);
-        cbGenre2Update.setBounds(240, 180, 120, 30);
+        cbGenre2Update.setBounds(240, 110, 120, 30);
 
-        cbGenre3Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Action", "Adventure", "Animation", "Biography", "Crime", "Comedy", "Documentary", "Family", "Fantasy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western" }));
+        cbGenre3Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
         jPanel7.add(cbGenre3Update);
-        cbGenre3Update.setBounds(430, 180, 120, 30);
+        cbGenre3Update.setBounds(430, 110, 120, 30);
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jPanel7.add(jLabel40);
-        jLabel40.setBounds(0, -60, 650, 730);
+        jLabel40.setBounds(0, -170, 650, 730);
 
         jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 630));
 
@@ -789,6 +811,15 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        java.sql.Date dateOfLastUpdate=null;
+        
+        /*Sort the Table
+                    DefaultRowSorter sorter = ((DefaultRowSorter)allRevenueTable.getRowSorter()); 
+                    ArrayList list = new ArrayList();
+                    list.add( new RowSorter.SortKey(0, SortOrder.DESCENDING) );
+                    sorter.setSortKeys(list);
+                    sorter.sort();
+        */
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void search_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_HistoryActionPerformed
@@ -797,7 +828,7 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void S_TableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_TableActionPerformed
         // TODO add your handling code here:
-        String tabel = S_Table.getSelectedItem().toString();
+        
     }//GEN-LAST:event_S_TableActionPerformed
 
     private void search_WatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_WatchLaterActionPerformed
@@ -853,15 +884,55 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         
-        insert(titleUpload.getText(), yearUpload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(),
-                cbGenre2Upload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(), directorUpload.getText(),
-                actorUpload.getText(), countryUpload.getText() , synopsisUpload.getText(), newImageLoc );
+        String jdl = titleUpload.getText();
+        int thn = yearUpload.getSelectedIndex();
+        String genre1 = cbGenre1Upload.getSelectedItem().toString();
+        String genre2 = cbGenre2Upload.getSelectedItem().toString();
+        String genre3 = cbGenre3Upload.getSelectedItem().toString();
+        String drctr = directorUpload.getText();
+        String actr = actorUpload.getText();
+        String cntry = countryUpload.getText();
+        String snpss = synopsisUpload.getText();
         
+        /*
+        if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
+        if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
+        if (jCheckBox3.isSelected()) {temp += jCheckBox3.getText();temp+= ", ";}
+        if (jCheckBox4.isSelected()) {temp += jCheckBox4.getText();temp+= ", ";}
+        if (jCheckBox5.isSelected()) {temp += jCheckBox5.getText();temp+= ", ";}
+        if (jCheckBox6.isSelected()) {temp += jCheckBox6.getText();temp+= ", ";}
+        if (jCheckBox7.isSelected()) {temp += jCheckBox7.getText();temp+= ", ";}
+        if (jCheckBox8.isSelected()) {temp += jCheckBox8.getText();temp+= ", ";}
+        if (jCheckBox9.isSelected()) {temp += jCheckBox9.getText();temp+= ", ";}
+        if (jCheckBox10.isSelected()) {temp += jCheckBox10.getText();temp+= ", ";}
+        if (jCheckBox11.isSelected()) {temp += jCheckBox11.getText();temp+= ", ";}
+        if (jCheckBox12.isSelected()) {temp += jCheckBox12.getText();temp+= ", ";}
+        if (jCheckBox13.isSelected()) {temp += jCheckBox13.getText();temp+= ", ";}
+        if (jCheckBox14.isSelected()) {temp += jCheckBox14.getText();temp+= ", ";}
+        if (jCheckBox15.isSelected()) {temp += jCheckBox15.getText();temp+= ", ";}
+        if (jCheckBox16.isSelected()) {temp += jCheckBox16.getText();temp+= ", ";}
+        if (jCheckBox17.isSelected()) {temp += jCheckBox17.getText();temp+= ", ";}
+        if (jCheckBox18.isSelected()) {temp += jCheckBox18.getText();temp+= ", ";}
+        if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
+        if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
+        
+        showMessageDialog(null, temp);*/
+        
+        insert(jdl, thn, genre1, genre2, genre3, drctr, actr, cntry , snpss, newImageLoc );
         showMessageDialog(null, "Upload succes!");
         
-        this.setVisible(false);
-        new FormAdmin().setVisible(true);
-         
+        cover_upload.setText("");
+        titleUpload.setText("");
+        yearUpload.setSelectedIndex(0);
+        cbGenre1Upload.setSelectedIndex(0);
+        cbGenre2Upload.setSelectedIndex(0);
+        cbGenre3Upload.setSelectedIndex(0);
+        directorUpload.setText("");
+        actorUpload.setText("");
+        countryUpload.setText("");
+        synopsisUpload.setText("");
+        
+        
     }//GEN-LAST:event_btn_uploadActionPerformed
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
@@ -874,7 +945,34 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-         /*
+        /**Connection conn = konek.connect();
+    
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
+            pstmt.setInt(1, id_terpilih);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.getInt("id_movie")==-1){
+                showMessageDialog(null, "Data tidak ada!!!");
+            }
+            else{
+                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?","Hapus Data Movie", JOptionPane.INFORMATION_MESSAGE);
+                if (result == JOptionPane.OK_OPTION){
+                     String sql = "DELETE FROM Movie WHERE id_movie=?";
+                     PreparedStatement hapus = conn.prepareStatement(sql);
+                    // set the corresponding param
+                    hapus.setInt(1, id_terpilih);
+                    hapus.executeUpdate();
+                    selectAll();
+                    hapus.close();
+                    }   
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }**/
+        
        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
        int row = table_home.getSelectedRow();
             if(row>=0){
@@ -884,24 +982,7 @@ public class FormAdmin extends javax.swing.JFrame {
                     
                     model.removeRow(row);
                 }
-        }*/
-        
-        int row_terpilih = table_home.getSelectedRow();
-        if(row_terpilih!=-1){
-            DefaultTableModel model = (DefaultTableModel) table_home.getModel();
-            String row = table_home.getModel().getValueAt(row_terpilih, 0).toString();
-            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION); 
-            if (selectedOption == JOptionPane.YES_OPTION) {
-                delete(row);
-                showMessageDialog(null, "Data deleted success !");
-                selectAll();
-                model.removeRow(Integer.parseInt(row));
-            }
-            
-        } else {
-            showMessageDialog(null, "Please choose row that you want to delete!");
-        } 
-          
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btn_ChooseUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChooseUpdateActionPerformed
@@ -1071,13 +1152,20 @@ public class FormAdmin extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_table_homeMouseClicked
 
+    private void titleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleUpdateActionPerformed
+
+    private void cbGenre1UploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGenre1UploadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGenre1UploadActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
-        int row = table_home.getSelectedRow();
-            if(row != -1){
-                new Detail().setVisible(true);
-            } 
+        table_home.getSelectedRow();
+        System.out.println("");
+        String sql = "Select * from Movie Where id_movie LIKE '%"+search_Home.getText()+ "%'";
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
@@ -1140,14 +1228,17 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void delete(String id_terpilih){
+    public void delete(int id_terpilih){
         Connection conn = konek.connect();
-        String sql = "DELETE FROM Movie WHERE title = ?";
-                
+        String sql = "DELETE FROM Movie WHERE id_movie = ?";
+        
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1, id_terpilih);
+            pstmt.setInt(1, id_terpilih);
             pstmt.executeUpdate();
             
+            if(rs.getInt("id_movie")==0){
+                showMessageDialog(null, "Data tidak ada!!!");
+            }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -1230,7 +1321,8 @@ public class FormAdmin extends javax.swing.JFrame {
         } 
     }
     
-    public void insert(String title, String year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
+    public void insert(String title, int year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
+   
         String sql = "INSERT INTO Movie(title, year, genre1, genre2, genre3, director, actor, country, synopsis, cover)" +
                 "VALUES('" + title + "','" + year + "','" + genre1 +"','" +genre2+ "','" + genre3 + "','" + director + "','" + actor + "','" + country + "','" +sinopsis+ "','" + cover + "')";
         try (Connection con = konek.connect();
@@ -1307,6 +1399,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.stripbandunk.jwidget.JPagination jPagination1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
