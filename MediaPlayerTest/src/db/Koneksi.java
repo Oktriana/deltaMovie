@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mediaplayertest;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Oktriana Sidik
+ * @author LPG
  */
 public class Koneksi {
     public Connection connect(){

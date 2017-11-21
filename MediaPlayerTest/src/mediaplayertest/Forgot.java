@@ -5,6 +5,7 @@
  */
 package mediaplayertest;
 
+import db.Koneksi;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;

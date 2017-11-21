@@ -5,6 +5,7 @@
  */
 package mediaplayertest;
 
+import db.Koneksi;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;

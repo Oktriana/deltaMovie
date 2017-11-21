@@ -5,6 +5,7 @@
  */
 package mediaplayertest;
 
+import db.Koneksi;
 import java.awt.image.BufferedImage;
 import java.sql.Blob;
 import java.sql.Connection;
