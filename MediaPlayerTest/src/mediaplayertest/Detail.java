@@ -5,11 +5,14 @@
  */
 package mediaplayertest;
 
+import db.Koneksi;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,8 +20,9 @@ import java.sql.Statement;
  */
 public class Detail extends javax.swing.JFrame {
 
-    LogIn log = new LogIn();
-    Koneksi konek = new Koneksi();
+    Connection conn=null;
+    ResultSet rs=null;
+    PreparedStatement pst=null;
     
     /**
      * Creates new form Detail
@@ -27,8 +31,8 @@ public class Detail extends javax.swing.JFrame {
         initComponents();    
     }
     
-    public Detail(int row){
-        tampilan();
+    public Detail(Movie detail){
+        tampilan(detail);
     }
 
     /**
@@ -254,25 +258,39 @@ public class Detail extends javax.swing.JFrame {
         });
     }
     
-    public void tampilan(){
-        String sql = "SELECT title, year, genre1,genre2, genre3, director, actor, country, synopsis, cover FROM Movie WHERE id_movie = '?'";
-        try (Connection conn = konek.connect();
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql)){
-            title.setText(rs.getString("title"));
-            //year.setInt(rs.getInt("year"));
-            actor.setText(rs.getString("actor"));
-            director.setText(rs.getString("director"));
-            country.setText(rs.getString("country"));
-            synopsis.setText(rs.getString("synopsis"));
+    public void tampilan(Movie detail){
+        try{                                            
+            String id1 = detail.getTitle();                
+            String sql = "SELECT * FROM Movie WHERE id_movie=title";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, id1);
+            ResultSet rs=pst.executeQuery();
             
-            stmt.close();
-            conn.close();
-    } catch(SQLException e){
-            System.out.println(e.getMessage());
+            String add1 =rs.getString("title");
+            title.setText(add1);
             
-    }
-        //year.setText();
+            String add2 =rs.getString("year");
+            year.setText(add2);
+            
+            String add3 =rs.getString("genre1"+"genre2"+"genre3");
+            genre.setText(add3);
+            
+            String add4 =rs.getString("actor");
+            actor.setText(add4);
+            
+            String add5 =rs.getString("director");
+            director.setText(add5);
+            
+            String add6 =rs.getString("synopsis");
+            synopsis.setText(add6);
+            
+            String img = rs.getString("cover");
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(cover.getWidth(), cover.getHeight(), Image.SCALE_SMOOTH));
+            cover.setIcon(imageIcon);
+            
+        }catch(Exception e){
+            
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,8 @@
  */
 package mediaplayertest;
 
-import com.stripbandunk.jwidget.model.DefaultPaginationModel;
+//import com.stripbandunk.jwidget.model.DefaultPaginationModel;
+import db.Koneksi;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
@@ -67,12 +68,12 @@ public class FormAdmin extends javax.swing.JFrame {
     /**
      * Creates new form formAdmin1
      */
-    public void paging(){
+    /*public void paging(){
         DefaultPaginationModel pagination= new DefaultPaginationModel();
         pagination.setTotalItem(2);
         pagination.setPageSize(2);
         jPagination1.setModel(pagination);
-    }
+    }*/
     
     public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
         initComponents();
@@ -114,7 +115,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        jPagination1 = new com.stripbandunk.jwidget.JPagination();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -284,7 +284,6 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
-        jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jButton1.setText("Detail");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1139,17 +1138,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SearchHistoryActionPerformed
 
     private void table_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_homeMouseClicked
-        // TODO add your handling code here:                                       
-        table_home.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JTable target = (JTable)e.getSource();
-                    int row = target.getSelectedRow();
-                    new Detail(row).setVisible(true);
-                    
-                }
-            }
-        });
+     
     }//GEN-LAST:event_table_homeMouseClicked
 
     private void titleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleUpdateActionPerformed
@@ -1162,9 +1151,11 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        table_home.getSelectedRow();
-        System.out.println("");
-        String sql = "Select * from Movie Where id_movie LIKE '%"+search_Home.getText()+ "%'";
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+        int row = table_home.getSelectedRow();
+            if(row != -1){
+                new Detail().setVisible(true);
+            } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
     
@@ -1399,7 +1390,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.stripbandunk.jwidget.JPagination jPagination1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
