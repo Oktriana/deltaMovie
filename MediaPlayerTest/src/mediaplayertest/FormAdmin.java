@@ -6,7 +6,6 @@
 package mediaplayertest;
 
 import com.stripbandunk.jwidget.model.DefaultPaginationModel;
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.event.MouseAdapter;
@@ -1145,7 +1144,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 if (e.getClickCount() == 2) {
                     JTable target = (JTable)e.getSource();
                     int row = target.getSelectedRow();
-                    new Detail(row).setVisible(true);
+                    new Detail().setVisible(true);
                     
                 }
             }
@@ -1162,10 +1161,14 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
         int row = table_home.getSelectedRow();
-        System.out.println("");
-        String sql = "Select * from Movie Where id_movie LIKE '%"+search_Home.getText()+ "%'";
-        Movie.idMovie = row;
+            if(row != -1){
+                    Movie x = new Movie();
+                    x.setTitle((String)table_home.getValueAt(row, 0));
+                    Detail y = new Detail(x);
+                    y.setVisible(true);
+            } 
     }//GEN-LAST:event_jButton1ActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){

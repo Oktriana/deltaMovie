@@ -5,11 +5,14 @@
  */
 package mediaplayertest;
 
+import db.Koneksi;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,8 +20,11 @@ import java.sql.Statement;
  */
 public class Detail extends javax.swing.JFrame {
 
-    LogIn log = new LogIn();
+    
     Koneksi konek = new Koneksi();
+    
+    ResultSet rs=null;
+    PreparedStatement pst=null;
     
     /**
      * Creates new form Detail
@@ -27,8 +33,9 @@ public class Detail extends javax.swing.JFrame {
         initComponents();    
     }
     
-    public Detail(int row){
-        tampilan();
+    public Detail(Movie detail){
+        initComponents();
+        tampilan(detail);
     }
 
     /**
@@ -49,177 +56,214 @@ public class Detail extends javax.swing.JFrame {
         actor = new javax.swing.JLabel();
         country = new javax.swing.JLabel();
         cover = new javax.swing.JLabel();
-        synopsis = new javax.swing.JLabel();
-        rating1 = new javax.swing.JButton();
-        rating2 = new javax.swing.JButton();
-        rating3 = new javax.swing.JButton();
-        rating4 = new javax.swing.JButton();
-        rating5 = new javax.swing.JButton();
+        synopsis = new java.awt.TextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setAlignment(java.awt.Label.CENTER);
+        label1.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
+        label1.setForeground(new java.awt.Color(51, 51, 0));
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, label1, org.jdesktop.beansbinding.ELProperty.create("DETAIL FILM"), label1, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 40));
+
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setText("jLabel1");
+        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 68, 193, 27));
 
+        year.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         year.setText("jLabel2");
+        getContentPane().add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 193, 27));
 
+        genre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         genre.setText("jLabel3");
+        getContentPane().add(genre, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 193, 27));
 
+        director.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         director.setText("jLabel1");
+        getContentPane().add(director, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 193, 27));
 
+        actor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         actor.setText("jLabel1");
+        getContentPane().add(actor, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 193, 27));
 
+        country.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         country.setText("jLabel1");
+        getContentPane().add(country, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 193, 27));
 
         cover.setText("jLabel1");
+        getContentPane().add(cover, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 98, 160, 180));
 
-        synopsis.setText("jLabel1");
+        synopsis.setEditable(false);
+        getContentPane().add(synopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 400, 260));
 
-        rating1.setText("1");
-        rating1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rating1ActionPerformed(evt);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel3ComponentHidden(evt);
             }
         });
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 41, -1));
 
-        rating2.setText("2");
-        rating2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rating2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, -1, 40));
 
-        rating3.setText("3");
-        rating3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rating3ActionPerformed(evt);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
+        jLabel4.setText("jLabel3");
+        jLabel4.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel4ComponentHidden(evt);
             }
         });
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 41, -1));
 
-        rating4.setText("4");
-        rating4.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rating4ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 40, 40));
 
-        rating5.setText("5");
-        rating5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rating5ActionPerformed(evt);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
+        jLabel5.setText("jLabel3");
+        jLabel5.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel5ComponentHidden(evt);
             }
         });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, 41, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(cover, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(genre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(director, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(actor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(country, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rating1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rating2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rating3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rating4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rating5)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(synopsis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                                .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(56, 56, 56))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cover, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(genre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(director, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(actor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(country, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addComponent(synopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rating1)
-                    .addComponent(rating2)
-                    .addComponent(rating3)
-                    .addComponent(rating4)
-                    .addComponent(rating5))
-                .addContainerGap(233, Short.MAX_VALUE))
-        );
+        jButton3.setText("3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, -1, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
+        jLabel6.setText("jLabel3");
+        jLabel6.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel6ComponentHidden(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 41, -1));
+
+        jButton4.setText("4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, -1, 40));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
+        jLabel7.setText("jLabel3");
+        jLabel7.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel7ComponentHidden(evt);
+            }
+        });
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 41, -1));
+
+        jButton5.setText("5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Rating :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 60, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu16.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -120, 790, 830));
 
         bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rating1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating1ActionPerformed
-        int nilai = 1;
-        insertRating(nilai);
-    }//GEN-LAST:event_rating1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int skor = 1;
+        insertRating(skor);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void rating2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
         int skor = 2;
         insertRating(skor);
-    }//GEN-LAST:event_rating2ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void rating3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
         int skor = 3;
         insertRating(skor);
-    }//GEN-LAST:event_rating3ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void rating4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating4ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
         int skor = 4;
         insertRating(skor);
-    }//GEN-LAST:event_rating4ActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void rating5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
         int skor = 5;
         insertRating(skor);
-    }//GEN-LAST:event_rating5ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jLabel3ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel3ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3ComponentHidden
+
+    private void jLabel4ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4ComponentHidden
+
+    private void jLabel5ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel5ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5ComponentHidden
+
+    private void jLabel6ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel6ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6ComponentHidden
+
+    private void jLabel7ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel7ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7ComponentHidden
 
     void insertRating(int skor){
         String user_name;
         int id_movie;
-        id_movie = Movie.idMovie;
+        //id_movie = Movie.idMovie;
         user_name = User.username;
                 
     String sql = "INSERT INTO Rating(id_user, id_movie, int skor)";
@@ -231,6 +275,7 @@ public class Detail extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }   
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -266,25 +311,60 @@ public class Detail extends javax.swing.JFrame {
         });
     }
     
-    public void tampilan(){
-        String sql = "SELECT title, year, genre1,genre2, genre3, director, actor, country, synopsis, cover FROM Movie WHERE id_movie = '?'";
-        try (Connection conn = konek.connect();
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql)){
-            title.setText(rs.getString("title"));
-            //year.setInt(rs.getInt("year"));
-            actor.setText(rs.getString("actor"));
-            director.setText(rs.getString("director"));
-            country.setText(rs.getString("country"));
-            synopsis.setText(rs.getString("synopsis"));
+    public void tampilan(Movie detail){
+        try(Connection conn = konek.connect()){ 
+            String id1 = detail.getTitle();                
+            String sql = "SELECT * FROM Movie WHERE title = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, id1);
+            ResultSet rs=pst.executeQuery();
             
-            stmt.close();
-            conn.close();
-    } catch(SQLException e){
-            System.out.println(e.getMessage());
             
+            
+            String add1 =rs.getString(2);
+            detail.setTitle(add1);
+            
+            System.out.println(add1);
+            
+            String add2 =rs.getString(3);
+            detail.setYear(add2);
+            
+            String add3 =rs.getString(4);
+            detail.setGenre_1(add3);
+            add3 =rs.getString(5);
+            detail.setGenre_1(detail.getGenre_1()+add3);
+            add3 =rs.getString(6);
+            detail.setGenre_1(detail.getGenre_1()+add3);
+            
+            String add4 =rs.getString(8);
+            detail.setActor(add4);
+            
+            String add5 =rs.getString(7);
+            detail.setDirector(add5);
+            
+            String add6 =rs.getString(9);
+            detail.setCountry(add6);
+            
+            String add7 =rs.getString(10);
+            detail.setSynopsis(add7);
+            
+            String img = rs.getString(11);
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(cover.getWidth(), cover.getHeight(), Image.SCALE_SMOOTH));
+            cover.setIcon(imageIcon);
+            
+            setData(detail);
+        }catch(Exception e){
+            
+        }
     }
-        //year.setText();
+    
+    public void setData(Movie x){
+        title.setText(x.getTitle());
+        year.setText(x.getYear());
+        actor.setText(x.getActor());
+        director.setText(x.getDirector());
+        country.setText(x.getCountry());
+        synopsis.setText(x.getSynopsis());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,13 +373,20 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JLabel cover;
     private javax.swing.JLabel director;
     private javax.swing.JLabel genre;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private java.awt.Label label1;
-    private javax.swing.JButton rating1;
-    private javax.swing.JButton rating2;
-    private javax.swing.JButton rating3;
-    private javax.swing.JButton rating4;
-    private javax.swing.JButton rating5;
-    private javax.swing.JLabel synopsis;
+    private java.awt.TextArea synopsis;
     private javax.swing.JLabel title;
     private javax.swing.JLabel year;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

@@ -219,6 +219,7 @@ public class LogIn extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
             
+            
             if(rs.next()){
                 if(rs.getString("job").equals("User")){
                 new FormUser().setVisible(true);
