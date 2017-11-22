@@ -176,11 +176,14 @@ public class LogIn extends javax.swing.JFrame {
                 String pass = new String(pwd);
                 
                 cek();
+                User.username = uname;
                 
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
         }
+        
+                
         
     }//GEN-LAST:event_btn_SignInActionPerformed
 

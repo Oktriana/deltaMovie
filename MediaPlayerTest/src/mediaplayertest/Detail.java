@@ -5,14 +5,11 @@
  */
 package mediaplayertest;
 
-import db.Koneksi;
-import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,18 +17,19 @@ import javax.swing.ImageIcon;
  */
 public class Detail extends javax.swing.JFrame {
 
-    Connection conn=null;
-    ResultSet rs=null;
-    PreparedStatement pst=null;
+    LogIn log = new LogIn();
+    Koneksi konek = new Koneksi();
     
     /**
      * Creates new form Detail
      */
     public Detail() {
-        initComponents();
-        tampilan();
+        initComponents();    
     }
     
+    public Detail(int row){
+        tampilan();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -199,27 +197,39 @@ public class Detail extends javax.swing.JFrame {
     }//GEN-LAST:event_rating1ActionPerformed
 
     private void rating2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating2ActionPerformed
-        int nilai = 2;
-        insertRating(nilai);
+        int skor = 2;
+        insertRating(skor);
     }//GEN-LAST:event_rating2ActionPerformed
 
     private void rating3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating3ActionPerformed
-        int nilai = 3;
-        insertRating(nilai);
+        int skor = 3;
+        insertRating(skor);
     }//GEN-LAST:event_rating3ActionPerformed
 
     private void rating4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating4ActionPerformed
-        int nilai = 4;
-        insertRating(nilai);
+        int skor = 4;
+        insertRating(skor);
     }//GEN-LAST:event_rating4ActionPerformed
 
     private void rating5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rating5ActionPerformed
-        int nilai = 5;
-        insertRating(nilai);
+        int skor = 5;
+        insertRating(skor);
     }//GEN-LAST:event_rating5ActionPerformed
 
-    void insertRating(int nilai){
-        
+    void insertRating(int skor){
+        String user_name;
+        int id_movie;
+        id_movie = Movie.idMovie;
+        user_name = User.username;
+                
+    String sql = "INSERT INTO Rating(id_user, id_movie, int skor)";
+        try (Connection conn = konek.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+              //selectAll();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }   
     }
     /**
      * @param args the command line arguments
@@ -257,37 +267,24 @@ public class Detail extends javax.swing.JFrame {
     }
     
     public void tampilan(){
-        try{                                            
-            String id1 = new Movie().getTitle();
-            String sql = "SELECT * FROM Movie WHERE title ='" +id1+ "'";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs=pst.executeQuery();
+        String sql = "SELECT title, year, genre1,genre2, genre3, director, actor, country, synopsis, cover FROM Movie WHERE id_movie = '?'";
+        try (Connection conn = konek.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+            title.setText(rs.getString("title"));
+            //year.setInt(rs.getInt("year"));
+            actor.setText(rs.getString("actor"));
+            director.setText(rs.getString("director"));
+            country.setText(rs.getString("country"));
+            synopsis.setText(rs.getString("synopsis"));
             
-            String add1 =rs.getString("title");
-            title.setText(add1);
+            stmt.close();
+            conn.close();
+    } catch(SQLException e){
+            System.out.println(e.getMessage());
             
-            String add2 =rs.getString("year");
-            year.setText(add2);
-            
-            String add3 =rs.getString("genre1"+"genre2"+"genre3");
-            genre.setText(add3);
-            
-            String add4 =rs.getString("actor");
-            actor.setText(add4);
-            
-            String add5 =rs.getString("director");
-            director.setText(add5);
-            
-            String add6 =rs.getString("synopsis");
-            synopsis.setText(add6);
-            
-            String img = rs.getString("cover");
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(cover.getWidth(), cover.getHeight(), Image.SCALE_SMOOTH));
-            cover.setIcon(imageIcon);
-            
-        }catch(Exception e){
-            
-        }
+    }
+        //year.setText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

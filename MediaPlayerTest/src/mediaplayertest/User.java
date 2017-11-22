@@ -9,7 +9,7 @@ package mediaplayertest;
  *
  * @author A
  */
-public class Movie {
-    public static int idMovie;
-    public static String judul;
+public class User {
+    public static String username;
+    public static int idUser;
 }
