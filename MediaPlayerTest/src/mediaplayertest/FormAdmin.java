@@ -6,6 +6,7 @@
 package mediaplayertest;
 
 import com.stripbandunk.jwidget.model.DefaultPaginationModel;
+import db.Koneksi;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.event.MouseAdapter;
@@ -115,6 +116,7 @@ public class FormAdmin extends javax.swing.JFrame {
         btnHapus = new javax.swing.JButton();
         jPagination1 = new com.stripbandunk.jwidget.JPagination();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -291,7 +293,15 @@ public class FormAdmin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, 30));
+
+        jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -893,30 +903,6 @@ public class FormAdmin extends javax.swing.JFrame {
         String cntry = countryUpload.getText();
         String snpss = synopsisUpload.getText();
         
-        /*
-        if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
-        if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
-        if (jCheckBox3.isSelected()) {temp += jCheckBox3.getText();temp+= ", ";}
-        if (jCheckBox4.isSelected()) {temp += jCheckBox4.getText();temp+= ", ";}
-        if (jCheckBox5.isSelected()) {temp += jCheckBox5.getText();temp+= ", ";}
-        if (jCheckBox6.isSelected()) {temp += jCheckBox6.getText();temp+= ", ";}
-        if (jCheckBox7.isSelected()) {temp += jCheckBox7.getText();temp+= ", ";}
-        if (jCheckBox8.isSelected()) {temp += jCheckBox8.getText();temp+= ", ";}
-        if (jCheckBox9.isSelected()) {temp += jCheckBox9.getText();temp+= ", ";}
-        if (jCheckBox10.isSelected()) {temp += jCheckBox10.getText();temp+= ", ";}
-        if (jCheckBox11.isSelected()) {temp += jCheckBox11.getText();temp+= ", ";}
-        if (jCheckBox12.isSelected()) {temp += jCheckBox12.getText();temp+= ", ";}
-        if (jCheckBox13.isSelected()) {temp += jCheckBox13.getText();temp+= ", ";}
-        if (jCheckBox14.isSelected()) {temp += jCheckBox14.getText();temp+= ", ";}
-        if (jCheckBox15.isSelected()) {temp += jCheckBox15.getText();temp+= ", ";}
-        if (jCheckBox16.isSelected()) {temp += jCheckBox16.getText();temp+= ", ";}
-        if (jCheckBox17.isSelected()) {temp += jCheckBox17.getText();temp+= ", ";}
-        if (jCheckBox18.isSelected()) {temp += jCheckBox18.getText();temp+= ", ";}
-        if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
-        if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
-        
-        showMessageDialog(null, temp);*/
-        
         insert(jdl, thn, genre1, genre2, genre3, drctr, actr, cntry , snpss, newImageLoc );
         showMessageDialog(null, "Upload succes!");
         
@@ -1170,6 +1156,18 @@ public class FormAdmin extends javax.swing.JFrame {
                     y.setVisible(true);
             } 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+        int row = table_home.getSelectedRow();
+            if(row != -1){
+                    Movie x = new Movie();
+                    x.setTitle((String)table_home.getValueAt(row, 0));
+                    Update y = new Update(x);
+                    y.setVisible(true);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1363,6 +1361,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
