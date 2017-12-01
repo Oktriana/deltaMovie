@@ -73,22 +73,6 @@ public class FormAdmin extends javax.swing.JFrame {
         pagination.setPageSize(2);
         jPagination1.setModel(pagination);
     }
-    
-    public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
-        initComponents();
-        this.id_terpilih= Integer.parseInt(id_terpilih);
-        this.upload = upload;
-        this.row_terpilih = row_terpilih;
-        
-        titleUpdate.setText(title);
-        yearUpdate.setSelectedIndex(year);
-        directorUpdate.setText(director);
-        actorUpdate.setText(actor);
-        countryUpdate.setText(country);
-        synopsisUpdate.setText(synopsis);
-        
-    }
-
     FormAdmin() {
     initComponents();
     tampilkan_data();
@@ -893,31 +877,15 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         
-        String jdl = titleUpload.getText();
-        int thn = yearUpload.getSelectedIndex();
-        String genre1 = cbGenre1Upload.getSelectedItem().toString();
-        String genre2 = cbGenre2Upload.getSelectedItem().toString();
-        String genre3 = cbGenre3Upload.getSelectedItem().toString();
-        String drctr = directorUpload.getText();
-        String actr = actorUpload.getText();
-        String cntry = countryUpload.getText();
-        String snpss = synopsisUpload.getText();
         
-        insert(jdl, thn, genre1, genre2, genre3, drctr, actr, cntry , snpss, newImageLoc );
+        insert(titleUpload.getText(), yearUpload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(),
+                cbGenre2Upload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(), directorUpload.getText(),
+                actorUpload.getText(), countryUpload.getText() , synopsisUpload.getText(), newImageLoc );
+        
         showMessageDialog(null, "Upload succes!");
         
-        cover_upload.setText("");
-        titleUpload.setText("");
-        yearUpload.setSelectedIndex(0);
-        cbGenre1Upload.setSelectedIndex(0);
-        cbGenre2Upload.setSelectedIndex(0);
-        cbGenre3Upload.setSelectedIndex(0);
-        directorUpload.setText("");
-        actorUpload.setText("");
-        countryUpload.setText("");
-        synopsisUpload.setText("");
-        
-        
+        this.setVisible(false);
+        new FormAdmin().setVisible(true);
     }//GEN-LAST:event_btn_uploadActionPerformed
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
@@ -930,34 +898,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        /**Connection conn = konek.connect();
-    
-        try{
-            PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
-            pstmt.setInt(1, id_terpilih);
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.getInt("id_movie")==-1){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
-            else{
-                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?","Hapus Data Movie", JOptionPane.INFORMATION_MESSAGE);
-                if (result == JOptionPane.OK_OPTION){
-                     String sql = "DELETE FROM Movie WHERE id_movie=?";
-                     PreparedStatement hapus = conn.prepareStatement(sql);
-                    // set the corresponding param
-                    hapus.setInt(1, id_terpilih);
-                    hapus.executeUpdate();
-                    selectAll();
-                    hapus.close();
-                    }   
-            }
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }**/
-        
+        /*
        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
        int row = table_home.getSelectedRow();
             if(row>=0){
@@ -967,7 +908,23 @@ public class FormAdmin extends javax.swing.JFrame {
                     
                     model.removeRow(row);
                 }
-        }
+        }*/
+        
+        int row_terpilih = table_home.getSelectedRow();
+        if(row_terpilih!=-1){
+            DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+            String row = table_home.getModel().getValueAt(row_terpilih, 0).toString();
+            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION); 
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                delete(row);
+                showMessageDialog(null, "Data deleted success !");
+                selectAll();
+                model.removeRow(Integer.parseInt(row));
+            }
+            
+        } else {
+            showMessageDialog(null, "Please choose row that you want to delete!");
+        } 
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btn_ChooseUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChooseUpdateActionPerformed
@@ -1229,58 +1186,19 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void delete(int id_terpilih){
+    public void delete(String id_terpilih){
         Connection conn = konek.connect();
-        String sql = "DELETE FROM Movie WHERE id_movie = ?";
+        String sql = "DELETE FROM Movie WHERE title = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, id_terpilih);
+            pstmt.setString(1, id_terpilih);
             pstmt.executeUpdate();
             
-            if(rs.getInt("id_movie")==0){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormAdmin().setVisible(true);
-            }
-        });
-    }
-    
+        
     public void selectAll(){
         try {
             Connection conn = konek.connect();
@@ -1322,8 +1240,7 @@ public class FormAdmin extends javax.swing.JFrame {
         } 
     }
     
-    public void insert(String title, int year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
-   
+    public void insert(String title, String year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
         String sql = "INSERT INTO Movie(title, year, genre1, genre2, genre3, director, actor, country, synopsis, cover)" +
                 "VALUES('" + title + "','" + year + "','" + genre1 +"','" +genre2+ "','" + genre3 + "','" + director + "','" + actor + "','" + country + "','" +sinopsis+ "','" + cover + "')";
         try (Connection con = konek.connect();
