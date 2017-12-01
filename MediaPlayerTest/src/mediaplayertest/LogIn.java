@@ -176,7 +176,7 @@ public class LogIn extends javax.swing.JFrame {
                 String pass = new String(pwd);
                 
                 cek();
-                User.username = uname;
+                User.setUsername(uname);
                 
             }catch(Exception e){
                 System.out.println(e.getMessage());
@@ -222,9 +222,15 @@ public class LogIn extends javax.swing.JFrame {
             
             if(rs.next()){
                 if(rs.getString("job").equals("User")){
+                User.setIdUser(rs.getInt("id_user"));
+                    System.out.println(User.getIdUser());
+                    System.out.println("it's work");
                 new FormUser().setVisible(true);
                 this.dispose();
                 } else if(rs.getString("job").equals("Admin")){
+                    User.setIdUser(rs.getInt("id_user"));
+                    System.out.println(User.getIdUser());
+                    System.out.println("it's work");
                 new FormAdmin().setVisible(true);
                 this.dispose();
                 }

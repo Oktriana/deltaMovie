@@ -10,6 +10,34 @@ package mediaplayertest;
  * @author A
  */
 public class User {
-    public static String username;
-    public static int idUser;
+    private static String username;
+    private static int idUser;
+
+    /**
+     * @return the username
+     */
+    public static String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param aUsername the username to set
+     */
+    public static void setUsername(String aUsername) {
+        username = aUsername;
+    }
+
+    /**
+     * @return the idUser
+     */
+    public static int getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * @param aIdUser the idUser to set
+     */
+    public static void setIdUser(int aIdUser) {
+        idUser = aIdUser;
+    }
 }
