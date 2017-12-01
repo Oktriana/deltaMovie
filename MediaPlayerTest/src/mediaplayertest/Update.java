@@ -36,6 +36,8 @@ public class Update extends javax.swing.JFrame {
     private String loc;
     private File file;
     private boolean image;
+    Movie movie = new Movie();
+            
     Koneksi konek = new Koneksi();
     ResultSet rs=null;
     PreparedStatement pst=null;
@@ -47,6 +49,7 @@ public class Update extends javax.swing.JFrame {
     public Update(Movie update){
         initComponents();
         tampilan(update);
+        movie = update;
     }
 
     /**
@@ -390,7 +393,7 @@ public class Update extends javax.swing.JFrame {
             pstmt.setString(8, country);
             pstmt.setString(9, synopsis);
             pstmt.setString(10, cover);
-            
+            pstmt.setInt(11,movie.getId());
             pstmt.executeUpdate();
             
             pstmt.close();
@@ -413,6 +416,7 @@ public class Update extends javax.swing.JFrame {
             pstmt.setString(7, actor);
             pstmt.setString(8, country);
             pstmt.setString(9, synopsis);
+            pstmt.setInt(10,movie.getId());
             pstmt.executeUpdate();
             
             pstmt.close();

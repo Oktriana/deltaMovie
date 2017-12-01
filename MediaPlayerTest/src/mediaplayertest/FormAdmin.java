@@ -6,6 +6,7 @@
 package mediaplayertest;
 
 import com.stripbandunk.jwidget.model.DefaultPaginationModel;
+import db.Koneksi;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.event.MouseAdapter;
@@ -1192,10 +1193,13 @@ public class FormAdmin extends javax.swing.JFrame {
         int row = table_home.getSelectedRow();
             if(row != -1){
                     Movie x = new Movie();
-                    x.setTitle((String)table_home.getValueAt(row, 0));
+                    x.setTitle((String)model.getValueAt(row, 1));
+                    x.setId((int)model.getValueAt(row, 0));
+                    System.out.println(x.getId()+" "+x.getTitle());
+                    String sql = "SELECT id_movie FROM Movie WHERE title";
                     Update y = new Update(x);
                     y.setVisible(true);
-            } 
+            }  
     }//GEN-LAST:event_editActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
