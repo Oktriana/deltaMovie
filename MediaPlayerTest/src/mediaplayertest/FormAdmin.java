@@ -117,6 +117,7 @@ public class FormAdmin extends javax.swing.JFrame {
         btnHapus = new javax.swing.JButton();
         jPagination1 = new com.stripbandunk.jwidget.JPagination();
         btn_detail = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -285,7 +286,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, 30));
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, 30));
         jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         btn_detail.setText("Detail");
@@ -294,7 +295,15 @@ public class FormAdmin extends javax.swing.JFrame {
                 btn_detailActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
+        jPanel1.add(btn_detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, 30));
+
+        edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
+            }
+        });
+        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -1176,6 +1185,18 @@ public class FormAdmin extends javax.swing.JFrame {
                     y.setVisible(true);
             } 
     }//GEN-LAST:event_btn_detailActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+        int row = table_home.getSelectedRow();
+            if(row != -1){
+                    Movie x = new Movie();
+                    x.setTitle((String)table_home.getValueAt(row, 0));
+                    Update y = new Update(x);
+                    y.setVisible(true);
+            } 
+    }//GEN-LAST:event_editActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1400,6 +1421,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel cover_upload;
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
+    private javax.swing.JButton edit;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
