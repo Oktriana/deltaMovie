@@ -5,10 +5,8 @@
  */
 package mediaplayertest;
 
-import com.stripbandunk.jwidget.model.DefaultPaginationModel;
 import db.Koneksi;
 import java.awt.Image;
-import java.awt.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage; //colormode
@@ -25,21 +23,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.table.DefaultTableModel;
-import java.util.logging.Level; //jenis user
-import java.util.logging.Logger; //pencatatan waktu
 import javax.imageio.ImageIO;
-import javax.swing.DefaultRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
 import javax.swing.JTable;
-import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -65,35 +54,15 @@ public class FormAdmin extends javax.swing.JFrame {
     Statement pstmt;
     ResultSet rs;
     PreparedStatement ps;
-    
+    int paging=0;
     /**
      * Creates new form formAdmin1
      */
-    public void paging(){
-        DefaultPaginationModel pagination= new DefaultPaginationModel();
-        pagination.setTotalItem(2);
-        pagination.setPageSize(2);
-        jPagination1.setModel(pagination);
-    }
     
-    public FormAdmin(FormAdmin upload, int row_terpilih, String id_terpilih, String title, int year, String genre, String director, String actor, String country, String synopsis ) {
-        initComponents();
-        this.id_terpilih= Integer.parseInt(id_terpilih);
-        this.upload = upload;
-        this.row_terpilih = row_terpilih;
-        
-        titleUpdate.setText(title);
-        yearUpdate.setSelectedIndex(year);
-        directorUpdate.setText(director);
-        actorUpdate.setText(actor);
-        countryUpdate.setText(country);
-        synopsisUpdate.setText(synopsis);
-        
-    }
-
     FormAdmin() {
     initComponents();
     tampilkan_data();
+    setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -116,9 +85,11 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btn_LogOut = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        jPagination1 = new com.stripbandunk.jwidget.JPagination();
         btn_detail = new javax.swing.JButton();
         edit = new javax.swing.JButton();
+        prev = new javax.swing.JLabel();
+        next = new javax.swing.JLabel();
+        btn_addWL = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -288,7 +259,6 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, 30));
-        jPanel1.add(jPagination1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         btn_detail.setText("Detail");
         btn_detail.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +275,34 @@ public class FormAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, 30));
+
+        prev.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        prev.setText("Previous");
+        prev.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevMouseClicked(evt);
+            }
+        });
+        jPanel1.add(prev, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
+
+        next.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        next.setText("Next");
+        next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextMouseClicked(evt);
+            }
+        });
+        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
+
+        btn_addWL.setText("+ Watch Letter");
+        btn_addWL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addWLActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_addWL, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 110, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -840,7 +838,6 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void S_TableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_TableActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_S_TableActionPerformed
 
     private void search_WatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_WatchLaterActionPerformed
@@ -896,55 +893,14 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         
-        String jdl = titleUpload.getText();
-        int thn = yearUpload.getSelectedIndex();
-        String genre1 = cbGenre1Upload.getSelectedItem().toString();
-        String genre2 = cbGenre2Upload.getSelectedItem().toString();
-        String genre3 = cbGenre3Upload.getSelectedItem().toString();
-        String drctr = directorUpload.getText();
-        String actr = actorUpload.getText();
-        String cntry = countryUpload.getText();
-        String snpss = synopsisUpload.getText();
+        insert(titleUpload.getText(), yearUpload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(),
+                cbGenre2Upload.getSelectedItem().toString(), cbGenre1Upload.getSelectedItem().toString(), directorUpload.getText(),
+                actorUpload.getText(), countryUpload.getText() , synopsisUpload.getText(), newImageLoc );
         
-        /*
-        if (jCheckBox1.isSelected()) {temp += jCheckBox1.getText();temp+= ", ";}
-        if (jCheckBox2.isSelected()) {temp += jCheckBox2.getText();temp+= ", ";}
-        if (jCheckBox3.isSelected()) {temp += jCheckBox3.getText();temp+= ", ";}
-        if (jCheckBox4.isSelected()) {temp += jCheckBox4.getText();temp+= ", ";}
-        if (jCheckBox5.isSelected()) {temp += jCheckBox5.getText();temp+= ", ";}
-        if (jCheckBox6.isSelected()) {temp += jCheckBox6.getText();temp+= ", ";}
-        if (jCheckBox7.isSelected()) {temp += jCheckBox7.getText();temp+= ", ";}
-        if (jCheckBox8.isSelected()) {temp += jCheckBox8.getText();temp+= ", ";}
-        if (jCheckBox9.isSelected()) {temp += jCheckBox9.getText();temp+= ", ";}
-        if (jCheckBox10.isSelected()) {temp += jCheckBox10.getText();temp+= ", ";}
-        if (jCheckBox11.isSelected()) {temp += jCheckBox11.getText();temp+= ", ";}
-        if (jCheckBox12.isSelected()) {temp += jCheckBox12.getText();temp+= ", ";}
-        if (jCheckBox13.isSelected()) {temp += jCheckBox13.getText();temp+= ", ";}
-        if (jCheckBox14.isSelected()) {temp += jCheckBox14.getText();temp+= ", ";}
-        if (jCheckBox15.isSelected()) {temp += jCheckBox15.getText();temp+= ", ";}
-        if (jCheckBox16.isSelected()) {temp += jCheckBox16.getText();temp+= ", ";}
-        if (jCheckBox17.isSelected()) {temp += jCheckBox17.getText();temp+= ", ";}
-        if (jCheckBox18.isSelected()) {temp += jCheckBox18.getText();temp+= ", ";}
-        if (jCheckBox19.isSelected()) {temp += jCheckBox19.getText();temp+= ", ";}
-        if (jCheckBox20.isSelected()) {temp += jCheckBox20.getText();temp+= ", ";}
-        
-        showMessageDialog(null, temp);*/
-        
-        insert(jdl, thn, genre1, genre2, genre3, drctr, actr, cntry , snpss, newImageLoc );
         showMessageDialog(null, "Upload succes!");
         
-        cover_upload.setText("");
-        titleUpload.setText("");
-        yearUpload.setSelectedIndex(0);
-        cbGenre1Upload.setSelectedIndex(0);
-        cbGenre2Upload.setSelectedIndex(0);
-        cbGenre3Upload.setSelectedIndex(0);
-        directorUpload.setText("");
-        actorUpload.setText("");
-        countryUpload.setText("");
-        synopsisUpload.setText("");
-        
-        
+        this.setVisible(false);
+        new FormAdmin().setVisible(true);
     }//GEN-LAST:event_btn_uploadActionPerformed
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
@@ -985,15 +941,20 @@ public class FormAdmin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }**/
         
-       DefaultTableModel model = (DefaultTableModel) table_home.getModel();
-       int row = table_home.getSelectedRow();
-            if(row>=0){
-                int ok=JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ","Konfirmasi",JOptionPane.YES_NO_OPTION);
-                if(ok==0){
-                    String sql = "DELETE FROM Movie WHERE title =" + titleUpload.getText()+ "";
-                    
-                    model.removeRow(row);
-                }
+       int row_terpilih = table_home.getSelectedRow();
+        if(row_terpilih!=-1){
+            DefaultTableModel model = (DefaultTableModel) table_home.getModel();
+            String row = table_home.getModel().getValueAt(row_terpilih, 0).toString();
+            int selectedOption = JOptionPane.showConfirmDialog(null, "Do you want to delete this data? ", "Data deleted", JOptionPane.YES_NO_OPTION); 
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                delete(row);
+                showMessageDialog(null, "Data deleted success !");
+                selectAll();
+                model.removeRow(Integer.parseInt(row));
+            }
+            
+        } else {
+            showMessageDialog(null, "Please choose row that you want to delete!");
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -1071,9 +1032,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_search_HomeMouseClicked
 
     private void directorUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directorUploadActionPerformed
-        
-        cbGenre1Upload.getSelectedItem();
-        
+              
     }//GEN-LAST:event_directorUploadActionPerformed
 
     private void actorUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actorUploadActionPerformed
@@ -1151,17 +1110,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SearchHistoryActionPerformed
 
     private void table_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_homeMouseClicked
-        // TODO add your handling code here:                                       
-        table_home.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JTable target = (JTable)e.getSource();
-                    int row = target.getSelectedRow();
-                    new Detail().setVisible(true);
-                    
-                }
-            }
-        });
+        // TODO add your handling code here:
     }//GEN-LAST:event_table_homeMouseClicked
 
     private void titleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleUpdateActionPerformed
@@ -1201,6 +1150,27 @@ public class FormAdmin extends javax.swing.JFrame {
                     y.setVisible(true);
             }  
     }//GEN-LAST:event_editActionPerformed
+
+    private void nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMouseClicked
+        // TODO add your handling code here:
+        paging = paging + 5;
+        tampilkan_data();
+        
+    }//GEN-LAST:event_nextMouseClicked
+
+    private void prevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevMouseClicked
+        // TODO add your handling code here:
+        paging = paging - 5;
+        if(paging!=0){
+            tampilkan_data();
+        } else{
+            prev.disable();
+        }
+    }//GEN-LAST:event_prevMouseClicked
+
+    private void btn_addWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addWLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_addWLActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1230,7 +1200,7 @@ public class FormAdmin extends javax.swing.JFrame {
             user.removeRow(0);
         }
         
-        String sql = "SELECT id_movie, title, year, actor FROM Movie ";
+        String sql = "SELECT id_movie, title, year, actor FROM Movie ORDER BY year LIMIT " +paging+ ",5";
         
         
         try (Connection conn = konek.connect();
@@ -1293,17 +1263,14 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void delete(int id_terpilih){
+    public void delete(String id_terpilih){
         Connection conn = konek.connect();
-        String sql = "DELETE FROM Movie WHERE id_movie = ?";
+        String sql = "DELETE FROM Movie WHERE title = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, id_terpilih);
+            pstmt.setString(1, id_terpilih);
             pstmt.executeUpdate();
             
-            if(rs.getInt("id_movie")==0){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -1386,14 +1353,12 @@ public class FormAdmin extends javax.swing.JFrame {
         } 
     }
     
-    public void insert(String title, int year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
-   
+    public void insert(String title, String year, String genre1, String genre2, String genre3, String director, String actor, String country, String sinopsis, String cover){
         String sql = "INSERT INTO Movie(title, year, genre1, genre2, genre3, director, actor, country, synopsis, cover)" +
                 "VALUES('" + title + "','" + year + "','" + genre1 +"','" +genre2+ "','" + genre3 + "','" + director + "','" + actor + "','" + country + "','" +sinopsis+ "','" + cover + "')";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.executeUpdate();
-              //selectAll();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -1409,6 +1374,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btn_SearchHistory;
     private javax.swing.JButton btn_SearchHome;
     private javax.swing.JButton btn_SearchWatchLater;
+    private javax.swing.JButton btn_addWL;
     private javax.swing.JButton btn_choose;
     private javax.swing.JButton btn_detail;
     private javax.swing.JButton btn_update;
@@ -1465,7 +1431,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.stripbandunk.jwidget.JPagination jPagination1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1482,6 +1447,8 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private java.awt.Label label3;
+    private javax.swing.JLabel next;
+    private javax.swing.JLabel prev;
     private javax.swing.JTextField search_History;
     private javax.swing.JTextField search_Home;
     private javax.swing.JTextField search_WatchLater;
