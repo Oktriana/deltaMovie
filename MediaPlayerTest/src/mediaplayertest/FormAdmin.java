@@ -90,6 +90,7 @@ public class FormAdmin extends javax.swing.JFrame {
         prev = new javax.swing.JLabel();
         next = new javax.swing.JLabel();
         btn_addWL = new javax.swing.JButton();
+        genre = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -258,7 +259,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 btnHapusActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, 30));
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, 30));
 
         btn_detail.setText("Detail");
         btn_detail.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +267,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 btn_detailActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, 30));
+        jPanel1.add(btn_detail, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 30));
 
         edit.setText("Edit");
         edit.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +275,7 @@ public class FormAdmin extends javax.swing.JFrame {
                 editActionPerformed(evt);
             }
         });
-        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, 30));
+        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, 30));
 
         prev.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         prev.setText("Previous");
@@ -302,7 +303,15 @@ public class FormAdmin extends javax.swing.JFrame {
                 btn_addWLActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_addWL, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 110, 30));
+        jPanel1.add(btn_addWL, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 110, 30));
+
+        genre.setText("Genre");
+        genre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(genre, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -1171,6 +1180,13 @@ public class FormAdmin extends javax.swing.JFrame {
     private void btn_addWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addWLActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_addWLActionPerformed
+
+    private void genreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreActionPerformed
+        // TODO add your handling code here:
+        Genre y = new Genre();
+        y.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_genreActionPerformed
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1392,6 +1408,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
     private javax.swing.JButton edit;
+    private javax.swing.JButton genre;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

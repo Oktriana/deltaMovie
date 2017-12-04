@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -26,7 +27,8 @@ public class Genre extends javax.swing.JFrame {
     Koneksi konek = new Koneksi();
     private int id;
     private String nm;
-    private boolean se = false;
+    private boolean saveEdit = false;
+    Connection conn = konek.connect();
     
     
     public Genre() {
@@ -51,6 +53,7 @@ public class Genre extends javax.swing.JFrame {
         table_genre = new javax.swing.JTable();
         edit = new javax.swing.JButton();
         delete = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +99,14 @@ public class Genre extends javax.swing.JFrame {
             }
         });
 
+        back.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        back.setText("Home");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +120,8 @@ public class Genre extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                                    .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                    .addComponent(back, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(delete)
@@ -126,7 +138,9 @@ public class Genre extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(genre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,7 +151,7 @@ public class Genre extends javax.swing.JFrame {
                     .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,18 +159,17 @@ public class Genre extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        if(se == true){
+        if(saveEdit == true){
             update(genre.getText());
-            se = false;
+            saveEdit = false;
         }
         else{
-            String gn = genre.getText();
-            insert(gn);
+            String gnr = genre.getText();
+            insert(gnr);
             genre.setText("");
         }
         
-        this.dispose();
-        new Genre().setVisible(true);
+        tampilkan();
     }//GEN-LAST:event_saveActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
@@ -164,7 +177,7 @@ public class Genre extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table_genre.getModel();
         int row = table_genre.getSelectedRow();
         if(row != -1){
-            se = true;
+            saveEdit = true;
             id = (int) model.getValueAt(row, 0);
             nm = (String) model.getValueAt(row, 1);
             genre.setText(nm);
@@ -185,7 +198,15 @@ public class Genre extends javax.swing.JFrame {
         } else {
             showMessageDialog(null, "Please choose row that you want to delete!");
         }
+        tampilkan();
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        FormAdmin y = new FormAdmin();
+        y.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
 
     public void insert(String genre){
         String sql="INSERT INTO Genre(name) VALUES('"+genre+"')";
@@ -198,7 +219,7 @@ public class Genre extends javax.swing.JFrame {
     }
     
     public void update(String genre){
-        String sql="UPDATE Genre SET name=? WHERE id_genre=?";
+        String sql="UPDATE Genre SET name=? WHERE id=?";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setString(1, genre);
@@ -226,14 +247,14 @@ public class Genre extends javax.swing.JFrame {
     }
     
     public void tampilkan(){
-        DefaultTableModel model = (DefaultTableModel) table_genre.getModel();
-        try(Connection conn = konek.connect()){
-            String sql = "SELECT * FROM Movie WHERE name = ?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs=pst.executeQuery();
-        }catch(Exception e){
+        try{
+            String query = " select * from Genre";
+            PreparedStatement pst = conn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            table_genre.setModel(DbUtils.resultSetToTableModel(rs));
             
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
     /**
@@ -272,6 +293,7 @@ public class Genre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JTextField genre;
