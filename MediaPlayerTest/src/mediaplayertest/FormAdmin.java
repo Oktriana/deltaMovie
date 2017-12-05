@@ -6,6 +6,7 @@
 package mediaplayertest;
 
 import db.Koneksi;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,6 +27,7 @@ import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
 import javax.swing.JTable;
@@ -60,10 +62,14 @@ public class FormAdmin extends javax.swing.JFrame {
      */
     
     FormAdmin() {
+        super("FormAdmin");
     initComponents();
     tampilkan_data();
     setExtendedState(MAXIMIZED_BOTH);
     }
+    
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1180,7 +1186,10 @@ public class FormAdmin extends javax.swing.JFrame {
 
     private void HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoryActionPerformed
         // TODO add your handling code here:
-        //addHistory(table_watchlater.getString());
+        int movie=0;
+        int user=0;
+        String date="aa";
+        addHistory(movie, user, date);
     }//GEN-LAST:event_HistoryActionPerformed
     
     public void addHistory(int movie, int user, String date){
