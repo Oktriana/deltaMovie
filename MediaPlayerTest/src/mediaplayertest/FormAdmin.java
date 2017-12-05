@@ -94,32 +94,35 @@ public class FormAdmin extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        History = new javax.swing.JButton();
         search_WatchLater = new javax.swing.JTextField();
         btn_SearchWatchLater = new javax.swing.JButton();
-        S_Table = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel16 = new javax.swing.JLabel();
+        table_watchlater = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         search_History = new javax.swing.JTextField();
         btn_SearchHistory = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel18 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        label3 = new java.awt.Label();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
         jLabel15 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        jLabel41 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        label3 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         btn_choose = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -329,6 +332,15 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(jLabel3);
         jLabel3.setBounds(40, 10, 260, 50);
 
+        History.setText("History");
+        History.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HistoryActionPerformed(evt);
+            }
+        });
+        jPanel4.add(History);
+        History.setBounds(523, 70, 90, 30);
+
         search_WatchLater.setText("search");
         search_WatchLater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,22 +360,13 @@ public class FormAdmin extends javax.swing.JFrame {
         jPanel4.add(btn_SearchWatchLater);
         btn_SearchWatchLater.setBounds(140, 70, 70, 30);
 
-        S_Table.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
-        S_Table.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                S_TableActionPerformed(evt);
-            }
-        });
-        jPanel4.add(S_Table);
-        S_Table.setBounds(520, 70, 110, 30);
-
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
         jPanel4.add(jLabel4);
         jLabel4.setBounds(0, 120, 630, 30);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table_watchlater.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -388,15 +391,10 @@ public class FormAdmin extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(table_watchlater);
 
         jPanel4.add(jScrollPane2);
         jScrollPane2.setBounds(0, 160, 630, 190);
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Sort by");
-        jPanel4.add(jLabel16);
-        jLabel16.setBounds(460, 70, 70, 30);
 
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel4.add(jLabel29);
@@ -436,14 +434,6 @@ public class FormAdmin extends javax.swing.JFrame {
         });
         jPanel3.add(btn_SearchHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Date", "Title A-Z" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, 30));
-
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -479,10 +469,6 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 630, 190));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Sort by");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 60, 30));
-
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
 
@@ -494,38 +480,59 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTextPane3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane3.setText("We calculate movie ratings by averaging the rating results of the films obtained.");
+        jScrollPane8.setViewportView(jTextPane3);
+
+        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 560, 50));
+
+        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("How to calculate rating for a movie?");
+        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel15.setOpaque(true);
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 560, 30));
+
+        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane2.setText("We provide search feature. If you forget the movie title, you can search by movie genre, or movie year in the search field already provided.");
+        jScrollPane7.setViewportView(jTextPane2);
+
+        jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 560, 60));
+
+        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("I'm looking for a film, but can't remember the title. Can you help me?");
+        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel14.setOpaque(true);
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 560, 30));
+
+        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane1.setText("If you were not prompted to choose a password or don't remember the password for your membership, you can get a new one by navigating to the Log in page. Select \"Log In\" and then select \"Forgot Your Password\". You'll be sent a link to your registered email to reset your password.");
+        jScrollPane6.setViewportView(jTextPane1);
+
+        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 560, 70));
+
+        jLabel41.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel41.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("I forgot my password. How do I login?");
+        jLabel41.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel41.setOpaque(true);
+        jPanel5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 560, 30));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
+        jLabel13.setText("jLabel13");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
+
         label3.setAlignment(java.awt.Label.CENTER);
         label3.setBackground(new java.awt.Color(255, 255, 255));
         label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         label3.setPreferredSize(new java.awt.Dimension(100, 24));
-        label3.setText("Pertanyaan yang sering diajukan");
-        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 270, 30));
-
-        jLabel9.setBackground(new java.awt.Color(153, 51, 0));
-        jLabel9.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Saya mengalami masalah masuk ke situs dengan username / password");
-        jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 560, 60));
-
-        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Siapa yang bisa menambahkan data ke judul?");
-        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 560, 60));
-
-        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Bagaimana menghitung rating untuk sebuah film?");
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 560, 60));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
-        jLabel13.setText("jLabel13");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
+        label3.setText("Frequently Asked Questions");
+        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 270, 30));
 
         jTabbedPane1.addTab("Help", jPanel5);
 
@@ -828,26 +835,9 @@ public class FormAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        java.sql.Date dateOfLastUpdate=null;
-        
-        /*Sort the Table
-                    DefaultRowSorter sorter = ((DefaultRowSorter)allRevenueTable.getRowSorter()); 
-                    ArrayList list = new ArrayList();
-                    list.add( new RowSorter.SortKey(0, SortOrder.DESCENDING) );
-                    sorter.setSortKeys(list);
-                    sorter.sort();
-        */
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void search_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_HistoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_search_HistoryActionPerformed
-
-    private void S_TableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_TableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_S_TableActionPerformed
 
     private void search_WatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_WatchLaterActionPerformed
         // TODO add your handling code here:
@@ -1187,6 +1177,27 @@ public class FormAdmin extends javax.swing.JFrame {
         y.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_genreActionPerformed
+
+    private void HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoryActionPerformed
+        // TODO add your handling code here:
+        //addHistory(table_watchlater.getString());
+    }//GEN-LAST:event_HistoryActionPerformed
+    
+    public void addHistory(int movie, int user, String date){
+        //int movie; 
+        //int user; 
+        //String date;
+        //String sql = "SELECT id_movie, id_user, date FROM History";
+        String sql = "INSERT INTO History(id_movie, id_user, date)" +
+                "VALUES('" + movie + "','" + user + "','" + date + "')";
+        try (Connection con = konek.connect();
+            PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+              //selectAll();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
         String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
@@ -1381,7 +1392,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> S_Table;
+    private javax.swing.JButton History;
     private javax.swing.JTextField actorUpdate;
     private javax.swing.JTextField actorUpload;
     private javax.swing.JButton btnHapus;
@@ -1409,7 +1420,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField directorUpload;
     private javax.swing.JButton edit;
     private javax.swing.JButton genre;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1417,9 +1427,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1445,9 +1453,9 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1460,9 +1468,14 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
     private java.awt.Label label3;
     private javax.swing.JLabel next;
     private javax.swing.JLabel prev;
@@ -1472,6 +1485,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea synopsisUpdate;
     private javax.swing.JTextArea synopsisUpload;
     private javax.swing.JTable table_home;
+    private javax.swing.JTable table_watchlater;
     private javax.swing.JTextField titleUpdate;
     private javax.swing.JTextField titleUpload;
     private javax.swing.JComboBox<String> yearUpdate;

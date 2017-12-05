@@ -69,6 +69,7 @@ public class Detail extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +86,7 @@ public class Detail extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setText("jLabel1");
-        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 68, 193, 27));
+        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 193, 27));
 
         year.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         year.setText("jLabel2");
@@ -108,10 +109,10 @@ public class Detail extends javax.swing.JFrame {
         getContentPane().add(country, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 193, 27));
 
         cover.setText("jLabel1");
-        getContentPane().add(cover, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 98, 160, 180));
+        getContentPane().add(cover, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 260, 270));
 
         synopsis.setEditable(false);
-        getContentPane().add(synopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 400, 260));
+        getContentPane().add(synopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 370, 220));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/imagesss.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -202,7 +203,15 @@ public class Detail extends javax.swing.JFrame {
         jLabel1.setText("Rating :");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 60, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu16.jpg"))); // NOI18N
+        jButton6.setText("Home");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/putih 2.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -120, 790, 830));
 
@@ -260,6 +269,12 @@ public class Detail extends javax.swing.JFrame {
     private void jLabel7ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel7ComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7ComponentHidden
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        new FormAdmin().setVisible(true);
+                this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     void insertRating(int skor){
         int id_user;
@@ -380,6 +395,7 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

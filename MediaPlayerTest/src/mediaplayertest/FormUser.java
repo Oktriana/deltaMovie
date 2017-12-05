@@ -67,30 +67,33 @@ public class FormUser extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel16 = new javax.swing.JLabel();
+        History = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        label3 = new java.awt.Label();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
         jLabel15 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        label3 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,15 +203,6 @@ public class FormUser extends javax.swing.JFrame {
         jPanel4.add(jButton2);
         jButton2.setBounds(140, 70, 70, 30);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jComboBox2);
-        jComboBox2.setBounds(510, 70, 110, 30);
-
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()+6));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Movies");
@@ -245,10 +239,14 @@ public class FormUser extends javax.swing.JFrame {
         jPanel4.add(jScrollPane2);
         jScrollPane2.setBounds(0, 160, 620, 190);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Sort by");
-        jPanel4.add(jLabel16);
-        jLabel16.setBounds(460, 70, 70, 30);
+        History.setText("History");
+        History.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HistoryActionPerformed(evt);
+            }
+        });
+        jPanel4.add(History);
+        History.setBounds(523, 70, 90, 30);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel4.add(jLabel20);
@@ -282,14 +280,6 @@ public class FormUser extends javax.swing.JFrame {
         jButton1.setText("search");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Title A-Z" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 100, 30));
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 204));
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+6));
@@ -326,10 +316,6 @@ public class FormUser extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 620, 190));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Sort by");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 30));
-
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/movie icon.png"))); // NOI18N
         jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 50));
 
@@ -341,38 +327,59 @@ public class FormUser extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTextPane3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane3.setText("We calculate movie ratings by averaging the rating results of the films obtained.");
+        jScrollPane8.setViewportView(jTextPane3);
+
+        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 560, 50));
+
+        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("How to calculate rating for a movie?");
+        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel15.setOpaque(true);
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 560, 30));
+
+        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane2.setText("We provide search feature. If you forget the movie title, you can search by movie genre, or movie year in the search field already provided.");
+        jScrollPane7.setViewportView(jTextPane2);
+
+        jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 560, 60));
+
+        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("I'm looking for a film, but can't remember the title. Can you help me?");
+        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel14.setOpaque(true);
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 560, 30));
+
+        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane1.setText("If you were not prompted to choose a password or don't remember the password for your membership, you can get a new one by navigating to the Log in page. Select \"Log In\" and then select \"Forgot Your Password\". You'll be sent a link to your registered email to reset your password.");
+        jScrollPane6.setViewportView(jTextPane1);
+
+        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 560, 70));
+
+        jLabel9.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel9.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("I forgot my password. How do I login?");
+        jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel9.setOpaque(true);
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 560, 30));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
+        jLabel13.setText("jLabel13");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
+
         label3.setAlignment(java.awt.Label.CENTER);
         label3.setBackground(new java.awt.Color(255, 255, 255));
         label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         label3.setPreferredSize(new java.awt.Dimension(100, 24));
-        label3.setText("Pertanyaan yang sering diajukan");
-        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 270, 30));
-
-        jLabel9.setBackground(new java.awt.Color(153, 51, 0));
-        jLabel9.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Saya mengalami masalah masuk ke situs dengan username / password");
-        jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 560, 60));
-
-        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Siapa yang bisa menambahkan data ke judul?");
-        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 560, 60));
-
-        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Bagaimana menghitung rating untuk sebuah film?");
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 560, 60));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
-        jLabel13.setText("jLabel13");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
+        label3.setText("Frequently Asked Questions");
+        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 270, 30));
 
         jTabbedPane1.addTab("Help", jPanel5);
 
@@ -390,17 +397,9 @@ public class FormUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -452,6 +451,27 @@ public class FormUser extends javax.swing.JFrame {
         search1.setText("");
     }//GEN-LAST:event_search1MouseClicked
 
+    private void HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoryActionPerformed
+        // TODO add your handling code here:
+        //addHistory(table_watchlater.getString());
+    }//GEN-LAST:event_HistoryActionPerformed
+
+    public void addHistory(int movie, int user, String date){
+        //int movie; 
+        //int user; 
+        //String date;
+        //String sql = "SELECT id_movie, id_user, date FROM History";
+        String sql = "INSERT INTO History(id_movie, id_user, date)" +
+                "VALUES('" + movie + "','" + user + "','" + date + "')";
+        try (Connection con = konek.connect();
+            PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+              //selectAll();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void tampilkan_data(){
         DefaultTableModel user = (DefaultTableModel)table_home1.getModel();
         
@@ -532,12 +552,11 @@ public class FormUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton History;
     private javax.swing.JButton Search1;
     private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -545,8 +564,6 @@ public class FormUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -563,11 +580,17 @@ public class FormUser extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
     private java.awt.Label label3;
     private javax.swing.JTextField search1;
     private javax.swing.JTable table_home1;
