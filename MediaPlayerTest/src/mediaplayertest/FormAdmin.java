@@ -6,10 +6,7 @@
 package mediaplayertest;
 
 import db.Koneksi;
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage; //colormode
 import java.io.File; //upload file
 import java.io.FileInputStream;
@@ -27,10 +24,8 @@ import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog; //error
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -40,7 +35,6 @@ import javax.swing.table.TableColumnModel;
  */
 public class FormAdmin extends javax.swing.JFrame {
     String loc;
-    
     Blob blob;
     BufferedImage img;
     
@@ -63,14 +57,11 @@ public class FormAdmin extends javax.swing.JFrame {
     
     FormAdmin() {
         super("FormAdmin");
-    initComponents();
-    tampilkan_data();
-    setExtendedState(MAXIMIZED_BOTH);
+        initComponents();
+        tampilkan_data();
+        setExtendedState(MAXIMIZED_BOTH);
     }
     
-   
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,18 +108,6 @@ public class FormAdmin extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jLabel30 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
-        jLabel15 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
-        jLabel14 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        label3 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         btn_choose = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -153,31 +132,18 @@ public class FormAdmin extends javax.swing.JFrame {
         cbGenre2Upload = new javax.swing.JComboBox<>();
         cbGenre3Upload = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        btn_ChooseUpdate = new javax.swing.JButton();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        titleUpdate = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        directorUpdate = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        actorUpdate = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        countryUpdate = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        synopsisUpdate = new javax.swing.JTextArea();
-        btn_update = new javax.swing.JButton();
-        jLabel39 = new javax.swing.JLabel();
-        yearUpdate = new javax.swing.JComboBox<>();
-        cover_update = new javax.swing.JLabel();
-        cbGenre1Update = new javax.swing.JComboBox<>();
-        cbGenre2Update = new javax.swing.JComboBox<>();
-        cbGenre3Update = new javax.swing.JComboBox<>();
-        jLabel40 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        label3 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -484,64 +450,6 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("History", jPanel3);
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextPane3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextPane3.setText("We calculate movie ratings by averaging the rating results of the films obtained.");
-        jScrollPane8.setViewportView(jTextPane3);
-
-        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 560, 50));
-
-        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("How to calculate rating for a movie?");
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel15.setOpaque(true);
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 560, 30));
-
-        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextPane2.setText("We provide search feature. If you forget the movie title, you can search by movie genre, or movie year in the search field already provided.");
-        jScrollPane7.setViewportView(jTextPane2);
-
-        jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 560, 60));
-
-        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("I'm looking for a film, but can't remember the title. Can you help me?");
-        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel14.setOpaque(true);
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 560, 30));
-
-        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextPane1.setText("If you were not prompted to choose a password or don't remember the password for your membership, you can get a new one by navigating to the Log in page. Select \"Log In\" and then select \"Forgot Your Password\". You'll be sent a link to your registered email to reset your password.");
-        jScrollPane6.setViewportView(jTextPane1);
-
-        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 560, 70));
-
-        jLabel41.setBackground(new java.awt.Color(204, 51, 0));
-        jLabel41.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("I forgot my password. How do I login?");
-        jLabel41.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel41.setOpaque(true);
-        jPanel5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 560, 30));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
-        jLabel13.setText("jLabel13");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
-
-        label3.setAlignment(java.awt.Label.CENTER);
-        label3.setBackground(new java.awt.Color(255, 255, 255));
-        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
-        label3.setPreferredSize(new java.awt.Dimension(100, 24));
-        label3.setText("Frequently Asked Questions");
-        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 270, 30));
-
-        jTabbedPane1.addTab("Help", jPanel5);
-
         jPanel2.setLayout(null);
 
         btn_choose.setText("Choose");
@@ -678,163 +586,63 @@ public class FormAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Upload", jPanel2);
 
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setLayout(null);
+        jTextPane3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane3.setText("We calculate movie ratings by averaging the rating results of the films obtained.");
+        jScrollPane8.setViewportView(jTextPane3);
 
-        btn_ChooseUpdate.setText("Choose");
-        btn_ChooseUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ChooseUpdateActionPerformed(evt);
-            }
-        });
-        jPanel7.add(btn_ChooseUpdate);
-        btn_ChooseUpdate.setBounds(70, 0, 90, 20);
+        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 560, 50));
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setText("Cover :");
-        jPanel7.add(jLabel31);
-        jLabel31.setBounds(10, 0, 60, 20);
+        jLabel15.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel15.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("How to calculate rating for a movie?");
+        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel15.setOpaque(true);
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 560, 30));
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setText("Title :");
-        jPanel7.add(jLabel32);
-        jLabel32.setBounds(10, 30, 40, 15);
+        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane2.setText("We provide search feature. If you forget the movie title, you can search by movie genre, or movie year in the search field already provided.");
+        jScrollPane7.setViewportView(jTextPane2);
 
-        titleUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                titleUpdateMouseClicked(evt);
-            }
-        });
-        titleUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleUpdateActionPerformed(evt);
-            }
-        });
-        jPanel7.add(titleUpdate);
-        titleUpdate.setBounds(70, 30, 190, 30);
+        jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 560, 60));
 
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("Year :");
-        jPanel7.add(jLabel33);
-        jLabel33.setBounds(10, 70, 40, 15);
+        jLabel14.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel14.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("I'm looking for a film, but can't remember the title. Can you help me?");
+        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel14.setOpaque(true);
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 560, 30));
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("Genre :");
-        jPanel7.add(jLabel34);
-        jLabel34.setBounds(10, 120, 50, 15);
+        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextPane1.setText("If you were not prompted to choose a password or don't remember the password for your membership, you can get a new one by navigating to the Log in page. Select \"Log In\" and then select \"Forgot Your Password\". You'll be sent a link to your registered email to reset your password.");
+        jScrollPane6.setViewportView(jTextPane1);
 
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("Director :");
-        jPanel7.add(jLabel35);
-        jLabel35.setBounds(10, 170, 60, 15);
+        jPanel5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 560, 70));
 
-        directorUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                directorUpdateMouseClicked(evt);
-            }
-        });
-        jPanel7.add(directorUpdate);
-        directorUpdate.setBounds(70, 160, 200, 30);
+        jLabel41.setBackground(new java.awt.Color(204, 51, 0));
+        jLabel41.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("I forgot my password. How do I login?");
+        jLabel41.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel41.setOpaque(true);
+        jPanel5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 560, 30));
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("Actor :");
-        jPanel7.add(jLabel36);
-        jLabel36.setBounds(10, 230, 50, 15);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
+        jLabel13.setText("jLabel13");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 640, 520));
 
-        actorUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                actorUpdateMouseClicked(evt);
-            }
-        });
-        jPanel7.add(actorUpdate);
-        actorUpdate.setBounds(70, 220, 200, 30);
+        label3.setAlignment(java.awt.Label.CENTER);
+        label3.setBackground(new java.awt.Color(255, 255, 255));
+        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        label3.setPreferredSize(new java.awt.Dimension(100, 24));
+        label3.setText("Frequently Asked Questions");
+        jPanel5.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 270, 30));
 
-        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("Country :");
-        jPanel7.add(jLabel37);
-        jLabel37.setBounds(10, 280, 60, 15);
-
-        countryUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                countryUpdateMouseClicked(evt);
-            }
-        });
-        jPanel7.add(countryUpdate);
-        countryUpdate.setBounds(70, 270, 200, 30);
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("Synopsis :");
-        jPanel7.add(jLabel38);
-        jLabel38.setBounds(10, 320, 60, 15);
-
-        synopsisUpdate.setColumns(20);
-        synopsisUpdate.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        synopsisUpdate.setRows(5);
-        synopsisUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                synopsisUpdateMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(synopsisUpdate);
-
-        jPanel7.add(jScrollPane5);
-        jScrollPane5.setBounds(70, 320, 330, 110);
-
-        btn_update.setText("Update");
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
-            }
-        });
-        jPanel7.add(btn_update);
-        btn_update.setBounds(70, 440, 70, 30);
-
-        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText(".jpg");
-        jPanel7.add(jLabel39);
-        jLabel39.setBounds(160, 0, 40, 20);
-
-        yearUpdate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016", "2017" }));
-        jPanel7.add(yearUpdate);
-        yearUpdate.setBounds(70, 70, 90, 20);
-
-        cover_update.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cover_update.setForeground(new java.awt.Color(255, 255, 255));
-        cover_update.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cover_update.setText("Cover movie");
-        cover_update.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel7.add(cover_update);
-        cover_update.setBounds(430, 230, 180, 190);
-
-        cbGenre1Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
-        jPanel7.add(cbGenre1Update);
-        cbGenre1Update.setBounds(70, 110, 120, 30);
-
-        cbGenre2Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
-        jPanel7.add(cbGenre2Update);
-        cbGenre2Update.setBounds(240, 110, 120, 30);
-
-        cbGenre3Update.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Action", "Adventure", "Animation", "Bibiography", "Crime", "Comedy", "Documentary", "Family", "Fantacy", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriler", "War", "Western" }));
-        jPanel7.add(cbGenre3Update);
-        cbGenre3Update.setBounds(430, 110, 120, 30);
-
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/siapatauperlu22.jpg"))); // NOI18N
-        jPanel7.add(jLabel40);
-        jLabel40.setBounds(0, -170, 650, 730);
-
-        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 630));
-
-        jTabbedPane1.addTab("Update", jPanel6);
+        jTabbedPane1.addTab("Help", jPanel5);
 
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -918,34 +726,7 @@ public class FormAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        /**Connection conn = konek.connect();
-    
-        try{
-            PreparedStatement pstmt = conn.prepareStatement("Select * from Movie where id_movie=?");
-            pstmt.setInt(1, id_terpilih);
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.getInt("id_movie")==-1){
-                showMessageDialog(null, "Data tidak ada!!!");
-            }
-            else{
-                int result = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?","Hapus Data Movie", JOptionPane.INFORMATION_MESSAGE);
-                if (result == JOptionPane.OK_OPTION){
-                     String sql = "DELETE FROM Movie WHERE id_movie=?";
-                     PreparedStatement hapus = conn.prepareStatement(sql);
-                    // set the corresponding param
-                    hapus.setInt(1, id_terpilih);
-                    hapus.executeUpdate();
-                    selectAll();
-                    hapus.close();
-                    }   
-            }
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }**/
-        
+       
        int row_terpilih = table_home.getSelectedRow();
         if(row_terpilih!=-1){
             DefaultTableModel model = (DefaultTableModel) table_home.getModel();
@@ -954,51 +735,12 @@ public class FormAdmin extends javax.swing.JFrame {
             if (selectedOption == JOptionPane.YES_OPTION) {
                 delete(row);
                 showMessageDialog(null, "Data deleted success !");
-                selectAll();
-                model.removeRow(Integer.parseInt(row));
-            }
-            
+                tampilkan_data();
+            }            
         } else {
             showMessageDialog(null, "Please choose row that you want to delete!");
-        }
+        } 
     }//GEN-LAST:event_btnHapusActionPerformed
-
-    private void btn_ChooseUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChooseUpdateActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fc = new JFileChooser();
-        int result = fc.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION){
-            loc = fc.getSelectedFile().getAbsolutePath();
-            
-            BufferedImage img = null;
-            try{
-                img = ImageIO.read(new File(loc));
-            } catch(IOException e){
-                System.out.println(e.getMessage());
-            }
-            Image newImg = img.getScaledInstance(cover_update.getWidth(), cover_update.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon imgIcon = new ImageIcon(newImg);
-            cover_update.setIcon(imgIcon);
-        }
-    }//GEN-LAST:event_btn_ChooseUpdateActionPerformed
-
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        // TODO add your handling code here:
-        String title = titleUpdate.getText();
-        int year = yearUpdate.getSelectedIndex();
-        int genre1 = cbGenre1Update.getSelectedIndex();
-        int genre2 = cbGenre2Update.getSelectedIndex();
-        int genre3 = cbGenre3Update.getSelectedIndex();
-        String director = directorUpdate.getText();
-        String actor = actorUpdate.getText();
-        String country = countryUpdate.getText();
-        String synopsis = synopsisUpdate.getText();
-        
-        update (id_terpilih, title, year, genre1, genre2, genre3, director, actor, country, synopsis);
-        showMessageDialog(null, "Data tidak ditemukan!");
-        
-        this.dispose();
-    }//GEN-LAST:event_btn_updateActionPerformed
 
     
     private void btn_SearchHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchHomeActionPerformed
@@ -1043,26 +785,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private void actorUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actorUploadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_actorUploadActionPerformed
-
-    private void titleUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleUpdateMouseClicked
-        titleUpdate.setText("");
-    }//GEN-LAST:event_titleUpdateMouseClicked
-
-    private void actorUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actorUpdateMouseClicked
-        actorUpdate.setText("");
-    }//GEN-LAST:event_actorUpdateMouseClicked
-
-    private void synopsisUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_synopsisUpdateMouseClicked
-        synopsisUpdate.setText("");
-    }//GEN-LAST:event_synopsisUpdateMouseClicked
-
-    private void countryUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_countryUpdateMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_countryUpdateMouseClicked
-
-    private void directorUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_directorUpdateMouseClicked
-        directorUpdate.setText("");
-    }//GEN-LAST:event_directorUpdateMouseClicked
 
     private void btn_SearchWatchLaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchWatchLaterActionPerformed
         // TODO add your handling code here:
@@ -1117,10 +839,6 @@ public class FormAdmin extends javax.swing.JFrame {
     private void table_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_homeMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_table_homeMouseClicked
-
-    private void titleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleUpdateActionPerformed
 
     private void cbGenre1UploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGenre1UploadActionPerformed
         // TODO add your handling code here:
@@ -1312,42 +1030,6 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormAdmin().setVisible(true);
-            }
-        });
-    }
-    
     public void selectAll(){
         try {
             Connection conn = konek.connect();
@@ -1402,10 +1084,8 @@ public class FormAdmin extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton History;
-    private javax.swing.JTextField actorUpdate;
     private javax.swing.JTextField actorUpload;
     private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btn_ChooseUpdate;
     private javax.swing.JButton btn_LogOut;
     private javax.swing.JButton btn_SearchHistory;
     private javax.swing.JButton btn_SearchHome;
@@ -1413,19 +1093,12 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btn_addWL;
     private javax.swing.JButton btn_choose;
     private javax.swing.JButton btn_detail;
-    private javax.swing.JButton btn_update;
     private javax.swing.JButton btn_upload;
-    private javax.swing.JComboBox<String> cbGenre1Update;
     private javax.swing.JComboBox<String> cbGenre1Upload;
-    private javax.swing.JComboBox<String> cbGenre2Update;
     private javax.swing.JComboBox<String> cbGenre2Upload;
-    private javax.swing.JComboBox<String> cbGenre3Update;
     private javax.swing.JComboBox<String> cbGenre3Upload;
-    private javax.swing.JTextField countryUpdate;
     private javax.swing.JTextField countryUpload;
-    private javax.swing.JLabel cover_update;
     private javax.swing.JLabel cover_upload;
-    private javax.swing.JTextField directorUpdate;
     private javax.swing.JTextField directorUpload;
     private javax.swing.JButton edit;
     private javax.swing.JButton genre;
@@ -1451,17 +1124,7 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1470,13 +1133,10 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -1491,13 +1151,10 @@ public class FormAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField search_History;
     private javax.swing.JTextField search_Home;
     private javax.swing.JTextField search_WatchLater;
-    private javax.swing.JTextArea synopsisUpdate;
     private javax.swing.JTextArea synopsisUpload;
     private javax.swing.JTable table_home;
     private javax.swing.JTable table_watchlater;
-    private javax.swing.JTextField titleUpdate;
     private javax.swing.JTextField titleUpload;
-    private javax.swing.JComboBox<String> yearUpdate;
     private javax.swing.JComboBox<String> yearUpload;
     // End of variables declaration//GEN-END:variables
 

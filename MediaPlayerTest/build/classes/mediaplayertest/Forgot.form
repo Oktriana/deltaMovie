@@ -134,7 +134,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="answerMessage" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
                                   <Component id="answer" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
-                                  <Component id="question" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
+                                  <Component id="cbQuestion" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
                                   <Component id="retypeMessage" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -175,7 +175,7 @@
                       <Component id="retypeMessage" min="-2" pref="21" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="question" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -248,7 +248,7 @@
                 <Property name="text" type="java.lang.String" value="Security Question       :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="question">
+            <Component class="javax.swing.JComboBox" name="cbQuestion">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">

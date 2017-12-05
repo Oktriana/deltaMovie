@@ -27,6 +27,7 @@ public class Forgot extends javax.swing.JFrame {
      */
     public Forgot() {
         initComponents();
+        tampilkan();
     }
 
     /**
@@ -48,7 +49,7 @@ public class Forgot extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         retypePwd = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        question = new javax.swing.JComboBox<>();
+        cbQuestion = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         answer = new javax.swing.JTextField();
         btn_Submit = new javax.swing.JButton();
@@ -90,7 +91,7 @@ public class Forgot extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Security Question       :");
 
-        question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Where is your mother born?", "Where is city of your childhood?", "What is your pet name?", "What is your favorite song?", "What is your favorite quote?" }));
+        cbQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Where is your mother born?", "Where is city of your childhood?", "What is your pet name?", "What is your favorite song?", "What is your favorite quote?" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,7 +170,7 @@ public class Forgot extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(answerMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(answer, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(question, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(retypeMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(103, 103, 103))
         );
@@ -200,7 +201,7 @@ public class Forgot extends javax.swing.JFrame {
                 .addComponent(retypeMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(question, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,8 +241,6 @@ public class Forgot extends javax.swing.JFrame {
             showMessageDialog(null, "Semua field harus diisi!");
         } else if(answer.getText().trim().isEmpty()){
             answerMessage.setText("Jawaban pertanyaan keamanan harus diisi!");
-        } else if(!answer.getText().equals("KOTAAAA")){
-            answerMessage.setText("Jawaban anda salah!");
         } else if(retypePwd.getText().trim().isEmpty()){
             retypeMessage.setText("Retype Password harus diisi!");
         } else if(password.getText().trim().isEmpty()){
@@ -249,59 +248,53 @@ public class Forgot extends javax.swing.JFrame {
         } else if(email.getText().trim().isEmpty()){
             emailMessage.setText("Email harus diisi!");
         } else{
-            String sql = "SELECT * FROM User WHERE name= '" +userName.getText()+ "' AND email= '" +email.getText()+ "' AND s_question= '"
-            +question.getSelectedIndex()+ "' AND s_answer= '" +answer.getText()+ "' ";
-
-            try(Connection conn  = konek.connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)){
-
-                String username = userName.getText();
-                String mail = email.getText();
-                int quest = question.getSelectedIndex();
-                String ans = answer.getText();
-
-                if(rs.next()){
-                    if(rs.getString("job").equals("Admin")){
-                        showMessageDialog(null, "Anda adalah admin! Ubah dari Database!");
-                    } else if(rs.getString("job").equals("User")){
-                        if(rs.getString("name").equals(username) && rs.getString("email").equals(mail)&&
-                            rs.getString("s_question").equals(quest)&&rs.getString("s_answer").equals(ans)){
-                            String pass = password.getText();
-                            String rPass = retypePwd.getText();
-                            String passMD5 = "";
-                            try{
-                                MessageDigest md5 = MessageDigest.getInstance("MD5");
-                                byte[] tmp = pass.getBytes();
-                                md5.update(tmp);
-                                passMD5 = byteArrToString(md5.digest());
-                            } catch(NoSuchAlgorithmException ex){
-                                showMessageDialog(null, ex.getMessage());
-                            }
-                            update(passMD5);
-                        }
-                    }else {
-                        showMessageDialog(null, "Data tidak ditemukan! Mungkin anda belum terdaftar");
-                    }
-                }
-
+            String pass = password.getText();
+            String rPass = retypePwd.getText();
+            String passMD5 = "";
+            
+            try{
+                MessageDigest md5 = MessageDigest.getInstance("MD5");
+                byte[] tmp = pass.getBytes();
+                md5.update(tmp);
+                passMD5 = byteArrToString(md5.digest());
+            } catch(NoSuchAlgorithmException ex){
+                showMessageDialog(null, ex.getMessage());
             }
-            catch(Exception e){
+            
+            try(Connection conn = konek.connect()){
+                String nama = User.getUsername();
+                String sql = "SELECT * FROM User WHERE name = '" +nama+ "'";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                
+                String jawaban = rs.getString(6);
+                if(answer.getText().equals(jawaban)){
+                    update(passMD5);
+                    new LogIn().setVisible(true);
+                    this.dispose();
+                } else{
+                    showMessageDialog(null, "Jawaban pertanyaan anda salah! Silahkan coba lagi");
+                    tampilkan();
+                }
+                                
+            } catch(SQLException e){
                 System.out.println(e.getMessage());
             }
         }
-
-        new LogIn().setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
     public void update(String pwd){
-        String sql = "UPDATE User SET password= ? WHERE id_user";
+        String sql = "UPDATE User SET password=? WHERE name=?";
         try(Connection conn = konek.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             
             pstmt.setString(1, pwd);
+            pstmt.setString(2, User.getUsername());
             pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            showMessageDialog(null, "Password berhasil di ganti!");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -320,45 +313,34 @@ public class Forgot extends javax.swing.JFrame {
         res = sb.toString();
         return res.toUpperCase();
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Forgot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Forgot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Forgot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Forgot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    
+    public void tampilkan(){
+        try(Connection conn = konek.connect()){
+            
+            String uname = User.getUsername();
+            String sql = "SELECT * FROM User WHERE name=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, uname);
+            ResultSet rs = pst.executeQuery();
+            
+            String nama = rs.getString(2);
+            userName.setText(nama);
+            String mail = rs.getString(3);
+            email.setText(mail);
+            int qst = rs.getInt(5);
+            cbQuestion.setSelectedIndex(qst);
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());            
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Forgot().setVisible(true);
-            }
-        });
+        password.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField answer;
     private javax.swing.JLabel answerMessage;
     private javax.swing.JButton btn_Submit;
+    private javax.swing.JComboBox<String> cbQuestion;
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailMessage;
     private javax.swing.JLabel jLabel1;
@@ -373,7 +355,6 @@ public class Forgot extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel pwdMessage;
-    private javax.swing.JComboBox<String> question;
     private javax.swing.JLabel retypeMessage;
     private javax.swing.JPasswordField retypePwd;
     private javax.swing.JTextField userName;

@@ -137,6 +137,7 @@ public class LogIn extends javax.swing.JFrame {
 
         tombolForgot.setForeground(new java.awt.Color(255, 255, 255));
         tombolForgot.setText("Forgot Password?");
+        tombolForgot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tombolForgot.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tombolForgotMouseClicked(evt);
@@ -185,10 +186,7 @@ public class LogIn extends javax.swing.JFrame {
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
-        }
-        new screen().setVisible(true);
-                this.dispose();
-                
+        }                
         
     }//GEN-LAST:event_btn_SignInActionPerformed
 
@@ -236,7 +234,7 @@ public class LogIn extends javax.swing.JFrame {
                     User.setIdUser(rs.getInt("id_user"));
                     System.out.println(User.getIdUser());
                     System.out.println("it's work");
-                new zeropages().setVisible(true);
+                new Zeropages().setVisible(true);
                 this.dispose();
                 }
             }else {
