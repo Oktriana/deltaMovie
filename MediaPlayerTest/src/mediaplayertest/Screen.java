@@ -31,7 +31,7 @@ public class Screen extends javax.swing.JFrame {
         action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                progressBar.setValue(progressBar.getValue() + 5); //persen progress bar bertambah setiap 5 kali
+                progressBar.setValue(progressBar.getValue() + 3); //persen progress bar bertambah setiap 5 kali
                 progressBar.setStringPainted(true);
                 if (progressBar.getPercentComplete() == 1.0) {
                     timer.stop();
