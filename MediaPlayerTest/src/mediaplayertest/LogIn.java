@@ -176,7 +176,9 @@ public class LogIn extends javax.swing.JFrame {
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
-        }                
+        }   
+        new Screen().setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_btn_SignInActionPerformed
 

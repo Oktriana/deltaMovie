@@ -16,6 +16,7 @@ public class Zeropages extends javax.swing.JFrame {
      */
     public Zeropages() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**

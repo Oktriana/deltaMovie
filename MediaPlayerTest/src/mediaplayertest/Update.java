@@ -380,7 +380,7 @@ public class Update extends javax.swing.JFrame {
     }
     
     public void update(String title, String year, String genre1, String genre2, String genre3, String director, String actor, String country, String synopsis, String cover){
-        String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie=?";
+        String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? cover=? WHERE id_movie=?";
         try (Connection con = konek.connect();
             PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setString(1, title);
