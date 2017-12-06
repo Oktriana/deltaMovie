@@ -687,8 +687,7 @@ public class FormAdmin extends javax.swing.JFrame {
         
         InputStream inStream = null;
         OutputStream outStream = null;
-        boolean result = false;
-        
+               
         try{
             byte[] buffer = new byte[1024];
             int length;
@@ -926,27 +925,6 @@ public class FormAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void update(int id_terpilih, String title, int year, int genre1, int genre2, int genre3, String director, String actor, String country, String synopsis){
-        String sql = "UPDATE Movie SET title = ? ," + "year = ? ," + " genre1 = ?," + "genre2 = ?," +"genre3 =?," + "director = ? ," + "actor = ? ," + "country = ? ," + "synopsis = ? WHERE id_movie";
-        try (Connection conn = konek.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1, title);
-            pstmt.setInt(2, year);
-            pstmt.setInt(3, genre1);
-            pstmt.setInt(4, genre2);
-            pstmt.setInt(5, genre3);
-            pstmt.setString(6, director);
-            pstmt.setString(7, actor);
-            pstmt.setString(8, country);
-            pstmt.setString(9, synopsis);
-            pstmt.executeUpdate();
-            
-            pstmt.close();
-            conn.close();
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
     
     public void tampilkan_data(){
         DefaultTableModel user = (DefaultTableModel)table_home.getModel();

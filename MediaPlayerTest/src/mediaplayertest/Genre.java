@@ -235,7 +235,7 @@ public class Genre extends javax.swing.JFrame {
     
     public void delete(int id_){
         Connection conn = konek.connect();
-        String sql = "DELETE FROM Movie WHERE genre = ?";
+        String sql = "DELETE FROM Genre WHERE id = ?";
         
         try(PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, id_);
